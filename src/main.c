@@ -7,6 +7,7 @@
 
 // sprites
 #include "face.h"
+#include "megaman.h"
 
 int main( int argc, char * argv[] ) {
 	
@@ -17,9 +18,12 @@ int main( int argc, char * argv[] ) {
 	}
 	
 	init_face();
+	init_megaman();
 	
-	int x_direction = 1;
-	int y_direction = 1;
+	int x_direction = 5;
+	int y_direction = 5;
+	
+	printf("x_direction: %d\n", x_direction);
 	
 	// primary loop
 	while(!ww_window_received_quit_event()) {
@@ -43,25 +47,27 @@ int main( int argc, char * argv[] ) {
 		// move x
 		face->pad_x = face->pad_x + x_direction;
 		if(face->pad_x > 1000){
-			x_direction = -1;
+			// change direction to up
+			x_direction = x_direction * -1;
 		}
-		
 		if(face->pad_x < 0){
-			x_direction = 1;
+			// change direction to down
+			x_direction = x_direction * -1;
 		}
-            					                                  	
-		// x_direction = -1
 		
 		// move y
 		face->pad_y = face->pad_y + y_direction;
 		if(face->pad_y > 500){
-			y_direction = -1;
+			// change direction to up
+			y_direction = y_direction * -1;
 		}
 		if(face->pad_y < 0){
-			y_direction = 1;
+			// change direction to down
+			y_direction = y_direction * -1;
 		}
 		
 		ww_draw_sprite(face);
+		ww_draw_sprite(megaman);
 		
 		// draw screen
 		ww_window_update_buffer();
