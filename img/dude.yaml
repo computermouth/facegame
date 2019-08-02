@@ -9,6 +9,294 @@ animations:
             imgBase64: iVBORw0KGgoAAAANSUhEUgAAASwAAAFACAIAAACJKdYDAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAABM9JREFUeJzt3LFt21AARdEwUKFBXGaPlJrDE3kOldkjpQdRx1QBUhhy8H+YK1LntAYpmtLF796yrusXfluWpX6Ep+BX96ev9QPAsxMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAixU/0AH6u2Xq4vycc+nZnv93j7NE5CiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoTYcrzFDvs0x3Z5H7/2MX/tTkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihNhpu1tXWy+Vme2TGbZt9s5JCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQW9Z1rZ/hA8+2T7NHM9s21R7PjO1KcRJCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcQ23JixE8OR2JiBwxIhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAix0/0/z+zE3N4uw9eeX6/D11aq/3fmcyvV9zvzrmZauL9P4ySEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoh9sjFT2eNeyx53Yvb4zHvc1LnPSQgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEPtkY2Zd1+FbL8syfO2M422QHE+15TNjpoX7nIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECLFlu+WMGfZpju14OzEznIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECLENN2aqnZjry/i133/ehq89n8/jH7xDt9v4u/rxbfxdXd6HL52yXSlOQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKE2On+n2d2Ym5vl+FrZ5xfr8PXXie2T2Y2V6p9mj3uxFS/q5kW7u/TOAkhJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGKfbMzw92Y2Vyp7fObjcRJCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcSWdV23uvWybHRn+P+2K8VJCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQ23BjZsbMPs315R8+yH9yeW8+99ne1WP+2p2EEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAixB92YmTGzT1OpvgXv6hE4CSEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYr8ASf2MXiZBqhQAAAAASUVORK5CYII=
             x_image: 0
             y_image: 0
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 236
+              - 226
+              - 183
+              - 113
+              - 79
+              - 70
+            y:
+              - 106
+              - 45
+              - 20
+              - 20
+              - 51
+              - 82
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 204
+              - 205
+              - 77
+              - 115
+              - 142
+              - 164
+              - 189
+            y:
+              - 88
+              - 108
+              - 105
+              - 69
+              - 62
+              - 61
+              - 72
+          - layer: Layer_0
+            color: "#000000"
+            x:
+              - 101
+              - 115
+              - 140
+              - 161
+              - 189
+              - 199
+              - 152
+              - 112
+              - 93
+            y:
+              - 84
+              - 69
+              - 63
+              - 61
+              - 71
+              - 85
+              - 80
+              - 78
+              - 85
+          - layer: undershirt
+            color: "#000000"
+            x:
+              - 105
+              - 205
+              - 194
+              - 114
+            y:
+              - 186
+              - 186
+              - 254
+              - 251
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 86
+              - 95
+              - 113
+              - 150
+              - 196
+              - 220
+              - 167
+              - 127
+            y:
+              - 209
+              - 192
+              - 200
+              - 235
+              - 198
+              - 211
+              - 249
+              - 250
+          - layer: head
+            color: "#f8974f"
+            x:
+              - 89
+              - 132
+              - 179
+              - 210
+              - 234
+              - 268
+              - 268
+              - 249
+              - 241
+              - 227
+              - 92
+              - 33
+              - 29
+              - 68
+            y:
+              - 198
+              - 204
+              - 206
+              - 203
+              - 178
+              - 154
+              - 111
+              - 104
+              - 137
+              - 114
+              - 116
+              - 119
+              - 160
+              - 179
+          - layer: hair
+            color: "#000000"
+            x:
+              - 72
+              - 72
+              - 30
+              - 69
+              - 31
+              - 87
+              - 53
+              - 112
+              - 220
+              - 262
+              - 261
+              - 226
+              - 212
+              - 202
+              - 163
+              - 131
+              - 136
+              - 114
+              - 90
+            y:
+              - 157
+              - 131
+              - 115
+              - 100
+              - 59
+              - 86
+              - 19
+              - 86
+              - 95
+              - 83
+              - 119
+              - 134
+              - 163
+              - 122
+              - 121
+              - 140
+              - 123
+              - 122
+              - 148
+          - layer: left_eye
+            color: "#000000"
+            x:
+              - 110
+              - 111
+              - 131
+              - 131
+            y:
+              - 181
+              - 142
+              - 142
+              - 180
+          - layer: right_eye
+            color: "#000000"
+            x:
+              - 169
+              - 170
+              - 190
+              - 190
+            y:
+              - 180
+              - 141
+              - 141
+              - 179
+          - layer: left_hand
+            color: "#f8974f"
+            x:
+              - 30
+              - 30
+              - 69
+              - 72
+            y:
+              - 221
+              - 261
+              - 260
+              - 230
+          - layer: right_hand
+            color: "#f8974f"
+            x:
+              - 229
+              - 230
+              - 269
+              - 269
+            y:
+              - 228
+              - 258
+              - 259
+              - 222
+          - layer: pants
+            color: "#014886"
+            x:
+              - 84
+              - 71
+              - 130
+              - 149
+              - 167
+              - 226
+              - 210
+            y:
+              - 254
+              - 296
+              - 297
+              - 281
+              - 299
+              - 296
+              - 253
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 46
+              - 60
+              - 78
+              - 94
+              - 128
+              - 185
+              - 202
+              - 210
+              - 234
+              - 259
+              - 230
+              - 217
+              - 171
+              - 130
+              - 83
+              - 72
+            y:
+              - 219
+              - 201
+              - 198
+              - 206
+              - 236
+              - 237
+              - 215
+              - 200
+              - 205
+              - 221
+              - 240
+              - 270
+              - 264
+              - 263
+              - 268
+              - 238
+          - layer: left_shoe
+            color: "#b12400"
+            x:
+              - 70
+              - 69
+              - 130
+              - 130
+            y:
+              - 304
+              - 282
+              - 283
+              - 306
+          - layer: right_shoe
+            color: "#b12400"
+            x:
+              - 171
+              - 230
+              - 228
+              - 169
+            y:
+              - 306
+              - 304
+              - 281
+              - 282
   - animation: idle_left
     frames:
       - frame: Frame_1
@@ -18,6 +306,300 @@ animations:
             imgBase64: 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
             x_image: 0
             y_image: 0
+          - layer: backpack_top
+            color: "#644f7e"
+            x:
+              - 219
+              - 234
+              - 230
+              - 217
+              - 213
+              - 196
+              - 178
+              - 179
+              - 186
+            y:
+              - 245
+              - 232
+              - 210
+              - 211
+              - 195
+              - 189
+              - 199
+              - 243
+              - 252
+          - layer: far_shoe
+            color: "#b12400"
+            x:
+              - 86
+              - 87
+              - 140
+              - 151
+              - 127
+            y:
+              - 278
+              - 299
+              - 302
+              - 286
+              - 274
+          - layer: pants
+            color: "#014886"
+            x:
+              - 107
+              - 118
+              - 150
+              - 168
+              - 174
+              - 163
+            y:
+              - 244
+              - 291
+              - 297
+              - 266
+              - 254
+              - 239
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 130
+              - 112
+              - 96
+              - 93
+              - 97
+              - 175
+              - 175
+              - 176
+              - 172
+            y:
+              - 251
+              - 255
+              - 233
+              - 208
+              - 190
+              - 185
+              - 204
+              - 236
+              - 251
+          - layer: strap
+            color: "#564c4c"
+            x:
+              - 183
+              - 172
+              - 119
+              - 111
+              - 123
+              - 123
+              - 125
+              - 146
+              - 171
+              - 183
+            y:
+              - 198
+              - 196
+              - 193
+              - 218
+              - 232
+              - 218
+              - 204
+              - 205
+              - 205
+              - 210
+          - layer: face
+            color: "#f8974f"
+            x:
+              - 59
+              - 61
+              - 81
+              - 160
+              - 202
+              - 202
+              - 111
+            y:
+              - 106
+              - 180
+              - 199
+              - 200
+              - 177
+              - 137
+              - 114
+          - layer: hair
+            color: "#000000"
+            x:
+              - 4
+              - 55
+              - 82
+              - 120
+              - 120
+              - 150
+              - 175
+              - 208
+              - 210
+              - 242
+              - 275
+              - 236
+              - 130
+              - 69
+              - 3
+              - 48
+              - 50
+              - 5
+              - 20
+            y:
+              - 137
+              - 111
+              - 119
+              - 125
+              - 178
+              - 150
+              - 137
+              - 148
+              - 178
+              - 161
+              - 119
+              - 108
+              - 95
+              - 49
+              - 41
+              - 74
+              - 90
+              - 79
+              - 108
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 138
+              - 199
+              - 238
+              - 276
+              - 283
+              - 196
+              - 162
+            y:
+              - 118
+              - 120
+              - 116
+              - 96
+              - 79
+              - 78
+              - 89
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 57
+              - 73
+              - 94
+              - 97
+              - 143
+              - 183
+              - 221
+              - 218
+              - 186
+              - 140
+              - 85
+            y:
+              - 47
+              - 61
+              - 90
+              - 103
+              - 118
+              - 99
+              - 79
+              - 37
+              - 22
+              - 18
+              - 23
+          - layer: logo
+            color: "#ffffff"
+            x:
+              - 180
+              - 183
+              - 202
+              - 235
+              - 237
+            y:
+              - 98
+              - 70
+              - 60
+              - 75
+              - 96
+          - layer: fastener
+            color: "#ce2900"
+            x:
+              - 99
+              - 61
+              - 44
+              - 44
+              - 61
+              - 94
+            y:
+              - 102
+              - 97
+              - 83
+              - 71
+              - 87
+              - 92
+          - layer: eye
+            color: "#000000"
+            x:
+              - 79
+              - 80
+              - 99
+              - 98
+            y:
+              - 112
+              - 161
+              - 159
+              - 112
+          - layer: hand
+            color: "#f8974f"
+            x:
+              - 121
+              - 121
+              - 160
+              - 161
+            y:
+              - 242
+              - 280
+              - 282
+              - 240
+          - layer: near_shoe
+            color: "#ce2900"
+            x:
+              - 106
+              - 107
+              - 160
+              - 171
+              - 147
+            y:
+              - 288
+              - 309
+              - 312
+              - 296
+              - 284
+          - layer: backpack_bottom
+            color: "#8c542c"
+            x:
+              - 180
+              - 185
+              - 219
+              - 221
+            y:
+              - 244
+              - 259
+              - 262
+              - 242
+          - layer: bottom_strap
+            color: "#564c4c"
+            x:
+              - 162
+              - 161
+              - 180
+              - 180
+            y:
+              - 227
+              - 238
+              - 246
+              - 233
   - animation: idle_right
     frames:
       - frame: Frame_2
@@ -45,20 +627,844 @@ animations:
             imgBase64: iVBORw0KGgoAAAANSUhEUgAAASwAAAFACAIAAACJKdYDAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAABKxJREFUeJzt3LGR2kAAhlGvh4BCCN0Ldbgi10HoXq4QMl3qwINtLfiTxHspI9g7+GazfyzL8gXofK0PAO9OhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxE71AbZljFEf4S1YNvqVmxBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIIbbRjZlq6+V2ST727cx8v8fbp3ETQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHExvEWO+zTHNv1Y/2z2/y1uwkhJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGKn1711tfVSmdk+mWHbZu/chBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIsbEsS32G33i3fZo9mtm2qfZ4ZryuFDchxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEULshRszdmI4EhszcFgihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghdnr88sxOzP3HdfWz5++31c9Wqr935nMr1fc787+aaeHxPo2bEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAgh9oeNmcoe91r2uBOzxzPvcVPnMTchxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEULshRszM/slM463QXI81ZbPNrkJISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiY1mWRy+Psfqt97gjYp/m/9jjTszjUma4CSEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYqfHL8/saszs08zY47YNf+92Wf/s9eN553geNyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQmzMrMhs08y2zR73S+73++pnz+fz+s+d2PKZMbMDtM1fu5sQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCF2qg+wLdVOzIyf39bvxLAFbkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihNhYlqU+w5ONMVY/e7s88SD/YI/bNpXj/WLdhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIsQNuzMyY2aep+Ab3zk0IMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBD7BDQCdwHbE0hcAAAAAElFTkSuQmCC
             x_image: 0
             y_image: 0
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 234
+              - 224
+              - 181
+              - 111
+              - 77
+              - 68
+            y:
+              - 126
+              - 65
+              - 40
+              - 40
+              - 71
+              - 102
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 203
+              - 204
+              - 76
+              - 114
+              - 141
+              - 163
+              - 188
+            y:
+              - 99
+              - 119
+              - 116
+              - 80
+              - 73
+              - 72
+              - 83
+          - layer: pants
+            color: "#014886"
+            x:
+              - 89
+              - 94
+              - 187
+              - 204
+              - 162
+              - 127
+            y:
+              - 284
+              - 257
+              - 255
+              - 267
+              - 275
+              - 285
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 47
+              - 98
+              - 249
+              - 263
+              - 232
+              - 191
+              - 151
+              - 93
+              - 90
+              - 69
+              - 47
+            y:
+              - 199
+              - 201
+              - 205
+              - 235
+              - 260
+              - 269
+              - 273
+              - 264
+              - 241
+              - 239
+              - 204
+          - layer: undershirt
+            color: "#000000"
+            x:
+              - 114
+              - 127
+              - 147
+              - 178
+            y:
+              - 213
+              - 238
+              - 241
+              - 211
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 107
+              - 124
+              - 148
+              - 186
+              - 161
+              - 141
+              - 122
+            y:
+              - 217
+              - 247
+              - 248
+              - 219
+              - 220
+              - 238
+              - 216
+          - layer: head
+            color: "#f8974f"
+            x:
+              - 91
+              - 134
+              - 181
+              - 212
+              - 236
+              - 270
+              - 270
+              - 251
+              - 243
+              - 229
+              - 94
+              - 35
+              - 31
+              - 70
+            y:
+              - 217
+              - 223
+              - 225
+              - 222
+              - 197
+              - 173
+              - 130
+              - 123
+              - 156
+              - 133
+              - 135
+              - 138
+              - 179
+              - 198
+          - layer: hair
+            color: "#000000"
+            x:
+              - 72
+              - 72
+              - 30
+              - 69
+              - 31
+              - 87
+              - 53
+              - 112
+              - 220
+              - 262
+              - 261
+              - 226
+              - 212
+              - 202
+              - 163
+              - 131
+              - 136
+              - 114
+              - 90
+            y:
+              - 177
+              - 151
+              - 135
+              - 120
+              - 79
+              - 106
+              - 39
+              - 106
+              - 115
+              - 103
+              - 139
+              - 154
+              - 183
+              - 142
+              - 141
+              - 160
+              - 143
+              - 142
+              - 168
+          - layer: left_eye
+            color: "#000000"
+            x:
+              - 113
+              - 114
+              - 134
+              - 134
+            y:
+              - 199
+              - 160
+              - 160
+              - 198
+          - layer: right_eye
+            color: "#000000"
+            x:
+              - 168
+              - 169
+              - 189
+              - 189
+            y:
+              - 199
+              - 160
+              - 160
+              - 198
+          - layer: left_shoe
+            color: "#b12400"
+            x:
+              - 89
+              - 135
+              - 129
+              - 91
+            y:
+              - 301
+              - 301
+              - 282
+              - 281
+          - layer: right_shoe
+            color: "#b12400"
+            x:
+              - 150
+              - 151
+              - 182
+              - 192
+              - 191
+            y:
+              - 268
+              - 285
+              - 285
+              - 279
+              - 259
+          - layer: right_hand
+            color: "#f8974f"
+            x:
+              - 191
+              - 192
+              - 231
+              - 229
+            y:
+              - 241
+              - 280
+              - 283
+              - 241
+          - layer: left_hand
+            color: "#f8974f"
+            x:
+              - 28
+              - 18
+              - 50
+              - 55
+            y:
+              - 193
+              - 216
+              - 226
+              - 196
+          - layer: Layer_1
+            color: "#000000"
+            x:
+              - 103
+              - 115
+              - 143
+              - 163
+              - 186
+              - 202
+              - 170
+              - 130
+            y:
+              - 94
+              - 82
+              - 72
+              - 72
+              - 85
+              - 99
+              - 96
+              - 96
       - frame: Frame_5
         delay: 20
         layers:
-          - layer: Layer_5
+          - layer: Layer_0
             imgBase64: iVBORw0KGgoAAAANSUhEUgAAASwAAAFACAIAAACJKdYDAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAABM9JREFUeJzt3LFt21AARdEwUKFBXGaPlJrDE3kOldkjpQdRx1QBUhhy8H+YK1LntAYpmtLF796yrusXfluWpX6Ep+BX96ev9QPAsxMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAixU/0AH6u2Xq4vycc+nZnv93j7NE5CiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoTYcrzFDvs0x3Z5H7/2MX/tTkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihNhpu1tXWy+Vme2TGbZt9s5JCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQW9Z1rZ/hA8+2T7NHM9s21R7PjO1KcRJCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcQ23JixE8OR2JiBwxIhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAix0/0/z+zE3N4uw9eeX6/D11aq/3fmcyvV9zvzrmZauL9P4ySEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoh9sjFT2eNeyx53Yvb4zHvc1LnPSQgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEPtkY2Zd1+FbL8syfO2M422QHE+15TNjpoX7nIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECLFlu+WMGfZpju14OzEznIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECLENN2aqnZjry/i133/ehq89n8/jH7xDt9v4u/rxbfxdXd6HL52yXSlOQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKE2On+n2d2Ym5vl+FrZ5xfr8PXXie2T2Y2V6p9mj3uxFS/q5kW7u/TOAkhJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGKfbMzw92Y2Vyp7fObjcRJCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcSWdV23uvWybHRn+P+2K8VJCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQ23BjZsbMPs315R8+yH9yeW8+99ne1WP+2p2EEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAixB92YmTGzT1OpvgXv6hE4CSEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYr8ASf2MXiZBqhQAAAAASUVORK5CYII=
             x_image: 0
             y_image: 0
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 236
+              - 226
+              - 183
+              - 113
+              - 79
+              - 70
+            y:
+              - 106
+              - 45
+              - 20
+              - 20
+              - 51
+              - 82
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 204
+              - 205
+              - 77
+              - 115
+              - 142
+              - 164
+              - 189
+            y:
+              - 88
+              - 108
+              - 105
+              - 69
+              - 62
+              - 61
+              - 72
+          - layer: undershirt
+            color: "#000000"
+            x:
+              - 105
+              - 205
+              - 194
+              - 114
+            y:
+              - 186
+              - 186
+              - 254
+              - 251
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 86
+              - 95
+              - 113
+              - 150
+              - 196
+              - 220
+              - 167
+              - 127
+            y:
+              - 209
+              - 192
+              - 200
+              - 235
+              - 198
+              - 211
+              - 249
+              - 250
+          - layer: head
+            color: "#f8974f"
+            x:
+              - 89
+              - 132
+              - 179
+              - 210
+              - 234
+              - 268
+              - 268
+              - 249
+              - 241
+              - 227
+              - 92
+              - 33
+              - 29
+              - 68
+            y:
+              - 198
+              - 204
+              - 206
+              - 203
+              - 178
+              - 154
+              - 111
+              - 104
+              - 137
+              - 114
+              - 116
+              - 119
+              - 160
+              - 179
+          - layer: hair
+            color: "#000000"
+            x:
+              - 72
+              - 72
+              - 30
+              - 69
+              - 31
+              - 87
+              - 53
+              - 112
+              - 220
+              - 262
+              - 261
+              - 226
+              - 212
+              - 202
+              - 163
+              - 131
+              - 136
+              - 114
+              - 90
+            y:
+              - 157
+              - 131
+              - 115
+              - 100
+              - 59
+              - 86
+              - 19
+              - 86
+              - 95
+              - 83
+              - 119
+              - 134
+              - 163
+              - 122
+              - 121
+              - 140
+              - 123
+              - 122
+              - 148
+          - layer: left_eye
+            color: "#000000"
+            x:
+              - 110
+              - 111
+              - 131
+              - 131
+            y:
+              - 181
+              - 142
+              - 142
+              - 180
+          - layer: right_eye
+            color: "#000000"
+            x:
+              - 169
+              - 170
+              - 190
+              - 190
+            y:
+              - 180
+              - 141
+              - 141
+              - 179
+          - layer: left_hand
+            color: "#f8974f"
+            x:
+              - 30
+              - 30
+              - 69
+              - 72
+            y:
+              - 221
+              - 261
+              - 260
+              - 230
+          - layer: right_hand
+            color: "#f8974f"
+            x:
+              - 229
+              - 230
+              - 269
+              - 269
+            y:
+              - 228
+              - 258
+              - 259
+              - 222
+          - layer: pants
+            color: "#014886"
+            x:
+              - 84
+              - 71
+              - 130
+              - 149
+              - 167
+              - 226
+              - 210
+            y:
+              - 254
+              - 296
+              - 297
+              - 281
+              - 299
+              - 296
+              - 253
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 46
+              - 60
+              - 78
+              - 94
+              - 128
+              - 185
+              - 202
+              - 210
+              - 234
+              - 259
+              - 230
+              - 217
+              - 171
+              - 130
+              - 83
+              - 72
+            y:
+              - 219
+              - 201
+              - 198
+              - 206
+              - 236
+              - 237
+              - 215
+              - 200
+              - 205
+              - 221
+              - 240
+              - 270
+              - 264
+              - 263
+              - 268
+              - 238
+          - layer: left_shoe
+            color: "#b12400"
+            x:
+              - 70
+              - 69
+              - 130
+              - 130
+            y:
+              - 304
+              - 282
+              - 283
+              - 306
+          - layer: right_shoe
+            color: "#b12400"
+            x:
+              - 171
+              - 230
+              - 228
+              - 169
+            y:
+              - 306
+              - 304
+              - 281
+              - 282
+          - layer: Layer_2
+            color: "#000000"
+            x:
+              - 106
+              - 116
+              - 140
+              - 164
+              - 190
+              - 197
+              - 154
+            y:
+              - 81
+              - 69
+              - 64
+              - 61
+              - 73
+              - 82
+              - 82
       - frame: Frame_6
         delay: 20
         layers:
           - layer: Layer_6
             imgBase64: iVBORw0KGgoAAAANSUhEUgAAASwAAAFACAIAAACJKdYDAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAABKxJREFUeJzt3LFx20AARUGehwELYeheVIcrch0M3YsKYQalCjyUB2fqAeBuqgEBkXhz2R/LspyAzo/6AeDViRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihNi5foBtGWPUj/ASLBt95iSEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQohtdGOm2nq5XZPbvpyZ3/d4+zROQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKE2NjmYke1MTPDPs33eHtff+0233YnIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFC7Py8j97jTsyMme2TGbZt9s5JCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQG8uy1M/wF6+2T7NHM9s21R7PjOeV4iSEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQog9cWPGTgxHYmMGDkuEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHEzo//PLMTc//9tvray6/b6msr1f87c99K9fvOfFczLTzep3ESQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHEvtiYqexxr2WPOzF7fOY9buo85iSEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoh9sTGzLMvqjx5jrL52xvE2SI6n2vLZJichxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJszKzIfPHR0cbMDPs036Paiam2bR5X5iSEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQohtdGPmdl1/37f39dfyPaqtlxnPK8VJCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQe+LGzIyZfZqZ/ZIZM9sn9/t9/X0vl9XXztjjDtA233YnIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFC7Fw/AKfT6fTnZ7MTM8NOzP/iJISYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiI3jLXaMMepH2I3btbnvzD7N8d5YJyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQuyAGzP8u2qPx1v3mZMQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCH2AZmzftbgqDqXAAAAAElFTkSuQmCC
             x_image: 0
-            y_image: 0
+            y_image: -1
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 237
+              - 227
+              - 184
+              - 114
+              - 80
+              - 71
+            y:
+              - 127
+              - 66
+              - 41
+              - 41
+              - 72
+              - 103
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 204
+              - 205
+              - 77
+              - 115
+              - 142
+              - 164
+              - 189
+            y:
+              - 106
+              - 126
+              - 123
+              - 87
+              - 80
+              - 79
+              - 90
+          - layer: pants
+            color: "#014886"
+            x:
+              - 172
+              - 205
+              - 192
+              - 128
+            y:
+              - 289
+              - 280
+              - 265
+              - 269
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 70
+              - 42
+              - 49
+              - 73
+              - 226
+              - 240
+              - 252
+              - 221
+              - 200
+              - 130
+              - 110
+            y:
+              - 255
+              - 230
+              - 207
+              - 211
+              - 213
+              - 211
+              - 231
+              - 251
+              - 264
+              - 270
+              - 263
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 117
+              - 156
+              - 187
+              - 196
+              - 177
+              - 175
+              - 139
+            y:
+              - 217
+              - 250
+              - 246
+              - 214
+              - 214
+              - 238
+              - 218
+          - layer: undershirt
+            color: "#000000"
+            x:
+              - 128
+              - 162
+              - 182
+              - 186
+            y:
+              - 212
+              - 239
+              - 239
+              - 207
+          - layer: head
+            color: "#f8974f"
+            x:
+              - 91
+              - 134
+              - 181
+              - 212
+              - 236
+              - 270
+              - 270
+              - 251
+              - 243
+              - 229
+              - 94
+              - 35
+              - 31
+              - 70
+            y:
+              - 216
+              - 222
+              - 224
+              - 221
+              - 196
+              - 172
+              - 129
+              - 122
+              - 155
+              - 132
+              - 134
+              - 137
+              - 178
+              - 197
+          - layer: hair
+            color: "#000000"
+            x:
+              - 71
+              - 71
+              - 29
+              - 68
+              - 30
+              - 86
+              - 52
+              - 111
+              - 219
+              - 261
+              - 260
+              - 225
+              - 211
+              - 201
+              - 162
+              - 130
+              - 135
+              - 113
+              - 89
+            y:
+              - 178
+              - 152
+              - 136
+              - 121
+              - 80
+              - 107
+              - 40
+              - 107
+              - 116
+              - 104
+              - 140
+              - 155
+              - 184
+              - 143
+              - 142
+              - 161
+              - 144
+              - 143
+              - 169
+          - layer: left_eye
+            color: "#000000"
+            x:
+              - 111
+              - 112
+              - 132
+              - 132
+            y:
+              - 194
+              - 155
+              - 155
+              - 193
+          - layer: right_eye
+            color: "#000000"
+            x:
+              - 170
+              - 171
+              - 191
+              - 191
+            y:
+              - 194
+              - 155
+              - 155
+              - 193
+          - layer: left_shoe
+            color: "#b12400"
+            x:
+              - 105
+              - 107
+              - 142
+              - 141
+            y:
+              - 267
+              - 287
+              - 287
+              - 264
+          - layer: left_hand
+            color: "#f8974f"
+            x:
+              - 69
+              - 70
+              - 111
+              - 111
+            y:
+              - 244
+              - 277
+              - 281
+              - 251
+          - layer: right_hand
+            color: "#f8974f"
+            x:
+              - 242
+              - 245
+              - 272
+              - 264
+            y:
+              - 208
+              - 228
+              - 220
+              - 198
+          - layer: right_shoe
+            color: "#b12400"
+            x:
+              - 170
+              - 169
+              - 208
+              - 209
+            y:
+              - 277
+              - 300
+              - 301
+              - 279
+          - layer: Layer_3
+            color: "#000000"
+            x:
+              - 105
+              - 117
+              - 143
+              - 164
+              - 190
+              - 200
+              - 151
+            y:
+              - 99
+              - 87
+              - 81
+              - 81
+              - 94
+              - 103
+              - 101
       - frame: Frame_7
         delay: 20
         layers:
@@ -66,6 +1472,288 @@ animations:
             imgBase64: iVBORw0KGgoAAAANSUhEUgAAASwAAAFACAIAAACJKdYDAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAABM9JREFUeJzt3LFt21AARdEwUKFBXGaPlJrDE3kOldkjpQdRx1QBUhhy8H+YK1LntAYpmtLF796yrusXfluWpX6Ep+BX96ev9QPAsxMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAixU/0AH6u2Xq4vycc+nZnv93j7NE5CiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoTYcrzFDvs0x3Z5H7/2MX/tTkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihNhpu1tXWy+Vme2TGbZt9s5JCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQW9Z1rZ/hA8+2T7NHM9s21R7PjO1KcRJCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcQ23JixE8OR2JiBwxIhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAix0/0/z+zE3N4uw9eeX6/D11aq/3fmcyvV9zvzrmZauL9P4ySEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoh9sjFT2eNeyx53Yvb4zHvc1LnPSQgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEPtkY2Zd1+FbL8syfO2M422QHE+15TNjpoX7nIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECLFlu+WMGfZpju14OzEznIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECLENN2aqnZjry/i133/ehq89n8/jH7xDt9v4u/rxbfxdXd6HL52yXSlOQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKE2On+n2d2Ym5vl+FrZ5xfr8PXXie2T2Y2V6p9mj3uxFS/q5kW7u/TOAkhJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGKfbMzw92Y2Vyp7fObjcRJCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcSWdV23uvWybHRn+P+2K8VJCDERQkyEEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQ23BjZsbMPs315R8+yH9yeW8+99ne1WP+2p2EEBMhxEQIMRFCTIQQEyHERAgxEUJMhBATIcRECDERQkyEEBMhxEQIMRFCTIQQEyHERAixB92YmTGzT1OpvgXv6hE4CSEmQoiJEGIihJgIISZCiIkQYiKEmAghJkKIiRBiIoSYCCEmQoiJEGIihJgIISZCiIkQYr8ASf2MXiZBqhQAAAAASUVORK5CYII=
             x_image: 0
             y_image: 0
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 236
+              - 226
+              - 183
+              - 113
+              - 79
+              - 70
+            y:
+              - 106
+              - 45
+              - 20
+              - 20
+              - 51
+              - 82
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 204
+              - 205
+              - 77
+              - 115
+              - 142
+              - 164
+              - 189
+            y:
+              - 88
+              - 108
+              - 105
+              - 69
+              - 62
+              - 61
+              - 72
+          - layer: undershirt
+            color: "#000000"
+            x:
+              - 105
+              - 205
+              - 194
+              - 114
+            y:
+              - 186
+              - 186
+              - 254
+              - 251
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 86
+              - 95
+              - 113
+              - 150
+              - 196
+              - 220
+              - 167
+              - 127
+            y:
+              - 209
+              - 192
+              - 200
+              - 235
+              - 198
+              - 211
+              - 249
+              - 250
+          - layer: head
+            color: "#f8974f"
+            x:
+              - 89
+              - 132
+              - 179
+              - 210
+              - 234
+              - 268
+              - 268
+              - 249
+              - 241
+              - 227
+              - 92
+              - 33
+              - 29
+              - 68
+            y:
+              - 198
+              - 204
+              - 206
+              - 203
+              - 178
+              - 154
+              - 111
+              - 104
+              - 137
+              - 114
+              - 116
+              - 119
+              - 160
+              - 179
+          - layer: hair
+            color: "#000000"
+            x:
+              - 72
+              - 72
+              - 30
+              - 69
+              - 31
+              - 87
+              - 53
+              - 112
+              - 220
+              - 262
+              - 261
+              - 226
+              - 212
+              - 202
+              - 163
+              - 131
+              - 136
+              - 114
+              - 90
+            y:
+              - 157
+              - 131
+              - 115
+              - 100
+              - 59
+              - 86
+              - 19
+              - 86
+              - 95
+              - 83
+              - 119
+              - 134
+              - 163
+              - 122
+              - 121
+              - 140
+              - 123
+              - 122
+              - 148
+          - layer: left_eye
+            color: "#000000"
+            x:
+              - 110
+              - 111
+              - 131
+              - 131
+            y:
+              - 181
+              - 142
+              - 142
+              - 180
+          - layer: right_eye
+            color: "#000000"
+            x:
+              - 169
+              - 170
+              - 190
+              - 190
+            y:
+              - 180
+              - 141
+              - 141
+              - 179
+          - layer: left_hand
+            color: "#f8974f"
+            x:
+              - 30
+              - 30
+              - 69
+              - 72
+            y:
+              - 221
+              - 261
+              - 260
+              - 230
+          - layer: right_hand
+            color: "#f8974f"
+            x:
+              - 229
+              - 230
+              - 269
+              - 269
+            y:
+              - 228
+              - 258
+              - 259
+              - 222
+          - layer: pants
+            color: "#014886"
+            x:
+              - 84
+              - 71
+              - 130
+              - 149
+              - 167
+              - 226
+              - 210
+            y:
+              - 254
+              - 296
+              - 297
+              - 281
+              - 299
+              - 296
+              - 253
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 46
+              - 60
+              - 78
+              - 94
+              - 128
+              - 185
+              - 202
+              - 210
+              - 234
+              - 259
+              - 230
+              - 217
+              - 171
+              - 130
+              - 83
+              - 72
+            y:
+              - 219
+              - 201
+              - 198
+              - 206
+              - 236
+              - 237
+              - 215
+              - 200
+              - 205
+              - 221
+              - 240
+              - 270
+              - 264
+              - 263
+              - 268
+              - 238
+          - layer: left_shoe
+            color: "#b12400"
+            x:
+              - 70
+              - 69
+              - 130
+              - 130
+            y:
+              - 304
+              - 282
+              - 283
+              - 306
+          - layer: right_shoe
+            color: "#b12400"
+            x:
+              - 171
+              - 230
+              - 228
+              - 169
+            y:
+              - 306
+              - 304
+              - 281
+              - 282
+          - layer: Layer_4
+            color: "#000000"
+            x:
+              - 109
+              - 124
+              - 153
+              - 175
+              - 196
+              - 158
+            y:
+              - 77
+              - 67
+              - 62
+              - 66
+              - 81
+              - 78
   - animation: walk_left
     frames:
       - frame: Frame_8
@@ -74,7 +1762,301 @@ animations:
           - layer: Layer_8
             imgBase64: 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
             x_image: 0
-            y_image: 0
+            y_image: 2
+          - layer: backpack_bottom
+            color: "#8c542c"
+            x:
+              - 191
+              - 204
+              - 219
+              - 227
+              - 237
+              - 226
+              - 202
+            y:
+              - 255
+              - 261
+              - 259
+              - 244
+              - 254
+              - 270
+              - 274
+          - layer: backpack_top
+            color: "#644f7e"
+            x:
+              - 217
+              - 232
+              - 221
+              - 211
+              - 202
+              - 191
+              - 175
+              - 177
+              - 184
+            y:
+              - 258
+              - 245
+              - 228
+              - 228
+              - 211
+              - 208
+              - 216
+              - 256
+              - 265
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 111
+              - 104
+              - 118
+              - 166
+              - 179
+              - 174
+            y:
+              - 211
+              - 243
+              - 267
+              - 267
+              - 237
+              - 210
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 125
+              - 106
+              - 110
+            y:
+              - 216
+              - 243
+              - 212
+          - layer: face
+            color: "#f8974f"
+            x:
+              - 59
+              - 61
+              - 81
+              - 160
+              - 202
+              - 202
+              - 111
+            y:
+              - 127
+              - 201
+              - 220
+              - 221
+              - 198
+              - 158
+              - 135
+          - layer: hair
+            color: "#000000"
+            x:
+              - 1
+              - 52
+              - 79
+              - 117
+              - 117
+              - 147
+              - 172
+              - 205
+              - 207
+              - 239
+              - 272
+              - 233
+              - 127
+              - 66
+              - 0
+              - 45
+              - 47
+              - 2
+              - 17
+            y:
+              - 158
+              - 132
+              - 140
+              - 146
+              - 199
+              - 171
+              - 158
+              - 169
+              - 199
+              - 182
+              - 140
+              - 129
+              - 116
+              - 70
+              - 62
+              - 95
+              - 111
+              - 100
+              - 129
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 138
+              - 199
+              - 238
+              - 276
+              - 283
+              - 196
+              - 162
+            y:
+              - 134
+              - 136
+              - 132
+              - 112
+              - 95
+              - 94
+              - 105
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 55
+              - 71
+              - 92
+              - 95
+              - 141
+              - 181
+              - 219
+              - 216
+              - 184
+              - 138
+              - 83
+            y:
+              - 64
+              - 78
+              - 107
+              - 120
+              - 135
+              - 116
+              - 96
+              - 54
+              - 39
+              - 35
+              - 40
+          - layer: logo
+            color: "#ffffff"
+            x:
+              - 172
+              - 175
+              - 194
+              - 227
+              - 229
+            y:
+              - 115
+              - 87
+              - 77
+              - 92
+              - 113
+          - layer: fastener
+            color: "#ce2900"
+            x:
+              - 99
+              - 61
+              - 44
+              - 44
+              - 61
+              - 94
+            y:
+              - 123
+              - 118
+              - 104
+              - 92
+              - 108
+              - 113
+          - layer: eye
+            color: "#000000"
+            x:
+              - 79
+              - 80
+              - 99
+              - 98
+            y:
+              - 133
+              - 182
+              - 180
+              - 133
+          - layer: hand
+            color: "#f8974f"
+            x:
+              - 161
+              - 161
+              - 200
+              - 201
+            y:
+              - 241
+              - 279
+              - 281
+              - 239
+          - layer: left_shoe
+            color: "#b12400"
+            x:
+              - 98
+              - 64
+              - 37
+              - 43
+              - 73
+              - 100
+            y:
+              - 305
+              - 303
+              - 282
+              - 257
+              - 267
+              - 289
+          - layer: right_shoe
+            color: "#b12400"
+            x:
+              - 195
+              - 213
+              - 242
+              - 238
+              - 218
+              - 210
+              - 192
+            y:
+              - 302
+              - 306
+              - 278
+              - 259
+              - 264
+              - 286
+              - 288
+          - layer: pants
+            color: "#014886"
+            x:
+              - 210
+              - 161
+              - 97
+              - 74
+              - 113
+              - 171
+              - 224
+            y:
+              - 287
+              - 283
+              - 288
+              - 272
+              - 264
+              - 263
+              - 270
+          - layer: strap
+            color: "#564c4c"
+            x:
+              - 176
+              - 144
+              - 143
+              - 161
+              - 161
+              - 154
+              - 176
+            y:
+              - 217
+              - 223
+              - 240
+              - 253
+              - 240
+              - 231
+              - 226
       - frame: Frame_9
         delay: 20
         layers:
@@ -82,6 +2064,310 @@ animations:
             imgBase64: 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
             x_image: 0
             y_image: 0
+          - layer: backpack_top
+            color: "#644f7e"
+            x:
+              - 219
+              - 234
+              - 230
+              - 217
+              - 213
+              - 196
+              - 178
+              - 179
+              - 186
+            y:
+              - 245
+              - 232
+              - 210
+              - 211
+              - 195
+              - 189
+              - 199
+              - 243
+              - 252
+          - layer: far_shoe
+            color: "#b12400"
+            x:
+              - 86
+              - 87
+              - 140
+              - 151
+              - 127
+            y:
+              - 278
+              - 299
+              - 302
+              - 286
+              - 274
+          - layer: pants
+            color: "#014886"
+            x:
+              - 107
+              - 118
+              - 150
+              - 168
+              - 174
+              - 163
+            y:
+              - 244
+              - 291
+              - 297
+              - 266
+              - 254
+              - 239
+          - layer: shirt
+            color: "#00a8b1"
+            x:
+              - 130
+              - 112
+              - 96
+              - 93
+              - 97
+              - 175
+              - 175
+              - 176
+              - 172
+            y:
+              - 251
+              - 255
+              - 233
+              - 208
+              - 190
+              - 185
+              - 204
+              - 236
+              - 251
+          - layer: collar
+            color: "#ffffff"
+            x:
+              - 105
+              - 96
+              - 92
+            y:
+              - 197
+              - 222
+              - 193
+          - layer: strap
+            color: "#564c4c"
+            x:
+              - 183
+              - 172
+              - 119
+              - 111
+              - 123
+              - 123
+              - 125
+              - 146
+              - 171
+              - 183
+            y:
+              - 198
+              - 196
+              - 193
+              - 218
+              - 232
+              - 218
+              - 204
+              - 205
+              - 205
+              - 210
+          - layer: face
+            color: "#f8974f"
+            x:
+              - 59
+              - 61
+              - 81
+              - 160
+              - 202
+              - 202
+              - 111
+            y:
+              - 106
+              - 180
+              - 199
+              - 200
+              - 177
+              - 137
+              - 114
+          - layer: hair
+            color: "#000000"
+            x:
+              - 4
+              - 55
+              - 82
+              - 120
+              - 120
+              - 150
+              - 175
+              - 208
+              - 210
+              - 242
+              - 275
+              - 236
+              - 130
+              - 69
+              - 3
+              - 48
+              - 50
+              - 5
+              - 20
+            y:
+              - 137
+              - 111
+              - 119
+              - 125
+              - 178
+              - 150
+              - 137
+              - 148
+              - 178
+              - 161
+              - 119
+              - 108
+              - 95
+              - 49
+              - 41
+              - 74
+              - 90
+              - 79
+              - 108
+          - layer: brim
+            color: "#ce2900"
+            x:
+              - 138
+              - 199
+              - 238
+              - 276
+              - 283
+              - 196
+              - 162
+            y:
+              - 118
+              - 120
+              - 116
+              - 96
+              - 79
+              - 78
+              - 89
+          - layer: hat
+            color: "#b12400"
+            x:
+              - 57
+              - 73
+              - 94
+              - 97
+              - 143
+              - 183
+              - 221
+              - 218
+              - 186
+              - 140
+              - 85
+            y:
+              - 47
+              - 61
+              - 90
+              - 103
+              - 118
+              - 99
+              - 79
+              - 37
+              - 22
+              - 18
+              - 23
+          - layer: logo
+            color: "#ffffff"
+            x:
+              - 180
+              - 183
+              - 202
+              - 235
+              - 237
+            y:
+              - 98
+              - 70
+              - 60
+              - 75
+              - 96
+          - layer: fastener
+            color: "#ce2900"
+            x:
+              - 99
+              - 61
+              - 44
+              - 44
+              - 61
+              - 94
+            y:
+              - 102
+              - 97
+              - 83
+              - 71
+              - 87
+              - 92
+          - layer: eye
+            color: "#000000"
+            x:
+              - 79
+              - 80
+              - 99
+              - 98
+            y:
+              - 112
+              - 161
+              - 159
+              - 112
+          - layer: hand
+            color: "#f8974f"
+            x:
+              - 121
+              - 121
+              - 160
+              - 161
+            y:
+              - 242
+              - 280
+              - 282
+              - 240
+          - layer: near_shoe
+            color: "#ce2900"
+            x:
+              - 106
+              - 107
+              - 160
+              - 171
+              - 147
+            y:
+              - 288
+              - 309
+              - 312
+              - 296
+              - 284
+          - layer: backpack_bottom
+            color: "#8c542c"
+            x:
+              - 180
+              - 185
+              - 219
+              - 221
+            y:
+              - 244
+              - 259
+              - 262
+              - 242
+          - layer: bottom_strap
+            color: "#564c4c"
+            x:
+              - 162
+              - 161
+              - 180
+              - 180
+            y:
+              - 227
+              - 238
+              - 246
+              - 233
   - animation: walk_right
     frames:
       - frame: Frame_11
