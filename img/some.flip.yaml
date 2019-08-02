@@ -1,0 +1,1018 @@
+- animation: idle_left
+  frames:
+  - frame: Frame_1
+    delay: 2
+    layers:
+    - layer: Layer_1
+      imgBase64: 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
+      x_image: 0
+      y_image: 0
+      color: ""
+    - layer: backpack_top
+      x_image: 0
+      y_image: 0
+      color: '#644f7e'
+      x:
+      - 294
+      - 321
+      - 318
+      - 308
+      - 314
+      - 333
+      - 319
+      - 289
+      - 304
+      "y":
+      - 245
+      - 232
+      - 210
+      - 211
+      - 195
+      - 189
+      - 199
+      - 243
+      - 252
+    - layer: far_shoe
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 1
+      - 1
+      - 231
+      - 252
+      - 10
+      "y":
+      - 278
+      - 299
+      - 302
+      - 286
+      - 274
+    - layer: pants
+      x_image: 0
+      y_image: 0
+      color: '#014886'
+      x:
+      - 195
+      - 209
+      - 251
+      - 305
+      - 315
+      - 273
+      "y":
+      - 244
+      - 291
+      - 297
+      - 266
+      - 254
+      - 239
+    - layer: shirt
+      x_image: 0
+      y_image: 0
+      color: '#00a8b1'
+      x:
+      - 221
+      - 213
+      - 41
+      - 48
+      - 13
+      - 293
+      - 224
+      - 225
+      - 252
+      "y":
+      - 251
+      - 255
+      - 233
+      - 208
+      - 190
+      - 185
+      - 204
+      - 236
+      - 251
+    - layer: strap
+      x_image: 0
+      y_image: 0
+      color: '#564c4c'
+      x:
+      - 284
+      - 309
+      - 22
+      - 221
+      - 241
+      - 172
+      - 174
+      - 226
+      - 256
+      - 293
+      "y":
+      - 198
+      - 196
+      - 193
+      - 218
+      - 232
+      - 218
+      - 204
+      - 205
+      - 205
+      - 210
+    - layer: face
+      x_image: 0
+      y_image: 0
+      color: '#f8974f'
+      x:
+      - 78
+      - 80
+      - 29
+      - 278
+      - 251
+      - 251
+      - 191
+      "y":
+      - 106
+      - 180
+      - 199
+      - 200
+      - 177
+      - 137
+      - 114
+    - layer: hair
+      x_image: 0
+      y_image: 0
+      color: '#000000'
+      x:
+      - 137
+      - 55
+      - 36
+      - 169
+      - 169
+      - 230
+      - 260
+      - 318
+      - 300
+      - 360
+      - 391
+      - 325
+      - 192
+      - 32
+      - 133
+      - 93
+      - 59
+      - 109
+      - 29
+      "y":
+      - 137
+      - 111
+      - 119
+      - 125
+      - 178
+      - 150
+      - 137
+      - 148
+      - 178
+      - 161
+      - 119
+      - 108
+      - 95
+      - 49
+      - 41
+      - 74
+      - 90
+      - 79
+      - 108
+    - layer: brim
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 248
+      - 317
+      - 287
+      - 325
+      - 363
+      - 281
+      - 272
+      "y":
+      - 118
+      - 120
+      - 116
+      - 96
+      - 79
+      - 78
+      - 89
+    - layer: hat
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 61
+      - 122
+      - 143
+      - 177
+      - 228
+      - 293
+      - 311
+      - 336
+      - 302
+      - 229
+      - 147
+      "y":
+      - 47
+      - 61
+      - 90
+      - 103
+      - 118
+      - 99
+      - 79
+      - 37
+      - 22
+      - 18
+      - 23
+    - layer: logo
+      x_image: 0
+      y_image: 0
+      color: '#ffffff'
+      x:
+      - 229
+      - 232
+      - 282
+      - 320
+      - 347
+      "y":
+      - 98
+      - 70
+      - 60
+      - 75
+      - 96
+    - layer: fastener
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 148
+      - 19
+      - 41
+      - 66
+      - 29
+      - 24
+      "y":
+      - 102
+      - 97
+      - 83
+      - 71
+      - 87
+      - 92
+    - layer: eye
+      x_image: 0
+      y_image: 0
+      color: '#000000'
+      x:
+      - 1
+      - 5
+      - 11
+      - 188
+      "y":
+      - 112
+      - 161
+      - 159
+      - 112
+    - layer: hand
+      x_image: 0
+      y_image: 0
+      color: '#f8974f'
+      x:
+      - 206
+      - 231
+      - 250
+      - 279
+      "y":
+      - 242
+      - 280
+      - 282
+      - 240
+    - layer: near_shoe
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 4
+      - 197
+      - 278
+      - 287
+      - 236
+      "y":
+      - 288
+      - 309
+      - 312
+      - 296
+      - 284
+    - layer: backpack_bottom
+      x_image: 0
+      y_image: 0
+      color: '#8c542c'
+      x:
+      - 270
+      - 303
+      - 335
+      - 310
+      "y":
+      - 244
+      - 259
+      - 262
+      - 242
+    - layer: bottom_strap
+      x_image: 0
+      y_image: 0
+      color: '#564c4c'
+      x:
+      - 280
+      - 277
+      - 269
+      - 242
+      "y":
+      - 227
+      - 238
+      - 246
+      - 233
+- animation: walk_left
+  frames:
+  - frame: Frame_8
+    delay: 20
+    layers:
+    - layer: Layer_8
+      imgBase64: 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
+      x_image: 0
+      y_image: 2
+      color: ""
+    - layer: backpack_bottom
+      x_image: 0
+      y_image: 0
+      color: '#8c542c'
+      x:
+      - 278
+      - 292
+      - 310
+      - 328
+      - 374
+      - 367
+      - 312
+      "y":
+      - 255
+      - 261
+      - 259
+      - 244
+      - 254
+      - 270
+      - 274
+    - layer: backpack_top
+      x_image: 0
+      y_image: 0
+      color: '#644f7e'
+      x:
+      - 305
+      - 323
+      - 322
+      - 348
+      - 343
+      - 301
+      - 293
+      - 226
+      - 233
+      "y":
+      - 258
+      - 245
+      - 228
+      - 228
+      - 211
+      - 208
+      - 216
+      - 256
+      - 265
+    - layer: shirt
+      x_image: 0
+      y_image: 0
+      color: '#00a8b1'
+      x:
+      - 202
+      - 205
+      - 19
+      - 307
+      - 289
+      - 292
+      "y":
+      - 211
+      - 243
+      - 267
+      - 267
+      - 237
+      - 210
+    - layer: collar
+      x_image: 0
+      y_image: 0
+      color: '#ffffff'
+      x:
+      - 226
+      - 31
+      - 31
+      "y":
+      - 216
+      - 243
+      - 212
+    - layer: face
+      x_image: 0
+      y_image: 0
+      color: '#f8974f'
+      x:
+      - 78
+      - 80
+      - 29
+      - 278
+      - 251
+      - 251
+      - 191
+      "y":
+      - 127
+      - 201
+      - 220
+      - 221
+      - 198
+      - 158
+      - 135
+    - layer: hair
+      x_image: 0
+      y_image: 0
+      color: '#000000'
+      x:
+      - 140
+      - 58
+      - 39
+      - 166
+      - 166
+      - 227
+      - 257
+      - 315
+      - 297
+      - 357
+      - 388
+      - 322
+      - 189
+      - 35
+      - 136
+      - 96
+      - 62
+      - 112
+      - 32
+      "y":
+      - 158
+      - 132
+      - 140
+      - 146
+      - 199
+      - 171
+      - 158
+      - 169
+      - 199
+      - 182
+      - 140
+      - 129
+      - 116
+      - 70
+      - 62
+      - 95
+      - 111
+      - 100
+      - 129
+    - layer: brim
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 248
+      - 317
+      - 287
+      - 325
+      - 363
+      - 281
+      - 272
+      "y":
+      - 134
+      - 136
+      - 132
+      - 112
+      - 95
+      - 94
+      - 105
+    - layer: hat
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 63
+      - 120
+      - 141
+      - 175
+      - 226
+      - 291
+      - 309
+      - 334
+      - 300
+      - 227
+      - 145
+      "y":
+      - 64
+      - 78
+      - 107
+      - 120
+      - 135
+      - 116
+      - 96
+      - 54
+      - 39
+      - 35
+      - 40
+    - layer: logo
+      x_image: 0
+      y_image: 0
+      color: '#ffffff'
+      x:
+      - 221
+      - 224
+      - 274
+      - 312
+      - 339
+      "y":
+      - 115
+      - 87
+      - 77
+      - 92
+      - 113
+    - layer: fastener
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 148
+      - 19
+      - 41
+      - 66
+      - 29
+      - 24
+      "y":
+      - 123
+      - 118
+      - 104
+      - 92
+      - 108
+      - 113
+    - layer: eye
+      x_image: 0
+      y_image: 0
+      color: '#000000'
+      x:
+      - 1
+      - 5
+      - 11
+      - 188
+      "y":
+      - 133
+      - 182
+      - 180
+      - 133
+    - layer: hand
+      x_image: 0
+      y_image: 0
+      color: '#f8974f'
+      x:
+      - 246
+      - 271
+      - 290
+      - 319
+      "y":
+      - 241
+      - 279
+      - 281
+      - 239
+    - layer: left_shoe
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 12
+      - 26
+      - 81
+      - 73
+      - 16
+      - 162
+      "y":
+      - 305
+      - 303
+      - 282
+      - 257
+      - 267
+      - 289
+    - layer: right_shoe
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 285
+      - 331
+      - 358
+      - 327
+      - 280
+      - 311
+      - 328
+      "y":
+      - 302
+      - 306
+      - 278
+      - 259
+      - 264
+      - 286
+      - 288
+    - layer: pants
+      x_image: 0
+      y_image: 0
+      color: '#014886'
+      x:
+      - 328
+      - 277
+      - 186
+      - 136
+      - 214
+      - 307
+      - 365
+      "y":
+      - 287
+      - 283
+      - 288
+      - 272
+      - 264
+      - 263
+      - 270
+    - layer: strap
+      x_image: 0
+      y_image: 0
+      color: '#564c4c'
+      x:
+      - 292
+      - 233
+      - 205
+      - 262
+      - 297
+      - 295
+      - 285
+      "y":
+      - 217
+      - 223
+      - 240
+      - 253
+      - 240
+      - 231
+      - 226
+  - frame: Frame_9
+    delay: 20
+    layers:
+    - layer: Layer_9
+      imgBase64: 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
+      x_image: 0
+      y_image: 0
+      color: ""
+    - layer: backpack_top
+      x_image: 0
+      y_image: 0
+      color: '#644f7e'
+      x:
+      - 307
+      - 325
+      - 331
+      - 354
+      - 354
+      - 306
+      - 296
+      - 228
+      - 235
+      "y":
+      - 245
+      - 232
+      - 210
+      - 211
+      - 195
+      - 189
+      - 199
+      - 243
+      - 252
+    - layer: far_shoe
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 5
+      - 14
+      - 277
+      - 292
+      - 237
+      "y":
+      - 278
+      - 299
+      - 302
+      - 286
+      - 274
+    - layer: pants
+      x_image: 0
+      y_image: 0
+      color: '#014886'
+      x:
+      - 208
+      - 19
+      - 291
+      - 278
+      - 292
+      - 212
+      "y":
+      - 244
+      - 291
+      - 297
+      - 266
+      - 254
+      - 239
+    - layer: shirt
+      x_image: 0
+      y_image: 0
+      color: '#00a8b1'
+      x:
+      - 7
+      - 29
+      - 14
+      - 25
+      - 146
+      - 224
+      - 255
+      - 261
+      - 282
+      "y":
+      - 251
+      - 255
+      - 233
+      - 208
+      - 190
+      - 185
+      - 204
+      - 236
+      - 251
+    - layer: collar
+      x_image: 0
+      y_image: 0
+      color: '#ffffff'
+      x:
+      - 36
+      - 14
+      - 26
+      "y":
+      - 197
+      - 222
+      - 193
+    - layer: strap
+      x_image: 0
+      y_image: 0
+      color: '#564c4c'
+      x:
+      - 293
+      - 290
+      - 168
+      - 160
+      - 203
+      - 208
+      - 235
+      - 236
+      - 289
+      - 299
+      "y":
+      - 198
+      - 196
+      - 193
+      - 218
+      - 232
+      - 218
+      - 204
+      - 205
+      - 205
+      - 210
+    - layer: face
+      x_image: 0
+      y_image: 0
+      color: '#f8974f'
+      x:
+      - 59
+      - 110
+      - 130
+      - 240
+      - 287
+      - 312
+      - 201
+      "y":
+      - 106
+      - 180
+      - 199
+      - 200
+      - 177
+      - 137
+      - 114
+    - layer: hair
+      x_image: 0
+      y_image: 0
+      color: '#000000'
+      x:
+      - 45
+      - 104
+      - 162
+      - 205
+      - 230
+      - 240
+      - 293
+      - 324
+      - 299
+      - 304
+      - 376
+      - 372
+      - 11
+      - 40
+      - 111
+      - 1
+      - 99
+      - 95
+      - 30
+      "y":
+      - 137
+      - 111
+      - 119
+      - 125
+      - 178
+      - 150
+      - 137
+      - 148
+      - 178
+      - 161
+      - 119
+      - 108
+      - 95
+      - 49
+      - 41
+      - 74
+      - 90
+      - 79
+      - 108
+    - layer: brim
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 187
+      - 279
+      - 323
+      - 386
+      - 373
+      - 314
+      - 278
+      "y":
+      - 118
+      - 120
+      - 116
+      - 96
+      - 79
+      - 78
+      - 89
+    - layer: hat
+      x_image: 0
+      y_image: 0
+      color: '#b12400'
+      x:
+      - 23
+      - 12
+      - 16
+      - 187
+      - 261
+      - 299
+      - 310
+      - 280
+      - 287
+      - 276
+      - 56
+      "y":
+      - 47
+      - 61
+      - 90
+      - 103
+      - 118
+      - 99
+      - 79
+      - 37
+      - 22
+      - 18
+      - 23
+    - layer: logo
+      x_image: 0
+      y_image: 0
+      color: '#ffffff'
+      x:
+      - 265
+      - 293
+      - 292
+      - 353
+      - 353
+      "y":
+      - 98
+      - 70
+      - 60
+      - 75
+      - 96
+    - layer: fastener
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 11
+      - 29
+      - 74
+      - 72
+      - 28
+      - 156
+      "y":
+      - 102
+      - 97
+      - 83
+      - 71
+      - 87
+      - 92
+    - layer: eye
+      x_image: 0
+      y_image: 0
+      color: '#000000'
+      x:
+      - 11
+      - 38
+      - 17
+      - 187
+      "y":
+      - 112
+      - 161
+      - 159
+      - 112
+    - layer: hand
+      x_image: 0
+      y_image: 0
+      color: '#f8974f'
+      x:
+      - 239
+      - 237
+      - 249
+      - 223
+      "y":
+      - 242
+      - 280
+      - 282
+      - 240
+    - layer: near_shoe
+      x_image: 0
+      y_image: 0
+      color: '#ce2900'
+      x:
+      - 10
+      - 196
+      - 222
+      - 272
+      - 283
+      "y":
+      - 288
+      - 309
+      - 312
+      - 296
+      - 284
+    - layer: backpack_bottom
+      x_image: 0
+      y_image: 0
+      color: '#8c542c'
+      x:
+      - 269
+      - 247
+      - 320
+      - 357
+      "y":
+      - 244
+      - 259
+      - 262
+      - 242
+    - layer: bottom_strap
+      x_image: 0
+      y_image: 0
+      color: '#564c4c'
+      x:
+      - 224
+      - 262
+      - 316
+      - 321
+      "y":
+      - 227
+      - 238
+      - 246
+      - 233
