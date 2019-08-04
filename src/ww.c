@@ -314,7 +314,7 @@ void ww_key_event(SDL_Event *event){
 	
 	ww_keystate_t old_keystate = keystate;
 	
-	if( event->type == SDL_KEYDOWN ){
+	if( event->type == SDL_KEYDOWN && event->key.repeat == 0){
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
 				keystate.esc = 1;
@@ -347,7 +347,7 @@ void ww_key_event(SDL_Event *event){
 				keystate.d = 1;
 				break;
 		}
-	} else if ( event->type == SDL_KEYUP) {
+	} else if ( event->type == SDL_KEYUP ) {
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
 				keystate.esc = 0;

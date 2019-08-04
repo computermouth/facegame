@@ -1,0 +1,19 @@
+
+animations:
+  - animation: blue_sky
+    frames:
+      - frame: blue_sky
+        delay: 2
+        layers:
+          - layer: blue_sky
+            color: "#00b9f6"
+            x:
+              - -22
+              - -29
+              - 1038
+              - 1036
+            y:
+              - -19
+              - 613
+              - 590
+              - -14

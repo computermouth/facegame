@@ -6,8 +6,11 @@
 #include "ww.h"
 
 // sprites
-#include "face.h"
-#include "megaman.h"
+#include "dude.h"
+#include "sky.h"
+
+typedef enum { DOWN, LEFT, RIGHT, UP } direction;
+typedef enum { IDLE, WALK } movement;
 
 int main( int argc, char * argv[] ) {
 	
@@ -17,13 +20,19 @@ int main( int argc, char * argv[] ) {
 		return 1;
 	}
 	
-	init_face();
-	init_megaman();
+	init_dude();
+	init_sky();
 	
-	int x_direction = 5;
-	int y_direction = 5;
+	direction dir = DOWN;
+	movement  mov = IDLE;
 	
-	printf("x_direction: %d\n", x_direction);
+	char anim = dir;
+	
+	if (mov == WALK)
+		anim += 4;
+	
+	dude->pad_x = 360;
+	dude->pad_y = 80;
 	
 	// primary loop
 	while(!ww_window_received_quit_event()) {
@@ -37,43 +46,46 @@ int main( int argc, char * argv[] ) {
 			ww_window_send_quit_event();
 		}
 		
-		// set animation
-	    if(keystate.w == 1 && face->active_animation == 0){
-			face->active_animation = 1;
-		} else if(keystate.w == 1){
-			face->active_animation = 0;
+		char old_anim = anim;
+		
+		if(keystate.w || keystate.a || keystate.s || keystate.d){
+			mov = WALK;
+		} else {
+			mov = IDLE;
 		}
 		
-		// move x
-		face->pad_x = face->pad_x + x_direction;
-		if(face->pad_x > 1000){
-			// change direction to up
-			x_direction = x_direction * -1;
-		}
-		if(face->pad_x < 0){
-			// change direction to down
-			x_direction = x_direction * -1;
+		if(keystate.w)
+			dir = UP;
+		
+		if(keystate.a)
+			dir = LEFT;
+		
+		if(keystate.s)
+			dir = DOWN;
+		
+		if(keystate.d)
+			dir = RIGHT;
+		
+		anim = dir;
+		if (mov == WALK)
+			anim += 4;
+		
+		if(old_anim != anim){
+			ww_animation_t * active_dude = dude->animations[dude->active_animation];
+			active_dude->active_frame = 0;
+			active_dude->d_progress = active_dude->delay[0];
 		}
 		
-		// move y
-		face->pad_y = face->pad_y + y_direction;
-		if(face->pad_y > 500){
-			// change direction to up
-			y_direction = y_direction * -1;
-		}
-		if(face->pad_y < 0){
-			// change direction to down
-			y_direction = y_direction * -1;
-		}
-		
-		ww_draw_sprite(face);
-		ww_draw_sprite(megaman);
+		dude->active_animation = anim;
+		ww_draw_sprite(sky);
+		ww_draw_sprite(dude);
 		
 		// draw screen
 		ww_window_update_buffer();
 	}
 	
-	ww_free_sprite(face);
+	ww_free_sprite(dude);
+	ww_free_sprite(sky);
 	
 	// cleanup and exit
 	ww_window_destroy();
