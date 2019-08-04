@@ -23,6 +23,11 @@ int main( int argc, char * argv[] ) {
 	init_dude();
 	init_sky();
 	
+	ww_sprite_t * other_dude = ww_clone_sprite(dude);
+	other_dude->pad_x = 0;
+	other_dude->pad_y = 0;
+	other_dude->scale = .3;
+	
 	direction dir = DOWN;
 	movement  mov = IDLE;
 	
@@ -74,17 +79,24 @@ int main( int argc, char * argv[] ) {
 			ww_animation_t * active_dude = dude->animations[dude->active_animation];
 			active_dude->active_frame = 0;
 			active_dude->d_progress = active_dude->delay[0];
+			
+			ww_animation_t * active_other_dude = other_dude->animations[other_dude->active_animation];
+			active_other_dude->active_frame = 0;
+			active_other_dude->d_progress = active_other_dude->delay[0];
 		}
 		
 		dude->active_animation = anim;
+		other_dude->active_animation = (anim + 1) % 8;
 		ww_draw_sprite(sky);
 		ww_draw_sprite(dude);
+		ww_draw_sprite(other_dude);
 		
 		// draw screen
 		ww_window_update_buffer();
 	}
 	
 	ww_free_sprite(dude);
+	ww_free_sprite(other_dude);
 	ww_free_sprite(sky);
 	
 	// cleanup and exit
