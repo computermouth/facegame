@@ -8,6 +8,7 @@
 // sprites
 #include "dude.h"
 #include "sky.h"
+#include "ground.h"
 
 typedef enum { DOWN, LEFT, RIGHT, UP } direction;
 typedef enum { IDLE, WALK } movement;
@@ -22,6 +23,7 @@ int main( int argc, char * argv[] ) {
 	
 	init_dude();
 	init_sky();
+	init_ground();
 	
 	ww_sprite_t * other_dude = ww_clone_sprite(dude);
 	other_dude->pad_x = 0;
@@ -30,6 +32,7 @@ int main( int argc, char * argv[] ) {
 	
 	direction dir = DOWN;
 	movement  mov = IDLE;
+	ground->paused = 1;
 	
 	char anim = dir;
 	
@@ -72,8 +75,12 @@ int main( int argc, char * argv[] ) {
 			dir = RIGHT;
 		
 		anim = dir;
-		if (mov == WALK)
+		if (mov == WALK){
 			anim += 4;
+			ground->paused = 0;
+		} else {
+			ground->paused = 1;
+		}
 		
 		if(old_anim != anim){
 			ww_animation_t * active_dude = dude->animations[dude->active_animation];
@@ -88,6 +95,7 @@ int main( int argc, char * argv[] ) {
 		dude->active_animation = anim;
 		other_dude->active_animation = (anim + 1) % 8;
 		ww_draw_sprite(sky);
+		ww_draw_sprite(ground);
 		ww_draw_sprite(dude);
 		ww_draw_sprite(other_dude);
 		

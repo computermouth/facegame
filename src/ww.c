@@ -574,11 +574,11 @@ int ww_draw_frame(ww_frame_t * frame){
 	
 }
 
-int ww_draw_animation(ww_animation_t * anim){
+int ww_draw_animation(ww_animation_t * anim, int paused){
 	
 	int rc = ww_draw_frame(anim->frames[anim->active_frame]);
 	
-	if(anim->d_progress == 0){
+	if(anim->d_progress == 0 && paused == 0){
 		anim->active_frame++;
 		
 		if(anim->active_frame == anim->count)
@@ -586,7 +586,7 @@ int ww_draw_animation(ww_animation_t * anim){
 		
 		anim->d_progress = anim->delay[anim->active_frame];
 		
-	} else {
+	} else if (paused == 0){
 		anim->d_progress--;
 	}
 	
@@ -596,7 +596,7 @@ int ww_draw_animation(ww_animation_t * anim){
 
 int ww_draw_sprite(ww_sprite_t * sprite){
 	
-	int rc = ww_draw_animation(sprite->animations[sprite->active_animation]);
+	int rc = ww_draw_animation(sprite->animations[sprite->active_animation], sprite->paused);
 	
 	return rc;
 	
@@ -820,9 +820,7 @@ ww_sprite_t * ww_clone_sprite(ww_sprite_t * in_sprite){
 			*out_sprite->animations[i]->frames[j] = *in_sprite->animations[i]->frames[j];
 			out_sprite->animations[i]->frames[j]->polys = NULL;
 			out_sprite->animations[i]->frames[j]->polys = calloc(in_sprite->animations[i]->frames[j]->count, sizeof(ww_polygon_t *));
-			
-			printf("frames\n");
-			
+						
 			for(int k = 0; k < in_sprite->animations[i]->frames[j]->count; k++){
 				
 				out_sprite->animations[i]->frames[j]->polys[k] = calloc(1, sizeof(ww_polygon_t));

@@ -83,6 +83,7 @@ typedef struct {
 	int active_animation;
 	int z_depth;
 	int count;
+	int paused;
 	float scale;
 } ww_sprite_t;
 
@@ -115,7 +116,7 @@ int ww_draw_raw_polygon(const Sint16 * vx, const Sint16 * vy, int n, unsigned ch
 void ww_scale_polygon(ww_polygon_t * poly);
 int ww_draw_polygon(ww_polygon_t * poly);
 int ww_draw_frame(ww_frame_t * frame);
-int ww_draw_animation(ww_animation_t * anim);
+int ww_draw_animation(ww_animation_t * anim, int paused);
 int ww_draw_sprite(ww_sprite_t * sprite);
 ww_polygon_t * ww_new_polygon(unsigned char color[3], short * x, short * y, int count);
 ww_frame_t * ww_new_frame(ww_polygon_t * polys, ...);
