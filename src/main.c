@@ -1,6 +1,8 @@
 
 // standard library shit
 #include <stdio.h>
+//~ #include <stdlib.h>
+#include <time.h>
 
 // engine shit
 #include "ww.h"
@@ -9,11 +11,14 @@
 #include "dude.h"
 #include "sky.h"
 #include "ground.h"
+#include "grass_decoration.h"
 
 typedef enum { DOWN, LEFT, RIGHT, UP } direction;
 typedef enum { IDLE, WALK } movement;
 
 int main( int argc, char * argv[] ) {
+
+	srand(time(0));
 	
 	// initialization
 	if(ww_window_create(argc, argv, "Pixarray", 1024, 576)) {
@@ -24,6 +29,7 @@ int main( int argc, char * argv[] ) {
 	init_dude();
 	init_sky();
 	init_ground();
+	init_grass_decoration();
 	
 	ww_sprite_t * other_dude = ww_clone_sprite(dude);
 	other_dude->pad_x = 0;
@@ -41,6 +47,29 @@ int main( int argc, char * argv[] ) {
 	
 	dude->pad_x = 360;
 	dude->pad_y = 80;
+	
+	char ground_slots[10][3];
+	ww_sprite_t * ground_sprites[10][3];
+	
+	for(int i = 0; i < 10; i++){
+		for(int j = 0; j < 3; j++){
+			ground_sprites[i][j] = ww_clone_sprite(grass_decoration);
+			ground_sprites[i][j]->pad_x = i * 100;
+			ground_sprites[i][j]->pad_y = (j * 83);
+			ground_slots[i][j] = rand() % 34 - 30;
+			if (ground_slots[i][j] <= 0){
+				ground_slots[i][j] = 0;
+			} else {
+				ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
+			}
+				SDL_Log("%d", ground_slots[i][j]);
+					SDL_Log("x: %d", ground_sprites[i][j]->pad_x);
+					SDL_Log("y: %d", ground_sprites[i][j]->pad_y);
+		}
+	}
+	
+	int x_prog = 10;
+	int y_prog = 10;
 	
 	// primary loop
 	while(!ww_window_received_quit_event()) {
@@ -62,17 +91,65 @@ int main( int argc, char * argv[] ) {
 			mov = IDLE;
 		}
 		
-		if(keystate.w)
+		if(keystate.w){
 			dir = UP;
+			y_prog--;
+		}
 		
-		if(keystate.a)
+		if(keystate.a){
 			dir = LEFT;
+			x_prog--;
+		}
 		
-		if(keystate.s)
+		if(keystate.s){
 			dir = DOWN;
+			y_prog++;
+		}
 		
-		if(keystate.d)
+		if(keystate.d){
 			dir = RIGHT;
+			x_prog++;
+		}
+		
+		if (x_prog == -10) { // moved left
+			x_prog = 0;
+			
+			for(int i = 9; i > 0; i--){
+				for(int j = 0; j < 3; j++){
+					ground_slots[i][j] = ground_slots[i - 1][j];
+					ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
+				}
+			}
+			
+			for(int i = 0; i < 3; i++){
+				ground_slots[0][i] = rand() % 34 - 30;
+				if(ground_slots[0][i] < 0){
+					ground_slots[0][i] = 0;
+				} else {
+					ground_sprites[0][i]->active_animation = ground_slots[0][i] - 1;
+				}
+			}
+		}
+		
+		if (x_prog == 10) { // moved right
+			x_prog = 0;
+			
+			for(int i = 0; i < 9; i++){
+				for(int j = 0; j < 3; j++){
+					ground_slots[i][j] = ground_slots[i + 1][j];
+					ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
+				}
+			}
+			
+			for(int i = 0; i < 3; i++){
+				ground_slots[9][i] = rand() % 34 - 30;
+				if(ground_slots[9][i] < 0){
+					ground_slots[9][i] = 0;
+				} else {
+					ground_sprites[9][i]->active_animation = ground_slots[9][i] - 1;
+				}
+			}
+		}
 		
 		anim = dir;
 		if (mov == WALK){
@@ -94,8 +171,26 @@ int main( int argc, char * argv[] ) {
 		
 		dude->active_animation = anim;
 		other_dude->active_animation = (anim + 1) % 8;
+		
 		ww_draw_sprite(sky);
 		ww_draw_sprite(ground);
+		
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < 3; j++){
+				if (ground_slots[i][j] != 0){
+					ww_draw_sprite(ground_sprites[i][j]);
+				}
+			}
+		}
+		
+		//~ ground_sprites[0][0]->pad_x = 800;
+		//~ ground_sprites[0][0]->pad_y = 516;
+		//~ ww_draw_sprite(ground_sprites[0][0]);
+		//~ ground_sprites[9][2]->pad_x = 900;
+		//~ ground_sprites[9][2]->pad_y = 516;
+		//~ ww_draw_sprite(ground_sprites[9][2]);
+		
+		//~ ww_draw_sprite(grass_decoration);
 		ww_draw_sprite(dude);
 		ww_draw_sprite(other_dude);
 		
@@ -106,6 +201,12 @@ int main( int argc, char * argv[] ) {
 	ww_free_sprite(dude);
 	ww_free_sprite(other_dude);
 	ww_free_sprite(sky);
+	
+	for(int i = 0; i < 10; i++){
+		for(int j = 0; j < 3; j++){
+			ww_free_sprite(ground_sprites[i][j]);
+		}
+	}
 	
 	// cleanup and exit
 	ww_window_destroy();
