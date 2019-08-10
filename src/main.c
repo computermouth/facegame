@@ -62,9 +62,6 @@ int main( int argc, char * argv[] ) {
 			} else {
 				ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
 			}
-				SDL_Log("%d", ground_slots[i][j]);
-					SDL_Log("x: %d", ground_sprites[i][j]->pad_x);
-					SDL_Log("y: %d", ground_sprites[i][j]->pad_y);
 		}
 	}
 	
@@ -147,6 +144,46 @@ int main( int argc, char * argv[] ) {
 					ground_slots[9][i] = 0;
 				} else {
 					ground_sprites[9][i]->active_animation = ground_slots[9][i] - 1;
+				}
+			}
+		}
+		
+		if (y_prog == -10) { // moved up
+			y_prog = 0;
+			
+			for(int j = 2; j > 0; j--){
+				for(int i = 0; i < 10; i++){
+					ground_slots[i][j] = ground_slots[i][j - 1];
+					ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
+				}
+			}
+			
+			for(int i = 0; i < 10; i++){
+				ground_slots[i][0] = rand() % 34 - 30;
+				if(ground_slots[i][0] < 0){
+					ground_slots[i][0] = 0;
+				} else {
+					ground_sprites[i][0]->active_animation = ground_slots[i][0] - 1;
+				}
+			}
+		}
+		
+		if (y_prog == 10) { // moved down
+			y_prog = 0;
+			
+			for(int j = 0; j < 3; j++){
+				for(int i = 0; i < 10; i++){
+					ground_slots[i][j] = ground_slots[i][j + 1];
+					ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
+				}
+			}
+			
+			for(int i = 0; i < 10; i++){
+				ground_slots[i][2] = rand() % 34 - 30;
+				if(ground_slots[i][2] < 0){
+					ground_slots[i][2] = 0;
+				} else {
+					ground_sprites[i][2]->active_animation = ground_slots[i][2] - 1;
 				}
 			}
 		}
