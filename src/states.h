@@ -8,7 +8,7 @@
 typedef struct {
 	uint32_t volume;
 	uint32_t scale;
-	enum { OPTIONS_MENU_SELECTED_VOLUME, OPTIONS_MENU_SELECTED_SCALE, OPTIONS_MENU_SELECTED_HOME } selected;
+	enum { OPTIONS_MENU_SELECTED_VOLUME, OPTIONS_MENU_SELECTED_SCALE, OPTIONS_MENU_SELECTED_HOME } options_menu_selected;
 } options_menu_state_t;
 
 typedef struct {
@@ -30,7 +30,7 @@ typedef struct {
 typedef struct {
 	uint32_t map[31][31];
 	player_t player;
-	enum { PLAY_STATE_WALK, PLAY_STATE_RUN, PLAY_STATE_DISTRACTION, PLAY_STATE_EVENT, PLAY_STATE_BATTLE, PLAY_STATE_LEVELUP, PLAY_STATE_WEAPONUP, PLAY_STATE_DEFUP } play_state;
+	enum { PLAY_STATE_ROAM, PLAY_STATE_MENU, PLAY_STATE_DISTRACTION, PLAY_STATE_EVENT, PLAY_STATE_BATTLE, PLAY_STATE_LEVELUP, PLAY_STATE_WEAPONUP, PLAY_STATE_DEFUP } play_state_activity;
 } play_state_t;
 
 typedef struct {

@@ -14,6 +14,7 @@
 #include "sky.h"
 #include "ground.h"
 #include "grass_decoration.h"
+#include "pause_menu.h"
 
 #include "untitled.h"
 #include "buttons.h"
@@ -38,6 +39,8 @@ void inits(){
 	init_buttons();
 	init_selector();
 	init_title();
+	
+	init_pause_menu();
 }
 
 void frees(){
@@ -100,6 +103,20 @@ void process_top_menu(){
 	
 }
 
+int process_play_menu_esc_previous_frame_value = 1;
+
+void process_play_menu(){
+	
+	if (keystate.esc && process_play_menu_esc_previous_frame_value == 0) {
+		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+	}
+	
+	ww_draw_sprite(pause_menu);
+	
+	process_play_menu_esc_previous_frame_value = keystate.esc;
+	
+}
+
 direction dir = DOWN;
 movement  mov = IDLE;
 
@@ -108,34 +125,56 @@ int y_prog = 10;
 char ground_slots[10][3];
 char anim;
 
-void process_play(){	
+int process_roam_esc_previous_frame_value = 1;
+
+void process_roam(){
 		
 		char old_anim = anim;
+		mov = IDLE;
 		
-		if(keystate.w || keystate.a || keystate.s || keystate.d){
-			mov = WALK;
-		} else {
-			mov = IDLE;
+		if(keystate.esc && process_roam_esc_previous_frame_value == 0){
+			game_state.play_state.play_state_activity = PLAY_STATE_MENU;
+			process_roam_esc_previous_frame_value = 1;
+			
+			process_play_menu();
+			return;
 		}
 		
 		if(keystate.w){
+			mov = WALK;
 			dir = UP;
-			y_prog--;
 		}
 		
 		if(keystate.a){
+			mov = WALK;
 			dir = LEFT;
-			x_prog--;
 		}
 		
 		if(keystate.s){
+			mov = WALK;
 			dir = DOWN;
-			y_prog++;
 		}
 		
 		if(keystate.d){
+			mov = WALK;
 			dir = RIGHT;
-			x_prog++;
+		}
+		
+		if (mov == WALK){
+			switch (dir) {
+				case UP:
+					y_prog--;
+					break;
+				case LEFT:
+					x_prog--;
+					break;
+				case DOWN:
+					y_prog++;
+					break;
+				case RIGHT:
+					x_prog++;
+					break;
+			}
 		}
 		
 		if (x_prog == -10) { // moved left
@@ -247,6 +286,33 @@ void process_play(){
 		
 		ww_draw_sprite(dude);
 	
+	process_roam_esc_previous_frame_value = keystate.esc;
+	
+}
+
+void process_play(){	
+
+	switch (game_state.play_state.play_state_activity){
+		case PLAY_STATE_BATTLE:
+			break;
+		case PLAY_STATE_DEFUP:
+			break;
+		case PLAY_STATE_DISTRACTION:
+			break;
+		case PLAY_STATE_EVENT:
+			break;
+		case PLAY_STATE_LEVELUP:
+			break;
+		case PLAY_STATE_MENU:
+			process_play_menu();
+			break;
+		case PLAY_STATE_ROAM:
+			process_roam();
+			break;
+		case PLAY_STATE_WEAPONUP:
+			break;
+	}
+
 }
 
 void process_state(){
@@ -322,10 +388,10 @@ int main( int argc, char * argv[] ) {
 		process_state();
 		
 		// quit
-		if(keystate.esc == 1){
-			printf("ESC pressed\n");
-			ww_window_send_quit_event();
-		}
+		//~ if(keystate.esc == 1){
+			//~ printf("ESC pressed\n");
+			//~ ww_window_send_quit_event();
+		//~ }
 		
 		// draw screen
 		ww_window_update_buffer();
