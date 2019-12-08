@@ -27,8 +27,11 @@ typedef struct {
 	uint32_t sub_y_pos;
 } player_t;
 
+#define MAP_WIDTH 27
+#define MAP_HEIGHT 25
+
 typedef struct {
-	uint32_t map[31][31];
+	uint32_t map[MAP_WIDTH][MAP_HEIGHT];
 	player_t player;
 	enum { PLAY_STATE_ROAM, PLAY_STATE_MENU, PLAY_STATE_DISTRACTION, PLAY_STATE_EVENT, PLAY_STATE_BATTLE, PLAY_STATE_LEVELUP, PLAY_STATE_WEAPONUP, PLAY_STATE_DEFUP } play_state_activity;
 } play_state_t;

@@ -1,0 +1,19 @@
+
+animations:
+  - animation: Animation_0
+    frames:
+      - frame: Frame_0
+        delay: 2
+        layers:
+          - layer: sole
+            color: "#000000"
+            x:
+              - 0
+              - 15
+              - 15
+              - 0
+            y:
+              - 0
+              - 0
+              - 15
+              - 15

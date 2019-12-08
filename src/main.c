@@ -15,6 +15,7 @@
 #include "ground.h"
 #include "grass_decoration.h"
 #include "pause_menu.h"
+#include "map_event.h"
 
 #include "untitled.h"
 #include "buttons.h"
@@ -41,6 +42,7 @@ void inits(){
 	init_title();
 	
 	init_pause_menu();
+	init_map_event();
 }
 
 void frees(){
@@ -104,6 +106,8 @@ void process_top_menu(){
 }
 
 int process_play_menu_esc_previous_frame_value = 1;
+int player_flash_rate = 30;
+int draw_player = 1;
 
 void process_play_menu(){
 	
@@ -112,6 +116,35 @@ void process_play_menu(){
 	}
 	
 	ww_draw_sprite(pause_menu);
+	
+	for(int i = 0; i < MAP_WIDTH; i++){
+		for(int j = 0; j < MAP_HEIGHT; j++){
+			if(game_state.play_state.map[i][j] == 1){
+				map_event->pad_x = 544 + (16 * i);
+				map_event->pad_y = 32  + (16 * j);
+				ww_draw_sprite(map_event);
+			}
+		}
+	}
+	
+	// draw flashing player dot
+	if (draw_player){
+		map_event->pad_x = 544 + (16 * game_state.play_state.player.x_pos);
+		map_event->pad_y = 32  + (16 * game_state.play_state.player.y_pos);
+		ww_draw_sprite(map_event);
+	}
+	
+	if(player_flash_rate == 0){
+		player_flash_rate = 30;
+		
+		if(draw_player == 0){
+			draw_player = 1;
+		} else {
+			draw_player = 0;
+		}
+	}
+	
+	player_flash_rate--;
 	
 	process_play_menu_esc_previous_frame_value = keystate.esc;
 	
@@ -333,6 +366,59 @@ void process_state(){
 	
 }
 
+void game_prop_init(){
+	
+	game_state.play_state.player.level     = 1;
+	game_state.play_state.player.max_hp    = 5;
+	game_state.play_state.player.hp        = 5;
+	game_state.play_state.player.speed     = 1;
+	game_state.play_state.player.baseatk   = 1;
+	game_state.play_state.player.basedef   = 1;
+	game_state.play_state.player.atk[0]    = 1;
+	game_state.play_state.player.atk[1]    = 1;
+	game_state.play_state.player.atk[2]    = 1;
+	game_state.play_state.player.atk[3]    = 1;
+	game_state.play_state.player.def[0]    = 1;
+	game_state.play_state.player.def[1]    = 1;
+	game_state.play_state.player.def[2]    = 1;
+	game_state.play_state.player.def[3]    = 1;
+	game_state.play_state.player.exp[0]    = 0;
+	game_state.play_state.player.exp[1]    = 0;
+	game_state.play_state.player.exp[2]    = 0;
+	game_state.play_state.player.exp[3]    = 0;
+	game_state.play_state.player.exp[4]    = 0;
+	game_state.play_state.player.exp[5]    = 0;
+	game_state.play_state.player.exp[6]    = 0;
+	game_state.play_state.player.exp[7]    = 0;
+	game_state.play_state.player.exp[8]    = 0;
+	game_state.play_state.player.x_pos     = ( MAP_WIDTH  / 2 ) + 1;
+	game_state.play_state.player.y_pos     = ( MAP_HEIGHT / 2 ) + 1;
+	game_state.play_state.player.sub_x_pos = 240;
+	game_state.play_state.player.sub_y_pos = 240;
+	game_state.options_menu_state.volume   = 5;
+	game_state.options_menu_state.scale    = SC_ONE;
+	
+	// magic number for event density 1/36 units
+	for(int i = 0; i < 18; i++){
+		int event_x = rand() % MAP_WIDTH;
+		int event_y = rand() % MAP_HEIGHT;
+		
+		if( 
+			( event_x == game_state.play_state.player.x_pos && 
+			event_y == game_state.play_state.player.y_pos ) ||
+			game_state.play_state.map[event_x][event_y] == 1
+		){
+			// don't put an event on the player
+			// don't put an event where there is already an event
+			i--;
+			continue;
+		}
+		
+		game_state.play_state.map[event_x][event_y] = 1;
+	}
+	
+}
+
 int main( int argc, char * argv[] ) {
 	
 	// seed random numbers
@@ -354,6 +440,7 @@ int main( int argc, char * argv[] ) {
 	}
 	
 	inits();
+	game_prop_init();
 	
 	// from here
 	ground->paused = 1;
