@@ -21,14 +21,14 @@ typedef struct {
 	uint32_t atk[4];
 	uint32_t def[4];
 	uint32_t exp[9];
-	uint32_t x_pos;
-	uint32_t y_pos;
-	uint32_t sub_x_pos;
-	uint32_t sub_y_pos;
+	int32_t x_pos;
+	int32_t y_pos;
+	int32_t sub_x_pos;
+	int32_t sub_y_pos;
 } player_t;
 
-#define MAP_WIDTH 27
-#define MAP_HEIGHT 25
+#define MAP_WIDTH 28
+#define MAP_HEIGHT 26
 
 typedef struct {
 	uint32_t map[MAP_WIDTH][MAP_HEIGHT];

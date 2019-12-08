@@ -193,23 +193,30 @@ void process_roam(){
 			dir = RIGHT;
 		}
 		
+		// move ground doodads
+		// move player
 		if (mov == WALK){
 			switch (dir) {
 				case UP:
 					y_prog--;
+					game_state.play_state.player.sub_y_pos-=10;
 					break;
 				case LEFT:
 					x_prog--;
+					game_state.play_state.player.sub_x_pos-=10;
 					break;
 				case DOWN:
 					y_prog++;
+					game_state.play_state.player.sub_y_pos+=10;
 					break;
 				case RIGHT:
 					x_prog++;
+					game_state.play_state.player.sub_x_pos+=10;
 					break;
 			}
 		}
 		
+		// handle ground doodads
 		if (x_prog == -10) { // moved left
 			x_prog = 0;
 			
@@ -290,6 +297,33 @@ void process_roam(){
 			}
 		}
 		
+		// handle player
+		if (game_state.play_state.player.sub_x_pos <=   0){ //left
+			game_state.play_state.player.sub_x_pos = 479;
+			game_state.play_state.player.x_pos--;
+			if(game_state.play_state.player.x_pos < 0)
+				game_state.play_state.player.x_pos = MAP_WIDTH - 1;
+		}
+		
+		if (game_state.play_state.player.sub_x_pos >= 480){ //right
+			game_state.play_state.player.sub_x_pos = 1;
+			game_state.play_state.player.x_pos++;
+			if(game_state.play_state.player.x_pos > MAP_WIDTH - 1)
+				game_state.play_state.player.x_pos = 0;
+		}
+		if (game_state.play_state.player.sub_y_pos <=   0){ //up
+			game_state.play_state.player.sub_y_pos = 479;
+			game_state.play_state.player.y_pos--;
+			if(game_state.play_state.player.y_pos < 0)
+				game_state.play_state.player.y_pos = MAP_HEIGHT - 1;
+		}
+		if (game_state.play_state.player.sub_y_pos >= 480){ //down
+			game_state.play_state.player.sub_y_pos = 1;
+			game_state.play_state.player.y_pos++;
+			if(game_state.play_state.player.y_pos > MAP_HEIGHT - 1)
+				game_state.play_state.player.y_pos = 0;
+		}
+				
 		anim = dir;
 		if (mov == WALK){
 			anim += 4;
@@ -391,8 +425,8 @@ void game_prop_init(){
 	game_state.play_state.player.exp[6]    = 0;
 	game_state.play_state.player.exp[7]    = 0;
 	game_state.play_state.player.exp[8]    = 0;
-	game_state.play_state.player.x_pos     = ( MAP_WIDTH  / 2 ) + 1;
-	game_state.play_state.player.y_pos     = ( MAP_HEIGHT / 2 ) + 1;
+	game_state.play_state.player.x_pos     = MAP_WIDTH  / 2;
+	game_state.play_state.player.y_pos     = MAP_HEIGHT / 2;
 	game_state.play_state.player.sub_x_pos = 240;
 	game_state.play_state.player.sub_y_pos = 240;
 	game_state.options_menu_state.volume   = 5;
