@@ -69,8 +69,9 @@ void ww_help(char * binary){
 	printf("\t\t\t[ 1 - 16000 ]\n");
 	printf("\t-H, --height\tSet the window's starting height\n");
 	printf("\t\t\t[ 1 - 9000 ]\n");
-	printf("\t-S, --height\tSet the window's starting scale\n");
+	printf("\t-S, --scale\tSet the window's starting scale\n");
 	printf("\t\t\t[ 1/16 | 1/8 | 1/4 | 1/2 | 1 | 2 | 4 | 8 ]\n");
+	printf("\t-F, --fullscreen\tStart in fullscreen mode\n");
 	
 }
 
@@ -86,6 +87,8 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	window_p->ww_default_height = height;
 	window_p->ww_ratio = 1.0;
 	window_p->ww_scale = SC_ONE;
+	
+	int fs = 0;
 	
 	for(int i = 0; i < argc; i++){
 		
@@ -125,6 +128,9 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 				ww_help(argv[0]);
 				return -1;
 			}
+			
+		} else if( strcmp(argv[i], "-F") == 0 || strcmp(argv[i], "--fullscreen") == 0 ){
+			window_p->fs = 1;
 			
 		} else if( strcmp(argv[i], "-S") == 0 || strcmp(argv[i], "--scale") == 0 ){
 			
@@ -180,11 +186,17 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 		return -1;
 	}
 	
+	uint32_t flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+	
+	if(window_p->fs){
+		flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
+	}
+		
 	window_p->ww_sdl_window = SDL_CreateWindow( title,
 								SDL_WINDOWPOS_CENTERED,
 								SDL_WINDOWPOS_CENTERED,
 								window_p->ww_width, window_p->ww_height, 
-								SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE );
+								flags);
 	
 	if(!window_p->ww_sdl_window) {
 		printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
@@ -293,20 +305,25 @@ int ww_window_event(SDL_Event *event){
 		if( ((event->key.keysym.sym == SDLK_RETURN) && 
 		((currentKeyStates[SDL_SCANCODE_RALT]) || 
 		(currentKeyStates[SDL_SCANCODE_LALT]))) ){
-			if( window_p->fs ){
-				SDL_SetWindowFullscreen( window_p->ww_sdl_window, SDL_FALSE );
-				window_p->fs = 0;
-			}else{
-				SDL_SetWindowFullscreen( window_p->ww_sdl_window, 
-					SDL_WINDOW_FULLSCREEN_DESKTOP );
-				window_p->fs = 1;
-			}
-			
+			ww_toggle_fs();
 			rc = 1;
 		}
 	}
 	
 	return rc;
+}
+
+void ww_toggle_fs(){
+	ww_window_s *window_p = (ww_window_s*) window;
+	
+	if( window_p->fs ){
+		SDL_SetWindowFullscreen( window_p->ww_sdl_window, SDL_FALSE );
+		window_p->fs = 0;
+	}else{
+		SDL_SetWindowFullscreen( window_p->ww_sdl_window, 
+			SDL_WINDOW_FULLSCREEN_DESKTOP );
+		window_p->fs = 1;
+	}
 }
 
 void ww_key_event(SDL_Event *event){

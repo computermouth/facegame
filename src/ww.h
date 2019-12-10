@@ -107,6 +107,7 @@ extern ww_keystate_t press_state;
 int ww_window_destroy();
 int ww_window_create(int argc, char * argv[], char * title, int width, int height);
 int ww_window_event(SDL_Event *event);
+void ww_toggle_fs();
 void ww_key_event(SDL_Event *event);
 int ww_window_update_events();
 void ww_window_send_quit_event();
