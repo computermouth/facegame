@@ -100,9 +100,24 @@ typedef struct{
 	unsigned char rt;
 } ww_keystate_t;
 
+typedef struct{
+	unsigned char str;
+	unsigned char sel;
+	unsigned char up;
+	unsigned char dn;
+	unsigned char lt;
+	unsigned char rt;
+	unsigned char a;
+	unsigned char b;
+	unsigned char x;
+	unsigned char y;
+} ww_ctrlstate_t;
+
 extern ww_window_t window;
-extern ww_keystate_t keystate;
-extern ww_keystate_t press_state;
+extern ww_keystate_t kstate;
+extern ww_keystate_t kpstate;
+extern ww_ctrlstate_t cstate;
+extern ww_ctrlstate_t cpstate;
 
 int ww_window_destroy();
 int ww_window_create(int argc, char * argv[], char * title, int width, int height);

@@ -64,18 +64,18 @@ void frees(){
 void process_top_menu(){
 	
 	// move left
-	if(press_state.lt){
+	if(kpstate.lt){
 		game_state.top_menu_selected--;
-		press_state.lt = 0;
+		kpstate.lt = 0;
 	}
 	// wrap left
 	if(game_state.top_menu_selected == TOP_MENU_SELECTED_PLAY - 1)
 		game_state.top_menu_selected = TOP_MENU_SELECTED_QUIT;
 	
 	// move right
-	if(press_state.rt){
+	if(kpstate.rt){
 		game_state.top_menu_selected++;
-		press_state.rt = 0;
+		kpstate.rt = 0;
 	}
 	// wrap right
 	if(game_state.top_menu_selected > TOP_MENU_SELECTED_QUIT)
@@ -83,7 +83,7 @@ void process_top_menu(){
 	
 	selector->pad_x = 200 * game_state.top_menu_selected;
 	
-	if(press_state.ent){
+	if(kpstate.ent){
 		switch(game_state.top_menu_selected){
 			case TOP_MENU_SELECTED_PLAY:
 				game_state.top_state = TOP_STATE_PLAY;
@@ -111,7 +111,7 @@ int draw_player = 1;
 
 void process_play_menu(){
 	
-	if (keystate.esc && process_play_menu_esc_previous_frame_value == 0) {
+	if (kstate.esc && process_play_menu_esc_previous_frame_value == 0) {
 		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
 	}
 	
@@ -146,7 +146,7 @@ void process_play_menu(){
 	
 	player_flash_rate--;
 	
-	process_play_menu_esc_previous_frame_value = keystate.esc;
+	process_play_menu_esc_previous_frame_value = kstate.esc;
 	
 }
 
@@ -165,7 +165,7 @@ void process_roam(){
 		char old_anim = anim;
 		mov = IDLE;
 		
-		if(keystate.esc && process_roam_esc_previous_frame_value == 0){
+		if(kstate.esc && process_roam_esc_previous_frame_value == 0){
 			game_state.play_state.play_state_activity = PLAY_STATE_MENU;
 			process_roam_esc_previous_frame_value = 1;
 			
@@ -173,22 +173,22 @@ void process_roam(){
 			return;
 		}
 		
-		if(keystate.w){
+		if(kstate.w){
 			mov = WALK;
 			dir = UP;
 		}
 		
-		if(keystate.a){
+		if(kstate.a){
 			mov = WALK;
 			dir = LEFT;
 		}
 		
-		if(keystate.s){
+		if(kstate.s){
 			mov = WALK;
 			dir = DOWN;
 		}
 		
-		if(keystate.d){
+		if(kstate.d){
 			mov = WALK;
 			dir = RIGHT;
 		}
@@ -353,7 +353,7 @@ void process_roam(){
 		
 		ww_draw_sprite(dude);
 	
-	process_roam_esc_previous_frame_value = keystate.esc;
+	process_roam_esc_previous_frame_value = kstate.esc;
 	
 }
 

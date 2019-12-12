@@ -9,9 +9,10 @@
 #include <SDL2/SDL.h>
 
 #include "ww.h"
+#include "gamecontrollerdb.h"
 
 ww_window_t window = NULL;
-ww_keystate_t keystate = {
+ww_keystate_t kstate = {
 	.esc = 0,
 	.ent = 0,
 	.w = 0,
@@ -24,7 +25,7 @@ ww_keystate_t keystate = {
 	.rt = 0
 };
 
-ww_keystate_t press_state = {
+ww_keystate_t kpstate = {
 	.esc = 0,
 	.ent = 0,
 	.w = 0,
@@ -36,6 +37,34 @@ ww_keystate_t press_state = {
 	.lt = 0,
 	.rt = 0
 };
+
+ww_ctrlstate_t cstate = {
+	.str = 0,
+	.sel = 0,
+	.up  = 0,
+	.dn  = 0,
+	.lt  = 0,
+	.rt  = 0,
+	.a   = 0,
+	.b   = 0,
+	.x   = 0,
+	.y   = 0
+};
+
+ww_ctrlstate_t cpstate = {
+	.str = 0,
+	.sel = 0,
+	.up  = 0,
+	.dn  = 0,
+	.lt  = 0,
+	.rt  = 0,
+	.a   = 0,
+	.b   = 0,
+	.x   = 0,
+	.y   = 0
+};
+
+SDL_GameController *ctrlr = NULL;
 
 int ww_calc_window(){
 	
@@ -87,8 +116,6 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	window_p->ww_default_height = height;
 	window_p->ww_ratio = 1.0;
 	window_p->ww_scale = SC_ONE;
-	
-	int fs = 0;
 	
 	for(int i = 0; i < argc; i++){
 		
@@ -181,9 +208,16 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	
 	ww_calc_window();
 	
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
+	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_JOYSTICK ) < 0 ) {
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 		return -1;
+	}
+	
+	const char * gcdb = GAMECONTROLLERDB_STRING;
+	int rc = SDL_GameControllerAddMapping(gcdb);
+	
+	if(rc == -1){
+		SDL_Log( "Couldn't load GCDB! SDL_Error: %s\n", SDL_GetError() );
 	}
 	
 	uint32_t flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
@@ -224,6 +258,21 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	SDL_RenderClear( window_p->ww_sdl_renderer );
 	
 	SDL_SetRenderTarget(window_p->ww_sdl_renderer, window_p->ww_sdl_texture);
+
+	//Check for joysticks
+	if( SDL_NumJoysticks() < 1 ){
+		printf( "Warning: No joysticks connected!\n" );
+	} else {
+		//Load joystick
+		SDL_Log("SDL_NumJoysticks(): %d", SDL_NumJoysticks());
+		if(SDL_IsGameController(0)){
+			ctrlr = SDL_GameControllerOpen( 0 );
+			SDL_Log("mok");
+			if( ctrlr == NULL )	{
+				printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
+			}
+		}
+	}
 
 	return 0;
 }
@@ -326,92 +375,176 @@ void ww_toggle_fs(){
 	}
 }
 
-void ww_key_event(SDL_Event *event){
+void ww_input_event(SDL_Event *event){
 	
 	
-	ww_keystate_t old_keystate = keystate;
+	ww_keystate_t old_kstate = kstate;
+	
+	SDL_Log("yup");
 	
 	if( event->type == SDL_KEYDOWN && event->key.repeat == 0){
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
-				keystate.esc = 1;
+				kstate.esc = 1;
 				break;
 			case SDLK_RETURN:
-				keystate.ent = 1;
+				kstate.ent = 1;
 				break;
 			case SDLK_UP:
-				keystate.up = 1;
+				kstate.up = 1;
 				break;
 			case SDLK_DOWN:
-				keystate.dn = 1;
+				kstate.dn = 1;
 				break;
 			case SDLK_LEFT:
-				keystate.lt = 1;
+				kstate.lt = 1;
 				break;
 			case SDLK_RIGHT:
-				keystate.rt = 1;
+				kstate.rt = 1;
 				break;
 			case SDLK_w:
-				keystate.w = 1;
+				kstate.w = 1;
 				break;
 			case SDLK_a:
-				keystate.a = 1;
+				kstate.a = 1;
 				break;
 			case SDLK_s:
-				keystate.s = 1;
+				kstate.s = 1;
 				break;
 			case SDLK_d:
-				keystate.d = 1;
+				kstate.d = 1;
 				break;
 		}
 	} else if ( event->type == SDL_KEYUP ) {
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
-				keystate.esc = 0;
+				kstate.esc = 0;
 				break;
 			case SDLK_RETURN:
-				keystate.ent = 0;
+				kstate.ent = 0;
 				break;
 			case SDLK_UP:
-				keystate.up = 0;
+				kstate.up = 0;
 				break;
 			case SDLK_DOWN:
-				keystate.dn = 0;
+				kstate.dn = 0;
 				break;
 			case SDLK_LEFT:
-				keystate.lt = 0;
+				kstate.lt = 0;
 				break;
 			case SDLK_RIGHT:
-				keystate.rt = 0;
+				kstate.rt = 0;
 				break;
 			case SDLK_w:
-				keystate.w = 0;
+				kstate.w = 0;
 				break;
 			case SDLK_a:
-				keystate.a = 0;
+				kstate.a = 0;
 				break;
 			case SDLK_s:
-				keystate.s = 0;
+				kstate.s = 0;
 				break;
 			case SDLK_d:
-				keystate.d = 0;
+				kstate.d = 0;
 				break;
 		}
 	}
 	
-	ww_keystate_t newp = { 0 };
-	press_state = newp;
+	ww_ctrlstate_t old_cstate = cstate;
 	
-	if (old_keystate.esc == 0 && keystate.esc == 1) press_state.esc = 1;
-	if (old_keystate.ent == 0 && keystate.ent == 1) press_state.ent = 1;
-	if (old_keystate.w   == 0 && keystate.w   == 1) press_state.w   = 1;
-	if (old_keystate.a   == 0 && keystate.a   == 1) press_state.a   = 1;
-	if (old_keystate.s   == 0 && keystate.s   == 1) press_state.s   = 1;
-	if (old_keystate.d   == 0 && keystate.d   == 1) press_state.d   = 1;
-	if (old_keystate.up  == 0 && keystate.up  == 1) press_state.up  = 1;
-	if (old_keystate.dn  == 0 && keystate.dn  == 1) press_state.dn  = 1;
-	if (old_keystate.lt  == 0 && keystate.lt  == 1) press_state.lt  = 1;
-	if (old_keystate.rt  == 0 && keystate.rt  == 1) press_state.rt  = 1;
+	SDL_Log("keydown %d", SDL_KEYDOWN);
+	SDL_Log("real ty %d", event->type);
+	SDL_Log("joybutt %d", SDL_JOYBUTTONDOWN);
+	
+	if( event->type == SDL_JOYBUTTONDOWN){
+		SDL_Log("also");
+		switch(event->cbutton.button){
+			case SDL_CONTROLLER_BUTTON_START:
+				SDL_Log("SDL_CONTROLLER_BUTTON_START");
+				break;
+			case SDL_CONTROLLER_BUTTON_GUIDE:
+				SDL_Log("SDL_CONTROLLER_BUTTON_GUIDE");
+				break;
+			case SDL_CONTROLLER_BUTTON_BACK:
+				SDL_Log("SDL_CONTROLLER_BUTTON_BACK");
+				break;
+			case SDL_CONTROLLER_BUTTON_MAX:
+				SDL_Log("SDL_CONTROLLER_BUTTON_MAX");
+				break;
+			case SDL_CONTROLLER_BUTTON_DPAD_UP:
+				SDL_Log("SDL_CONTROLLER_BUTTON_DPAD_UP");
+				break;
+			case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+				SDL_Log("SDL_CONTROLLER_BUTTON_DPAD_DOWN");
+				break;
+			case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+				SDL_Log("SDL_CONTROLLER_BUTTON_DPAD_LEFT");
+				break;
+			case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+				SDL_Log("SDL_CONTROLLER_BUTTON_DPAD_RIGHT");
+				break;
+			case SDL_CONTROLLER_BUTTON_A:
+				SDL_Log("SDL_CONTROLLER_BUTTON_A");
+				break;
+			case SDL_CONTROLLER_BUTTON_B:
+				SDL_Log("SDL_CONTROLLER_BUTTON_B");
+				break;
+			case SDL_CONTROLLER_BUTTON_X:
+				SDL_Log("SDL_CONTROLLER_BUTTON_X");
+				break;
+			case SDL_CONTROLLER_BUTTON_Y:
+				SDL_Log("SDL_CONTROLLER_BUTTON_Y");
+				break;
+		}
+	}
+	 //~ else if ( event->type == SDL_KEYUP ) {
+		//~ switch(event->key.keysym.sym){
+			//~ case SDLK_ESCAPE:
+				//~ kstate.esc = 0;
+				//~ break;
+			//~ case SDLK_RETURN:
+				//~ kstate.ent = 0;
+				//~ break;
+			//~ case SDLK_UP:
+				//~ kstate.up = 0;
+				//~ break;
+			//~ case SDLK_DOWN:
+				//~ kstate.dn = 0;
+				//~ break;
+			//~ case SDLK_LEFT:
+				//~ kstate.lt = 0;
+				//~ break;
+			//~ case SDLK_RIGHT:
+				//~ kstate.rt = 0;
+				//~ break;
+			//~ case SDLK_w:
+				//~ kstate.w = 0;
+				//~ break;
+			//~ case SDLK_a:
+				//~ kstate.a = 0;
+				//~ break;
+			//~ case SDLK_s:
+				//~ kstate.s = 0;
+				//~ break;
+			//~ case SDLK_d:
+				//~ kstate.d = 0;
+				//~ break;
+		//~ }
+	//~ }
+	
+	ww_keystate_t newp = { 0 };
+	kpstate = newp;
+	
+	if (old_kstate.esc == 0 && kstate.esc == 1) kpstate.esc = 1;
+	if (old_kstate.ent == 0 && kstate.ent == 1) kpstate.ent = 1;
+	if (old_kstate.w   == 0 && kstate.w   == 1) kpstate.w   = 1;
+	if (old_kstate.a   == 0 && kstate.a   == 1) kpstate.a   = 1;
+	if (old_kstate.s   == 0 && kstate.s   == 1) kpstate.s   = 1;
+	if (old_kstate.d   == 0 && kstate.d   == 1) kpstate.d   = 1;
+	if (old_kstate.up  == 0 && kstate.up  == 1) kpstate.up  = 1;
+	if (old_kstate.dn  == 0 && kstate.dn  == 1) kpstate.dn  = 1;
+	if (old_kstate.lt  == 0 && kstate.lt  == 1) kpstate.lt  = 1;
+	if (old_kstate.rt  == 0 && kstate.rt  == 1) kpstate.rt  = 1;
 	
 }
 
@@ -431,7 +564,7 @@ int ww_window_update_events(){
 				break;
 			default:
 				if ( ! ww_window_event(&event))
-					ww_key_event(&event);
+					ww_input_event(&event);
 				break;
 		}
 	}
