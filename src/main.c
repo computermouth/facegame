@@ -111,7 +111,7 @@ int draw_player = 1;
 
 void process_play_menu(){
 	
-	if (istate.back && process_play_menu_esc_previous_frame_value == 0) {
+	if ( (ipstate.back || ipstate.str) && process_play_menu_esc_previous_frame_value == 0) {
 		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
 		process_play_menu_esc_previous_frame_value = 1;
 	}
@@ -166,7 +166,7 @@ void process_roam(){
 		char old_anim = anim;
 		mov = IDLE;
 		
-		if(istate.back && process_roam_esc_previous_frame_value == 0){
+		if( (ipstate.sel || ipstate.str) && process_roam_esc_previous_frame_value == 0){
 			game_state.play_state.play_state_activity = PLAY_STATE_MENU;
 			process_roam_esc_previous_frame_value = 1;
 			
@@ -354,7 +354,7 @@ void process_roam(){
 		
 		ww_draw_sprite(dude);
 	
-	process_roam_esc_previous_frame_value = istate.back;
+	process_roam_esc_previous_frame_value = istate.back | istate.sel;
 	
 }
 

@@ -210,7 +210,8 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 		return -1;
 	}
 	window_p->ww_sdl_renderer = SDL_CreateRenderer( window_p->ww_sdl_window, -1,
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC ); //SDL_RENDERER_SOFTWARE
+		//~ SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC ); //SDL_RENDERER_SOFTWARE
+		SDL_RENDERER_SOFTWARE ); //SDL_RENDERER_SOFTWARE
 	
 	
 	if(!window_p->ww_sdl_renderer) {
@@ -219,7 +220,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	}
 	
 	window_p->ww_sdl_texture = SDL_CreateTexture( window_p->ww_sdl_renderer,
-		SDL_PIXELFORMAT_BGR888,
+		SDL_PIXELFORMAT_BGR565,
 		SDL_TEXTUREACCESS_TARGET,
 		window_p->ww_width * (window_p->ww_scale), window_p->ww_height * (window_p->ww_scale));
 
@@ -235,7 +236,6 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	//Check for joysticks
 	if( SDL_NumJoysticks() > 0 ){
 		//Load joystick
-		//~ SDL_Log("SDL_NumJoysticks(): %d", SDL_NumJoysticks());
 		if(SDL_IsGameController(0)){
 			ctrlr = SDL_GameControllerOpen( 0 );
 			if( ctrlr == NULL )	{
