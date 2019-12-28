@@ -9,6 +9,7 @@
 #include <SDL2/SDL.h>
 
 #include "ww.h"
+#include "gamecontrollerdb.h"
 
 ww_window_t window = NULL;
 
@@ -191,6 +192,13 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER ) < 0 ) {
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 		return -1;
+	}
+	
+	const char * gcdb = GAMECONTROLLERDB_STRING;
+	int rc = SDL_GameControllerAddMapping(gcdb);
+	
+	if(rc == -1){
+		SDL_Log( "Couldn't load GCDB! SDL_Error: %s\n", SDL_GetError() );
 	}
 	
 	uint32_t flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
