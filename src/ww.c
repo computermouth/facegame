@@ -9,7 +9,6 @@
 #include <SDL2/SDL.h>
 
 #include "ww.h"
-#include "gamecontrollerdb.h"
 
 ww_window_t window = NULL;
 
@@ -193,12 +192,10 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 		printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
 		return -1;
 	}
-	
-	const char * gcdb = GAMECONTROLLERDB_STRING;
-	int rc = SDL_GameControllerAddMapping(gcdb);
-	
+
+	int rc = SDL_GameControllerAddMapping("190000006c696e6b6465762064657600,RG350,platform:Linux,x:b3,a:b0,b:b1,y:b2,back:b8,start:b9,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,dpup:h0.1,leftshoulder:b4,lefttrigger:b6,rightshoulder:b5,righttrigger:b7,leftstick:b10,rightstick:b11,leftx:a0,lefty:a1,rightx:a2,righty:a3,");
 	if(rc == -1){
-		SDL_Log( "Couldn't load GCDB! SDL_Error: %s\n", SDL_GetError() );
+		SDL_Log( "Couldn't load RG350 controller map! SDL_Error: %s\n", SDL_GetError() );
 	}
 	
 	uint32_t flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
@@ -244,6 +241,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	//Check for joysticks
 	if( SDL_NumJoysticks() > 0 ){
 		//Load joystick
+	
 		if(SDL_IsGameController(0)){
 			ctrlr = SDL_GameControllerOpen( 0 );
 			if( ctrlr == NULL )	{
@@ -363,7 +361,7 @@ void ww_toggle_fs(){
 }
 
 void ww_key_event(SDL_Event *event){
-
+	
 	if( event->type == SDL_KEYDOWN && event->key.repeat == 0){
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
@@ -537,7 +535,7 @@ int ww_window_update_events(){
 	ww_istate_t old_istate = istate;
 	ww_istate_t newi = { 0 };
 	ipstate = newi;
-
+	
 	SDL_Event event;
 	while(SDL_PollEvent(&event)) {
 		switch(event.type){

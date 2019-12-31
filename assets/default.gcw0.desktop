@@ -1,9 +1,10 @@
 [Desktop Entry]
 Name=Facegame
 Comment=Face and game
-Exec=main -F
+Exec=main -F -S 1/2
 Terminal=false
 Type=Application
+X-OD-NeedsJoystick=true
 StartupNotify=true
 Icon=icon
 Categories=games;
