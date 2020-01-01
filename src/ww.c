@@ -74,12 +74,14 @@ void ww_help(char * binary){
 	
 	printf("Usage: %s [OPTION]...\n", binary);
 	printf("\n");
-	printf("\t-W, --width\tSet the window's starting width\n");
+	printf("\t-W, --width\tWindow starting width\n");
 	printf("\t\t\t[ 1 - 16000 ]\n");
-	printf("\t-H, --height\tSet the window's starting height\n");
+	printf("\t-H, --height\tWindow starting height\n");
 	printf("\t\t\t[ 1 - 9000 ]\n");
-	printf("\t-S, --scale\tSet the window's starting scale\n");
+	printf("\t-S, --scale\tVector scale (for performance)\n");
 	printf("\t\t\t[ 1/16 | 1/8 | 1/4 | 1/2 | 1 | 2 | 4 | 8 ]\n");
+	printf("\t-B, --bits\tSet bit level for color pallette\n");
+	printf("\t\t\t[ 8 | 12 | 15 | 16 | 24 ]\n");
 	printf("\t-F, --fullscreen\tStart in fullscreen mode\n");
 	
 }
@@ -96,6 +98,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	window_p->ww_default_height = height;
 	window_p->ww_ratio = 1.0;
 	window_p->ww_scale = SC_ONE;
+	window_p->pf = SDL_PIXELFORMAT_RGB888;
 	
 	for(int i = 0; i < argc; i++){
 		
@@ -160,7 +163,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 				else if( strcmp(argv[i+1], "8") == 0)
 					window_p->ww_scale = SC_EIGHT;
 				else {
-					printf("Scale setting invalid [ 1/4 ]\n");
+					printf("Scale setting invalid ie. [ 1/2 ]\n");
 					return -1;
 					ww_help(argv[0]);
 				}
@@ -172,7 +175,35 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 					SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 				
 			} else {
-				printf("No scale provided [ -S 2 ] \n");
+				printf("No scale provided ie [ -S 1/2 ] \n");
+				return -1;
+				ww_help(argv[0]);
+			}
+			
+		} else if( strcmp(argv[i], "-B") == 0 || strcmp(argv[i], "--bits") == 0 ){
+		
+			if (argc > (i + 1)){
+				
+				if( strcmp(argv[i+1], "8") == 0)
+					window_p->pf = SDL_PIXELFORMAT_RGB332;
+				else if( strcmp(argv[i+1], "12") == 0)
+					window_p->pf = SDL_PIXELFORMAT_RGB444;
+				else if( strcmp(argv[i+1], "15") == 0)
+					window_p->pf = SDL_PIXELFORMAT_RGB555;
+				else if( strcmp(argv[i+1], "16") == 0)
+					window_p->pf = SDL_PIXELFORMAT_RGB565;
+				else if( strcmp(argv[i+1], "24") == 0)
+					window_p->pf = SDL_PIXELFORMAT_RGB888;
+				else {
+					printf("Bit setting invalid [ 15 ]\n");
+					return -1;
+					ww_help(argv[0]);
+				}
+				
+				i++;
+				
+			} else {
+				printf("No bit level provided [ -B 8 ] \n");
 				return -1;
 				ww_help(argv[0]);
 			}
@@ -225,7 +256,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	}
 	
 	window_p->ww_sdl_texture = SDL_CreateTexture( window_p->ww_sdl_renderer,
-		SDL_PIXELFORMAT_BGR565,
+		window_p->pf,
 		SDL_TEXTUREACCESS_TARGET,
 		window_p->ww_width * (window_p->ww_scale), window_p->ww_height * (window_p->ww_scale));
 
@@ -291,7 +322,7 @@ int ww_window_event(SDL_Event *event){
 				if(window_p->ww_sdl_texture) SDL_DestroyTexture( window_p->ww_sdl_texture );
 
 				window_p->ww_sdl_texture = SDL_CreateTexture( window_p->ww_sdl_renderer,
-					SDL_PIXELFORMAT_BGR888,
+					window_p->pf,
 					SDL_TEXTUREACCESS_TARGET,
 					window_p->ww_width * (window_p->ww_scale), window_p->ww_height * (window_p->ww_scale));
 				

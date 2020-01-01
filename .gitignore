@@ -5,3 +5,4 @@ concoord/concoord
 img/**/*.h
 tools/yaml2struct/yaml2struct
 test.mp
+facegame.opk
