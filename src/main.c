@@ -452,6 +452,30 @@ void game_prop_init(){
 		game_state.play_state.map[event_x][event_y] = 1;
 	}
 	
+	// from here
+	ground->paused = 1;
+	dude->pad_x = 360;
+	dude->pad_y = 80;
+	anim = dir;
+	
+	if (mov == WALK)
+		anim += 4;
+	
+	for(int i = 0; i < 10; i++){
+		for(int j = 0; j < 3; j++){
+			ground_sprites[i][j] = ww_clone_sprite(grass_decoration);
+			ground_sprites[i][j]->pad_x = i * 100;
+			ground_sprites[i][j]->pad_y = (j * 83);
+			ground_slots[i][j] = rand() % 34 - 30;
+			if (ground_slots[i][j] <= 0){
+				ground_slots[i][j] = 0;
+			} else {
+				ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
+			}
+		}
+	}
+	// to here, should go somewhere else
+	
 }
 
 int main( int argc, char * argv[] ) {
@@ -477,30 +501,6 @@ int main( int argc, char * argv[] ) {
 	inits();
 	game_prop_init();
 	
-	// from here
-	ground->paused = 1;
-	dude->pad_x = 360;
-	dude->pad_y = 80;
-	anim = dir;
-	
-	if (mov == WALK)
-		anim += 4;
-	
-	for(int i = 0; i < 10; i++){
-		for(int j = 0; j < 3; j++){
-			ground_sprites[i][j] = ww_clone_sprite(grass_decoration);
-			ground_sprites[i][j]->pad_x = i * 100;
-			ground_sprites[i][j]->pad_y = (j * 83);
-			ground_slots[i][j] = rand() % 34 - 30;
-			if (ground_slots[i][j] <= 0){
-				ground_slots[i][j] = 0;
-			} else {
-				ground_sprites[i][j]->active_animation = ground_slots[i][j] - 1;
-			}
-		}
-	}
-	// to here, should go somewhere else
-	
 	// primary loop
 	while(!ww_window_received_quit_event()) {
 		
@@ -508,12 +508,6 @@ int main( int argc, char * argv[] ) {
 		ww_window_update_events();
 		
 		process_state();
-		
-		// quit
-		//~ if(keystate.esc == 1){
-			//~ printf("ESC pressed\n");
-			//~ ww_window_send_quit_event();
-		//~ }
 		
 		// draw screen
 		ww_window_update_buffer();

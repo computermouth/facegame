@@ -84,6 +84,7 @@ void ww_help(char * binary){
 	printf("\t\t\t[ 8 | 12 | 15 | 16 | 24 ]\n");
 	printf("\t-F, --fullscreen\tStart in fullscreen mode\n");
 	printf("\t-N, --no-accel\tDisable hardware acceleration\n");
+	printf("\t-D, --disable-vsync\tDisable hardware vsync\n");
 	
 }
 
@@ -101,6 +102,10 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	window_p->ww_scale = SC_ONE;
 	window_p->pf = SDL_PIXELFORMAT_RGB888;
 	window_p->acc = SDL_RENDERER_ACCELERATED;
+	window_p->vsync = SDL_RENDERER_PRESENTVSYNC;
+	window_p->ticks = 0;
+	window_p->framediff = 0.0;
+	window_p->frames = 0;
 	
 	for(int i = 0; i < argc; i++){
 		
@@ -212,6 +217,9 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 			
 		} else if( strcmp(argv[i], "-N") == 0 || strcmp(argv[i], "--no-accel") == 0 ){
 			window_p->acc = SDL_RENDERER_SOFTWARE;
+			window_p->vsync = 0;
+		} else if( strcmp(argv[i], "-D") == 0 || strcmp(argv[i], "--disable-vsync") == 0 ){
+			window_p->vsync = 0;
 			
 		} else if (argc > 0 && i != 0) {
 			ww_help(argv[0]);
@@ -251,7 +259,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 		return -1;
 	}
 	window_p->ww_sdl_renderer = SDL_CreateRenderer( window_p->ww_sdl_window, -1,
-		window_p->acc );
+		window_p->acc | window_p->vsync );
 	
 	
 	if(!window_p->ww_sdl_renderer) {
@@ -598,7 +606,33 @@ int ww_window_update_events(){
 		if (old_istate.back == 0 && istate.back == 1){ ipstate.back = 1;  }
 	}
 	
+	unsigned int new_ticks = SDL_GetTicks();
+	//~ unsigned int leftover_ticks =  window_p->framediff * (1000.0 / WW_FRAMERATE);
+	//~ if (leftover_ticks) {
+		//~ window_p->framediff = window_p->framediff - ((double)leftover_ticks * 1000.0 / WW_FRAMERATE);
+	//~ }
+	unsigned int passed_ms = (new_ticks - window_p->ticks);
+	window_p->frames = passed_ms / 16;
+	
+	window_p->framediff += ((float)window_p->frames * .67) + passed_ms % 16;
+	window_p->frames += window_p->framediff / 16;
+	while (window_p->framediff > 16.67){
+		window_p->framediff -= 16.67;
+		window_p->frames++;
+	}
+	
+	//~ printf("nt: %u\n\tleftover: %d\n\t\tpassed: %u\n\t\t\tframes: %d\n\t\t\t\tframediff: %f\n", 
+		//~ new_ticks, 0, passed_ms, window_p->frames, window_p->framediff);
+		
+	window_p->ticks = new_ticks;
+	
 	return 0;
+}
+
+int ww_frames_passed(){
+	ww_window_s *window_p = (ww_window_s*) window;
+	
+	return window_p->frames;
 }
 
 void ww_window_send_quit_event() {

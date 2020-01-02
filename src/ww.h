@@ -27,8 +27,12 @@ typedef struct{
 	SDL_Window* ww_sdl_window;
 	SDL_Renderer* ww_sdl_renderer;
 	SDL_Texture* ww_sdl_texture;
+	unsigned int ticks;
+	float framediff;
+	int frames;
 	int pf;
 	int acc;
+	int vsync;
 	int ww_width;
 	int ww_height;
 	int ww_default_width;
