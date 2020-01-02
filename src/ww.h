@@ -28,6 +28,7 @@ typedef struct{
 	SDL_Renderer* ww_sdl_renderer;
 	SDL_Texture* ww_sdl_texture;
 	int pf;
+	int acc;
 	int ww_width;
 	int ww_height;
 	int ww_default_width;

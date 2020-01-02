@@ -83,6 +83,7 @@ void ww_help(char * binary){
 	printf("\t-B, --bits\tSet bit level for color pallette\n");
 	printf("\t\t\t[ 8 | 12 | 15 | 16 | 24 ]\n");
 	printf("\t-F, --fullscreen\tStart in fullscreen mode\n");
+	printf("\t-N, --no-accel\tDisable hardware acceleration\n");
 	
 }
 
@@ -99,6 +100,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	window_p->ww_ratio = 1.0;
 	window_p->ww_scale = SC_ONE;
 	window_p->pf = SDL_PIXELFORMAT_RGB888;
+	window_p->acc = SDL_RENDERER_ACCELERATED;
 	
 	for(int i = 0; i < argc; i++){
 		
@@ -208,6 +210,9 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 				ww_help(argv[0]);
 			}
 			
+		} else if( strcmp(argv[i], "-N") == 0 || strcmp(argv[i], "--no-accel") == 0 ){
+			window_p->acc = SDL_RENDERER_SOFTWARE;
+			
 		} else if (argc > 0 && i != 0) {
 			ww_help(argv[0]);
 			return -1;
@@ -246,8 +251,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 		return -1;
 	}
 	window_p->ww_sdl_renderer = SDL_CreateRenderer( window_p->ww_sdl_window, -1,
-		//~ SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC ); //SDL_RENDERER_SOFTWARE
-		SDL_RENDERER_SOFTWARE ); //SDL_RENDERER_SOFTWARE
+		window_p->acc );
 	
 	
 	if(!window_p->ww_sdl_renderer) {

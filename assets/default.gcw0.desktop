@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Facegame
 Comment=Face and game
-Exec=main -F -B 8 -S 1/2
+Exec=main -F -N -S 1/2
 Terminal=false
 Type=Application
 X-OD-NeedsJoystick=true
