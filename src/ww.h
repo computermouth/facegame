@@ -119,6 +119,7 @@ int ww_window_event(SDL_Event *event);
 void ww_toggle_fs();
 void ww_key_event(SDL_Event *event);
 int ww_window_update_events();
+int ww_frames_passed();
 void ww_window_send_quit_event();
 int ww_window_received_quit_event();
 int _gfxPrimitivesCompareInt(const void *a, const void *b);

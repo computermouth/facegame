@@ -621,8 +621,8 @@ int ww_window_update_events(){
 		window_p->frames++;
 	}
 	
-	//~ printf("nt: %u\n\tleftover: %d\n\t\tpassed: %u\n\t\t\tframes: %d\n\t\t\t\tframediff: %f\n", 
-		//~ new_ticks, 0, passed_ms, window_p->frames, window_p->framediff);
+	printf("nt: %u\n\tleftover: %d\n\t\tpassed: %u\n\t\t\tframes: %d\n\t\t\t\tframediff: %f\n", 
+		new_ticks, 0, passed_ms, window_p->frames, window_p->framediff);
 		
 	window_p->ticks = new_ticks;
 	
@@ -792,16 +792,17 @@ int ww_draw_animation(ww_animation_t * anim, int paused){
 	
 	int rc = ww_draw_frame(anim->frames[anim->active_frame]);
 	
-	if(anim->d_progress == 0 && paused == 0){
+	if(anim->d_progress <= 0 && paused == 0){
+		int old_delay = anim->delay[anim->active_frame];
 		anim->active_frame++;
 		
 		if(anim->active_frame == anim->count)
 			anim->active_frame = 0;
 		
-		anim->d_progress = anim->delay[anim->active_frame];
+		anim->d_progress = anim->delay[anim->active_frame] - (anim->d_progress % old_delay);
 		
 	} else if (paused == 0){
-		anim->d_progress--;
+		anim->d_progress -= ww_frames_passed();
 	}
 	
 	return rc;

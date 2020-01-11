@@ -135,8 +135,8 @@ void process_play_menu(){
 		ww_draw_sprite(map_event);
 	}
 	
-	if(player_flash_rate == 0){
-		player_flash_rate = 30;
+	if(player_flash_rate <= 0){
+		player_flash_rate = 30 - abs(player_flash_rate);
 		
 		if(draw_player == 0){
 			draw_player = 1;
@@ -145,7 +145,7 @@ void process_play_menu(){
 		}
 	}
 	
-	player_flash_rate--;
+	player_flash_rate-= ww_frames_passed();
 	
 	process_play_menu_esc_previous_frame_value = (istate.back | istate.str | istate.sel);
 	
@@ -199,27 +199,27 @@ void process_roam(){
 		if (mov == WALK){
 			switch (dir) {
 				case UP:
-					y_prog--;
+					y_prog -= ww_frames_passed();
 					game_state.play_state.player.sub_y_pos-=10;
 					break;
 				case LEFT:
-					x_prog--;
+					x_prog -= ww_frames_passed();
 					game_state.play_state.player.sub_x_pos-=10;
 					break;
 				case DOWN:
-					y_prog++;
+					y_prog += ww_frames_passed();
 					game_state.play_state.player.sub_y_pos+=10;
 					break;
 				case RIGHT:
-					x_prog++;
+					x_prog += ww_frames_passed();
 					game_state.play_state.player.sub_x_pos+=10;
 					break;
 			}
 		}
 		
 		// handle ground doodads
-		if (x_prog == -10) { // moved left
-			x_prog = 0;
+		if (x_prog <= -10) { // moved left
+			x_prog = x_prog % 10;
 			
 			for(int i = 9; i > 0; i--){
 				for(int j = 0; j < 3; j++){
@@ -238,8 +238,8 @@ void process_roam(){
 			}
 		}
 		
-		if (x_prog == 10) { // moved right
-			x_prog = 0;
+		if (x_prog >= 10) { // moved right
+			x_prog = x_prog % 10;
 			
 			for(int i = 0; i < 9; i++){
 				for(int j = 0; j < 3; j++){
@@ -258,8 +258,8 @@ void process_roam(){
 			}
 		}
 		
-		if (y_prog == -10) { // moved up
-			y_prog = 0;
+		if (y_prog <= -10) { // moved up
+			y_prog = y_prog % 10;
 			
 			for(int j = 2; j > 0; j--){
 				for(int i = 0; i < 10; i++){
@@ -278,8 +278,8 @@ void process_roam(){
 			}
 		}
 		
-		if (y_prog == 10) { // moved down
-			y_prog = 0;
+		if (y_prog >= 10) { // moved down
+			y_prog = y_prog % 10;
 			
 			for(int j = 0; j < 3; j++){
 				for(int i = 0; i < 10; i++){
@@ -301,26 +301,26 @@ void process_roam(){
 		// handle player
 		if (game_state.play_state.player.sub_x_pos <=   0){ //left
 			game_state.play_state.player.sub_x_pos = 479;
-			game_state.play_state.player.x_pos--;
+			game_state.play_state.player.x_pos -= ww_frames_passed();
 			if(game_state.play_state.player.x_pos < 0)
 				game_state.play_state.player.x_pos = MAP_WIDTH - 1;
 		}
 		
 		if (game_state.play_state.player.sub_x_pos >= 480){ //right
 			game_state.play_state.player.sub_x_pos = 1;
-			game_state.play_state.player.x_pos++;
+			game_state.play_state.player.x_pos += ww_frames_passed();
 			if(game_state.play_state.player.x_pos > MAP_WIDTH - 1)
 				game_state.play_state.player.x_pos = 0;
 		}
 		if (game_state.play_state.player.sub_y_pos <=   0){ //up
 			game_state.play_state.player.sub_y_pos = 479;
-			game_state.play_state.player.y_pos--;
+			game_state.play_state.player.y_pos -= ww_frames_passed();
 			if(game_state.play_state.player.y_pos < 0)
 				game_state.play_state.player.y_pos = MAP_HEIGHT - 1;
 		}
 		if (game_state.play_state.player.sub_y_pos >= 480){ //down
 			game_state.play_state.player.sub_y_pos = 1;
-			game_state.play_state.player.y_pos++;
+			game_state.play_state.player.y_pos += ww_frames_passed();
 			if(game_state.play_state.player.y_pos > MAP_HEIGHT - 1)
 				game_state.play_state.player.y_pos = 0;
 		}
