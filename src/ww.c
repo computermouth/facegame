@@ -182,7 +182,7 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 					SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 				
 			} else {
-				printf("No scale provided ie [ -S 1/2 ] \n");
+				printf("No scale provided ie. [ -S 1/2 ] \n");
 				return -1;
 				ww_help(argv[0]);
 			}
@@ -607,22 +607,24 @@ int ww_window_update_events(){
 	}
 	
 	unsigned int new_ticks = SDL_GetTicks();
-	//~ unsigned int leftover_ticks =  window_p->framediff * (1000.0 / WW_FRAMERATE);
-	//~ if (leftover_ticks) {
-		//~ window_p->framediff = window_p->framediff - ((double)leftover_ticks * 1000.0 / WW_FRAMERATE);
-	//~ }
+	
+	// ms since last update
 	unsigned int passed_ms = (new_ticks - window_p->ticks);
+	
+	// frames since last update
 	window_p->frames = passed_ms / 16;
 	
-	window_p->framediff += ((float)window_p->frames * .67) + passed_ms % 16;
-	window_p->frames += window_p->framediff / 16;
+	// leftovers from last frame, plus new .67s, plus 
+	window_p->framediff += ((float)window_p->frames * .67) + (passed_ms % 16);
+	
+	// how many 16.67's have passed
 	while (window_p->framediff > 16.67){
 		window_p->framediff -= 16.67;
 		window_p->frames++;
 	}
 	
-	printf("nt: %u\n\tleftover: %d\n\t\tpassed: %u\n\t\t\tframes: %d\n\t\t\t\tframediff: %f\n", 
-		new_ticks, 0, passed_ms, window_p->frames, window_p->framediff);
+	//~ printf("nt: %u\n\tleftover: %d\n\t\tpassed: %u\n\t\t\tframes: %d\n\t\t\t\tframediff: %f\n", 
+		//~ new_ticks, 0, passed_ms, window_p->frames, window_p->framediff);
 		
 	window_p->ticks = new_ticks;
 	
@@ -790,20 +792,23 @@ int ww_draw_frame(ww_frame_t * frame){
 
 int ww_draw_animation(ww_animation_t * anim, int paused){
 	
-	int rc = ww_draw_frame(anim->frames[anim->active_frame]);
-	
-	if(anim->d_progress <= 0 && paused == 0){
-		int old_delay = anim->delay[anim->active_frame];
-		anim->active_frame++;
-		
-		if(anim->active_frame == anim->count)
-			anim->active_frame = 0;
-		
-		anim->d_progress = anim->delay[anim->active_frame] - (anim->d_progress % old_delay);
-		
-	} else if (paused == 0){
+	if (paused == 0) {
 		anim->d_progress -= ww_frames_passed();
+		
+		while(anim->d_progress <= 0){
+			
+			int old_delay = anim->delay[anim->active_frame];
+			anim->active_frame++;
+			
+			if(anim->active_frame == anim->count)
+				anim->active_frame = 0;
+			
+			anim->d_progress = anim->delay[anim->active_frame] - (anim->d_progress % old_delay);
+		}
+		
 	}
+	
+	int rc = ww_draw_frame(anim->frames[anim->active_frame]);
 	
 	return rc;
 	
