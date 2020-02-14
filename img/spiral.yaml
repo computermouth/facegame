@@ -1,0 +1,898 @@
+
+animations:
+  - animation: Animation_0
+    frames:
+      - frame: f0
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+      - frame: f1
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+      - frame: f2
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+      - frame: f3
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+      - frame: f4
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+      - frame: f5
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+      - frame: f6
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+          - layer: Layer_6
+            color: "#ffffff"
+            x:
+              - 502
+              - 684
+              - 207
+            y:
+              - 259
+              - 598
+              - 588
+      - frame: f7
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+          - layer: Layer_6
+            color: "#ffffff"
+            x:
+              - 502
+              - 684
+              - 207
+            y:
+              - 259
+              - 598
+              - 588
+          - layer: Layer_7
+            color: "#ffffff"
+            x:
+              - 523
+              - 222
+              - -74
+              - 511
+              - 528
+              - 504
+              - 510
+              - 514
+            y:
+              - 252
+              - 599
+              - 586
+              - 269
+              - 255
+              - 264
+              - 271
+              - 267
+      - frame: f8
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+          - layer: Layer_6
+            color: "#ffffff"
+            x:
+              - 502
+              - 684
+              - 207
+            y:
+              - 259
+              - 598
+              - 588
+          - layer: Layer_7
+            color: "#ffffff"
+            x:
+              - 523
+              - 222
+              - -74
+              - 511
+              - 528
+              - 504
+              - 510
+              - 514
+            y:
+              - 252
+              - 599
+              - 586
+              - 269
+              - 255
+              - 264
+              - 271
+              - 267
+          - layer: Layer_8
+            color: "#ffffff"
+            x:
+              - 557
+              - -67
+              - -56
+            y:
+              - 256
+              - 605
+              - 276
+      - frame: f9
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+          - layer: Layer_6
+            color: "#ffffff"
+            x:
+              - 502
+              - 684
+              - 207
+            y:
+              - 259
+              - 598
+              - 588
+          - layer: Layer_7
+            color: "#ffffff"
+            x:
+              - 523
+              - 222
+              - -74
+              - 511
+              - 528
+              - 504
+              - 510
+              - 514
+            y:
+              - 252
+              - 599
+              - 586
+              - 269
+              - 255
+              - 264
+              - 271
+              - 267
+          - layer: Layer_8
+            color: "#ffffff"
+            x:
+              - 557
+              - -67
+              - -56
+            y:
+              - 256
+              - 605
+              - 276
+          - layer: Layer_9
+            color: "#ffffff"
+            x:
+              - 559
+              - -10
+              - -17
+            y:
+              - 278
+              - 299
+              - 80
+      - frame: f10
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+          - layer: Layer_6
+            color: "#ffffff"
+            x:
+              - 502
+              - 684
+              - 207
+            y:
+              - 259
+              - 598
+              - 588
+          - layer: Layer_7
+            color: "#ffffff"
+            x:
+              - 523
+              - 222
+              - -74
+              - 511
+              - 528
+              - 504
+              - 510
+              - 514
+            y:
+              - 252
+              - 599
+              - 586
+              - 269
+              - 255
+              - 264
+              - 271
+              - 267
+          - layer: Layer_8
+            color: "#ffffff"
+            x:
+              - 557
+              - -67
+              - -56
+            y:
+              - 256
+              - 605
+              - 276
+          - layer: Layer_9
+            color: "#ffffff"
+            x:
+              - 559
+              - -10
+              - -17
+            y:
+              - 278
+              - 299
+              - 80
+          - layer: Layer_10
+            color: "#ffffff"
+            x:
+              - 526
+              - -17
+              - -38
+              - 209
+              - 537
+              - 532
+              - 548
+              - 562
+              - 540
+              - 522
+            y:
+              - 272
+              - 84
+              - -48
+              - -45
+              - 271
+              - 275
+              - 279
+              - 279
+              - 276
+              - 264
+      - frame: f11
+        delay: 120
+        layers:
+          - layer: Layer_0
+            color: "#ffffff"
+            x:
+              - 512
+              - 516
+              - 632
+            y:
+              - 271
+              - -28
+              - -28
+          - layer: Layer_1
+            color: "#ffffff"
+            x:
+              - 509
+              - 623
+              - 788
+            y:
+              - 270
+              - -35
+              - -13
+          - layer: Layer_2
+            color: "#ffffff"
+            x:
+              - 509
+              - 779
+              - 1006
+            y:
+              - 268
+              - -24
+              - -8
+          - layer: Layer_3
+            color: "#ffffff"
+            x:
+              - 510
+              - 1054
+              - 1036
+            y:
+              - 269
+              - -58
+              - 252
+          - layer: Layer_4
+            color: "#ffffff"
+            x:
+              - 509
+              - 1047
+              - 1029
+            y:
+              - 270
+              - 241
+              - 595
+          - layer: Layer_5
+            color: "#ffffff"
+            x:
+              - 508
+              - 1043
+              - 652
+            y:
+              - 266
+              - 575
+              - 586
+          - layer: Layer_6
+            color: "#ffffff"
+            x:
+              - 502
+              - 684
+              - 207
+            y:
+              - 259
+              - 598
+              - 588
+          - layer: Layer_7
+            color: "#ffffff"
+            x:
+              - 523
+              - 222
+              - -74
+              - 511
+              - 528
+              - 504
+              - 510
+              - 514
+            y:
+              - 252
+              - 599
+              - 586
+              - 269
+              - 255
+              - 264
+              - 271
+              - 267
+          - layer: Layer_8
+            color: "#ffffff"
+            x:
+              - 557
+              - -67
+              - -56
+            y:
+              - 256
+              - 605
+              - 276
+          - layer: Layer_9
+            color: "#ffffff"
+            x:
+              - 559
+              - -10
+              - -17
+            y:
+              - 278
+              - 299
+              - 80
+          - layer: Layer_10
+            color: "#ffffff"
+            x:
+              - 526
+              - -17
+              - -38
+              - 209
+              - 537
+              - 532
+              - 548
+              - 562
+              - 540
+              - 522
+            y:
+              - 272
+              - 84
+              - -48
+              - -45
+              - 271
+              - 275
+              - 279
+              - 279
+              - 276
+              - 264
+          - layer: Layer_11
+            color: "#ffffff"
+            x:
+              - 603
+              - 145
+              - 593
+            y:
+              - 379
+              - -80
+              - -60

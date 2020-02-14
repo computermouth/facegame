@@ -16,6 +16,8 @@
 #include "grass_decoration.h"
 #include "pause_menu.h"
 #include "map_event.h"
+#include "spiral.h"
+#include "wiper.h"
 
 #include "untitled.h"
 #include "buttons.h"
@@ -43,6 +45,7 @@ void inits(){
 	
 	init_pause_menu();
 	init_map_event();
+	init_spiral();
 }
 
 void frees(){
@@ -53,6 +56,7 @@ void frees(){
 	
 	ww_free_sprite(dude);
 	ww_free_sprite(sky);
+	ww_free_sprite(spiral);
 	
 	for(int i = 0; i < 10; i++){
 		for(int j = 0; j < 3; j++){
@@ -324,6 +328,10 @@ void process_roam(){
 			if(game_state.play_state.player.y_pos > MAP_HEIGHT - 1)
 				game_state.play_state.player.y_pos = 0;
 		}
+		
+		if (game_state.play_state.map[game_state.play_state.player.x_pos][game_state.play_state.player.y_pos]){
+			game_state.play_state.play_state_activity = PLAY_STATE_BATTLE;
+		}
 				
 		anim = dir;
 		if (mov == WALK){
@@ -358,10 +366,15 @@ void process_roam(){
 	
 }
 
+void process_battle(){
+	ww_draw_sprite(spiral);
+}
+
 void process_play(){	
 
 	switch (game_state.play_state.play_state_activity){
 		case PLAY_STATE_BATTLE:
+			process_battle();
 			break;
 		case PLAY_STATE_DEFUP:
 			break;
