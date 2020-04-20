@@ -31,36 +31,48 @@ game_state_t game_state = { 0 };
 
 ww_sprite_t * ground_sprites[10][3];
 
+ww_sprite_t * dude = NULL;
+ww_sprite_t * sky = NULL;
+ww_sprite_t * ground = NULL;
+ww_sprite_t * grass_decoration = NULL;
+ww_sprite_t * untitled = NULL;
+ww_sprite_t * buttons = NULL;
+ww_sprite_t * selector = NULL;
+ww_sprite_t * title = NULL;
+ww_sprite_t * pause_menu = NULL;
+ww_sprite_t * map_event = NULL;
+ww_sprite_t * spiral = NULL;
+
 void inits(){
 	
-	init_dude();
-	init_sky();
-	init_ground();
-	init_grass_decoration();
+	dude = ww_new_sprite(DUDE);
+	sky = ww_new_sprite(SKY);
+	ground = ww_new_sprite(GROUND);
+	grass_decoration = ww_new_sprite(GRASS_DECORATION);
 
-	init_untitled();
-	init_buttons();
-	init_selector();
-	init_title();
+	untitled = ww_new_sprite(UNTITLED);
+	buttons = ww_new_sprite(BUTTONS);
+	selector = ww_new_sprite(SELECTOR);
+	title = ww_new_sprite(TITLE);
 	
-	init_pause_menu();
-	init_map_event();
-	init_spiral();
+	pause_menu = ww_new_sprite(PAUSE_MENU);
+	map_event = ww_new_sprite(MAP_EVENT);
+	spiral = ww_new_sprite(SPIRAL);
 }
 
 void frees(){
-	ww_free_sprite(untitled);
-	ww_free_sprite(buttons);
-	ww_free_sprite(selector);
-	ww_free_sprite(title);
+	free(untitled);
+	free(buttons);
+	free(selector);
+	free(title);
 	
-	ww_free_sprite(dude);
-	ww_free_sprite(sky);
-	ww_free_sprite(spiral);
+	free(dude);
+	free(sky);
+	free(spiral);
 	
 	for(int i = 0; i < 10; i++){
 		for(int j = 0; j < 3; j++){
-			ww_free_sprite(ground_sprites[i][j]);
+			free(ground_sprites[i][j]);
 		}
 	}
 }
@@ -68,18 +80,18 @@ void frees(){
 void process_top_menu(){
 	
 	// move left
-	if(ipstate.lt){
+	if(ipstate.c_lt){
 		game_state.top_menu_selected--;
-		ipstate.lt = 0;
+		ipstate.c_lt = 0;
 	}
 	// wrap left
 	if(game_state.top_menu_selected == TOP_MENU_SELECTED_PLAY - 1)
 		game_state.top_menu_selected = TOP_MENU_SELECTED_QUIT;
 	
 	// move right
-	if(ipstate.rt){
+	if(ipstate.c_rt){
 		game_state.top_menu_selected++;
-		ipstate.rt = 0;
+		ipstate.c_rt = 0;
 	}
 	// wrap right
 	if(game_state.top_menu_selected > TOP_MENU_SELECTED_QUIT)
@@ -115,7 +127,7 @@ int draw_player = 1;
 
 void process_play_menu(){
 	
-	if ( (ipstate.back || ipstate.str) && process_play_menu_esc_previous_frame_value == 0) {
+	if ( (ipstate.back || ipstate.c_str) && process_play_menu_esc_previous_frame_value == 0) {
 		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
 		process_play_menu_esc_previous_frame_value = 1;
 	}
@@ -151,7 +163,7 @@ void process_play_menu(){
 	
 	player_flash_rate-= ww_frames_passed();
 	
-	process_play_menu_esc_previous_frame_value = (istate.back | istate.str | istate.sel);
+	process_play_menu_esc_previous_frame_value = (istate.back | istate.c_str | istate.c_sel);
 	
 }
 
@@ -170,7 +182,7 @@ void process_roam(){
 		char old_anim = anim;
 		mov = IDLE;
 		
-		if( (ipstate.sel || ipstate.str) && process_roam_esc_previous_frame_value == 0){
+		if( (ipstate.c_sel || ipstate.c_str) && process_roam_esc_previous_frame_value == 0){
 			game_state.play_state.play_state_activity = PLAY_STATE_MENU;
 			process_roam_esc_previous_frame_value = 1;
 			
@@ -178,22 +190,22 @@ void process_roam(){
 			return;
 		}
 		
-		if(istate.up){
+		if(istate.c_up){
 			mov = WALK;
 			dir = UP;
 		}
 		
-		if(istate.lt){
+		if(istate.c_lt){
 			mov = WALK;
 			dir = LEFT;
 		}
 		
-		if(istate.dn){
+		if(istate.c_dn){
 			mov = WALK;
 			dir = DOWN;
 		}
 		
-		if(istate.rt){
+		if(istate.c_rt){
 			mov = WALK;
 			dir = RIGHT;
 		}
@@ -342,7 +354,7 @@ void process_roam(){
 		}
 		
 		if(old_anim != anim){
-			ww_animation_t * active_dude = dude->animations[dude->active_animation];
+			ww_animation_t * active_dude = &dude->animations[dude->active_animation];
 			active_dude->active_frame = 0;
 			active_dude->d_progress = active_dude->delay[0];
 		}
@@ -362,7 +374,7 @@ void process_roam(){
 		
 		ww_draw_sprite(dude);
 	
-	process_roam_esc_previous_frame_value = istate.back | istate.sel;
+	process_roam_esc_previous_frame_value = istate.back | istate.c_sel;
 	
 }
 

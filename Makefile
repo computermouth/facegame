@@ -8,7 +8,7 @@ F_CFLAGS += -O2 -Wall -pedantic -std=gnu11
 F_CFLAGS += $(SDL_CFLAGS)
 
 all: images
-	$(CC) src/*.c $(CFLAGS) $(F_CFLAGS) $(INCLUDES) -o main $(LDFLAGS) $(F_LDFLAGS)
+	$(CC) src/*.c img/*.c $(CFLAGS) $(F_CFLAGS) $(INCLUDES) -o main $(LDFLAGS) $(F_LDFLAGS)
 
 images: tools
 	./concoord/concoord img/*.yaml

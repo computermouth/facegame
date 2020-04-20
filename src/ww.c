@@ -13,32 +13,32 @@
 ww_window_t window = NULL;
 
 ww_istate_t istate = {
-	.str  = 0,
-	.sel  = 0,
-	.up   = 0,
-	.dn   = 0,
-	.lt   = 0,
-	.rt   = 0,
-	.ba    = 0,
-	.bb    = 0,
-	.bx    = 0,
-	.by    = 0,
+	.c_str  = 0,
+	.c_sel  = 0,
+	.c_up   = 0,
+	.c_dn   = 0,
+	.c_lt   = 0,
+	.c_rt   = 0,
+	.c_a    = 0,
+	.c_b    = 0,
+	.c_x    = 0,
+	.c_y    = 0,
 	.cfrm = 0,
 	.paus = 0,
 	.back = 0
 };
 
 ww_istate_t ipstate = {
-	.str  = 0,
-	.sel  = 0,
-	.up   = 0,
-	.dn   = 0,
-	.lt   = 0,
-	.rt   = 0,
-	.ba    = 0,
-	.bb    = 0,
-	.bx    = 0,
-	.by    = 0,
+	.c_str  = 0,
+	.c_sel  = 0,
+	.c_up   = 0,
+	.c_dn   = 0,
+	.c_lt   = 0,
+	.c_rt   = 0,
+	.c_a    = 0,
+	.c_b    = 0,
+	.c_x    = 0,
+	.c_y    = 0,
 	.cfrm = 0,
 	.paus = 0,
 	.back = 0
@@ -408,79 +408,79 @@ void ww_key_event(SDL_Event *event){
 	if( event->type == SDL_KEYDOWN && event->key.repeat == 0){
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
-				istate.sel = 1;
+				istate.c_sel = 1;
 				istate.paus = 1;
 				istate.back = 1;
 				break;
 			case SDLK_RETURN:
-				istate.str = 1;
+				istate.c_str = 1;
 				istate.cfrm = 1;
 				istate.paus = 1;
 				break;
 			case SDLK_UP:
-				istate.by = 1;
+				istate.c_y = 1;
 				break;
 			case SDLK_DOWN:
-				istate.ba = 1;
+				istate.c_a = 1;
 				istate.cfrm = 1;
 				break;
 			case SDLK_LEFT:
-				istate.bx = 1;
+				istate.c_x = 1;
 				break;
 			case SDLK_RIGHT:
-				istate.bb = 1;
+				istate.c_b = 1;
 				istate.back = 1;
 				break;
 			case SDLK_w:
-				istate.up = 1;
+				istate.c_up = 1;
 				break;
 			case SDLK_a:
-				istate.lt = 1;
+				istate.c_lt = 1;
 				break;
 			case SDLK_s:
-				istate.dn = 1;
+				istate.c_dn = 1;
 				break;
 			case SDLK_d:
-				istate.rt = 1;
+				istate.c_rt = 1;
 				break;
 		}
 	} else if ( event->type == SDL_KEYUP ) {
 		switch(event->key.keysym.sym){
 			case SDLK_ESCAPE:
-				istate.sel = 0;
+				istate.c_sel = 0;
 				istate.paus = 0;
 				istate.back = 0;
 				break;
 			case SDLK_RETURN:
-				istate.str = 0;
+				istate.c_str = 0;
 				istate.cfrm = 0;
 				istate.paus = 0;
 				break;
 			case SDLK_UP:
-				istate.by = 0;
+				istate.c_y = 0;
 				break;
 			case SDLK_DOWN:
-				istate.ba = 0;
+				istate.c_a = 0;
 				istate.cfrm = 0;
 				break;
 			case SDLK_LEFT:
-				istate.bx = 0;
+				istate.c_x = 0;
 				break;
 			case SDLK_RIGHT:
-				istate.bb = 0;
+				istate.c_b = 0;
 				istate.back = 0;
 				break;
 			case SDLK_w:
-				istate.up = 0;
+				istate.c_up = 0;
 				break;
 			case SDLK_a:
-				istate.lt = 0;
+				istate.c_lt = 0;
 				break;
 			case SDLK_s:
-				istate.dn = 0;
+				istate.c_dn = 0;
 				break;
 			case SDLK_d:
-				istate.rt = 0;
+				istate.c_rt = 0;
 				break;
 		}
 	}
@@ -488,79 +488,79 @@ void ww_key_event(SDL_Event *event){
 	if( event->type == SDL_CONTROLLERBUTTONDOWN){
 		switch(event->cbutton.button){
 			case SDL_CONTROLLER_BUTTON_BACK:
-				istate.sel = 1;
+				istate.c_sel = 1;
 				istate.paus = 1;
 				istate.back = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_START:
-				istate.str = 1;
+				istate.c_str = 1;
 				istate.cfrm = 1;
 				istate.paus = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_Y:
-				istate.by = 1;
+				istate.c_y = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_A:
-				istate.ba = 1;
+				istate.c_a = 1;
 				istate.cfrm = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_X:
-				istate.bx = 1;
+				istate.c_x = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_B:
-				istate.bb = 1;
+				istate.c_b = 1;
 				istate.back = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_UP:
-				istate.up = 1;
+				istate.c_up = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-				istate.dn = 1;
+				istate.c_dn = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
-				istate.lt = 1;
+				istate.c_lt = 1;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
-				istate.rt = 1;
+				istate.c_rt = 1;
 				break;
 		}
 	} else if( event->type == SDL_CONTROLLERBUTTONUP){
 		switch(event->cbutton.button){
 			case SDL_CONTROLLER_BUTTON_BACK:
-				istate.sel = 0;
+				istate.c_sel = 0;
 				istate.paus = 0;
 				istate.back = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_START:
-				istate.str = 0;
+				istate.c_str = 0;
 				istate.cfrm = 0;
 				istate.paus = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_Y:
-				istate.by = 0;
+				istate.c_y = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_A:
-				istate.ba = 0;
+				istate.c_a = 0;
 				istate.cfrm = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_X:
-				istate.bx = 0;
+				istate.c_x = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_B:
-				istate.bb = 0;
+				istate.c_b = 0;
 				istate.back = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_UP:
-				istate.up = 0;
+				istate.c_up = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-				istate.dn = 0;
+				istate.c_dn = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
-				istate.lt = 0;
+				istate.c_lt = 0;
 				break;
 			case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
-				istate.rt = 0;
+				istate.c_rt = 0;
 				break;
 		}
 	}
@@ -591,42 +591,20 @@ int ww_window_update_events(){
 				break;
 		}
 	
-		if (old_istate.sel  == 0 && istate.sel  == 1){ ipstate.sel  = 1;  }
-		if (old_istate.str  == 0 && istate.str  == 1){ ipstate.str  = 1;  }
-		if (old_istate.up   == 0 && istate.up   == 1){ ipstate.up   = 1;  }
-		if (old_istate.lt   == 0 && istate.lt   == 1){ ipstate.lt   = 1;  }
-		if (old_istate.dn   == 0 && istate.dn   == 1){ ipstate.dn   = 1;  }
-		if (old_istate.rt   == 0 && istate.rt   == 1){ ipstate.rt   = 1;  }
-		if (old_istate.ba   == 0 && istate.ba   == 1){ ipstate.ba   = 1;  }
-		if (old_istate.bb   == 0 && istate.bb   == 1){ ipstate.bb   = 1;  }
-		if (old_istate.bx   == 0 && istate.bx   == 1){ ipstate.bx   = 1;  }
-		if (old_istate.by   == 0 && istate.by   == 1){ ipstate.by   = 1;  }
-		if (old_istate.cfrm == 0 && istate.cfrm == 1){ ipstate.cfrm = 1;  }
-		if (old_istate.paus == 0 && istate.paus == 1){ ipstate.paus = 1;  }
-		if (old_istate.back == 0 && istate.back == 1){ ipstate.back = 1;  }
+		if (old_istate.c_sel == 0 && istate.c_sel == 1){ ipstate.c_sel = 1;  }
+		if (old_istate.c_str == 0 && istate.c_str == 1){ ipstate.c_str = 1;  }
+		if (old_istate.c_up  == 0 && istate.c_up  == 1){ ipstate.c_up  = 1;  }
+		if (old_istate.c_lt  == 0 && istate.c_lt  == 1){ ipstate.c_lt  = 1;  }
+		if (old_istate.c_dn  == 0 && istate.c_dn  == 1){ ipstate.c_dn  = 1;  }
+		if (old_istate.c_rt  == 0 && istate.c_rt  == 1){ ipstate.c_rt  = 1;  }
+		if (old_istate.c_a   == 0 && istate.c_a   == 1){ ipstate.c_a   = 1;  }
+		if (old_istate.c_b   == 0 && istate.c_b   == 1){ ipstate.c_b   = 1;  }
+		if (old_istate.c_x   == 0 && istate.c_x   == 1){ ipstate.c_x   = 1;  }
+		if (old_istate.c_y   == 0 && istate.c_y   == 1){ ipstate.c_y   = 1;  }
+		if (old_istate.cfrm  == 0 && istate.cfrm  == 1){ ipstate.cfrm  = 1;  }
+		if (old_istate.paus  == 0 && istate.paus  == 1){ ipstate.paus  = 1;  }
+		if (old_istate.back  == 0 && istate.back  == 1){ ipstate.back  = 1;  }
 	}
-	
-	unsigned int new_ticks = SDL_GetTicks();
-	
-	// ms since last update
-	unsigned int passed_ms = (new_ticks - window_p->ticks);
-	
-	// frames since last update
-	window_p->frames = passed_ms / 16;
-	
-	// leftovers from last frame, plus new .67s, plus 
-	window_p->framediff += ((float)window_p->frames * .67) + (passed_ms % 16);
-	
-	// how many 16.67's have passed
-	while (window_p->framediff > 16.67){
-		window_p->framediff -= 16.67;
-		window_p->frames++;
-	}
-	
-	//~ printf("nt: %u\n\tleftover: %d\n\t\tpassed: %u\n\t\t\tframes: %d\n\t\t\t\tframediff: %f\n", 
-		//~ new_ticks, 0, passed_ms, window_p->frames, window_p->framediff);
-		
-	window_p->ticks = new_ticks;
 	
 	return 0;
 }
@@ -662,33 +640,413 @@ int _gfxPrimitivesCompareInt(const void *a, const void *b)
 	return (*(const int *) a) - (*(const int *) b);
 }
 
-int ww_draw_raw_polygon(const Sint16 * vx, const Sint16 * vy, int n, unsigned char color[3])
+void ww_render_bars(){
+	
+	ww_window_s *window_p = (ww_window_s*) window;
+	
+	unsigned char bar_grey[] = { 0x1C, 0x1F, 0x20 };
+	
+	if (window_p->ww_pad_x != 0){
+		// left
+		short bar_ax[4] = { 
+			0, 
+			window_p->ww_pad_x * (window_p->ww_scale), 
+			window_p->ww_pad_x * (window_p->ww_scale), 
+			0 
+		};
+		short bar_ay[4] = { 
+			0, 
+			0, 
+			window_p->ww_height * (window_p->ww_scale), 
+			window_p->ww_height * (window_p->ww_scale)
+		};
+		ww_draw_raw_polygon(bar_ax, bar_ay, 4, 0, window_p->ww_height * (window_p->ww_scale), bar_grey);
+		// right
+		short bar_bx[4] = { 
+			(window_p->ww_width - window_p->ww_pad_x) * (window_p->ww_scale), 
+			(window_p->ww_width) * (window_p->ww_scale),
+			(window_p->ww_width) * (window_p->ww_scale), 
+			(window_p->ww_width - window_p->ww_pad_x) * (window_p->ww_scale)
+		};
+		short bar_by[4] = { 
+			0, 
+			0, 
+			window_p->ww_height * (window_p->ww_scale), 
+			window_p->ww_height * (window_p->ww_scale)
+		};
+		ww_draw_raw_polygon(bar_bx, bar_by, 4, 0, window_p->ww_height * (window_p->ww_scale), bar_grey);
+		
+	} else {
+		// top
+		short bar_ax[4] = { 
+			0, 
+			window_p->ww_width * (window_p->ww_scale),
+			window_p->ww_width * (window_p->ww_scale),
+			0
+		};
+		short bar_ay[4] = { 
+			0, 
+			0, 
+			window_p->ww_pad_y * (window_p->ww_scale), 
+			window_p->ww_pad_y * (window_p->ww_scale)
+		};
+		ww_draw_raw_polygon(bar_ax, bar_ay, 4, 0, window_p->ww_pad_y * (window_p->ww_scale), bar_grey);
+		// bottom
+		short bar_bx[4] = { 
+			0, 
+			window_p->ww_width * (window_p->ww_scale), 
+			window_p->ww_width * (window_p->ww_scale),
+			0
+		};
+		short bar_by[4] = {
+			(window_p->ww_height - window_p->ww_pad_y) * (window_p->ww_scale), 
+			(window_p->ww_height - window_p->ww_pad_y) * (window_p->ww_scale), 
+			window_p->ww_height * (window_p->ww_scale),
+			window_p->ww_height * (window_p->ww_scale)
+		};
+		
+		short max_y = bar_by[0];
+		for (int i = 1; i < 4; i++)
+			if (bar_by[i] > max_y)
+				max_y = bar_by[i];
+		
+		ww_draw_raw_polygon(bar_bx, bar_by, 4, 0, max_y, bar_grey);
+		
+	}
+	
+}
+
+void ww_clear_buffer(){
+	
+	ww_window_s *window_p = (ww_window_s*) window;
+	
+	SDL_SetRenderDrawColor(window_p->ww_sdl_renderer, 0, 0, 0, 255);
+	
+	// clear texture
+	SDL_RenderClear( window_p->ww_sdl_renderer );
+	
+	// clear renderer
+	SDL_SetRenderTarget(window_p->ww_sdl_renderer, NULL);
+	SDL_RenderClear(window_p->ww_sdl_renderer);
+	
+	// draw to texture
+	SDL_SetRenderTarget(window_p->ww_sdl_renderer, window_p->ww_sdl_texture);
+
+}
+
+//~ #include <sys/time.h>
+//~ struct timeval t0 = {.tv_usec = 0};
+//~ struct timeval t1 = {.tv_usec = 0};
+
+int ww_window_update_buffer() {
+	
+	//~ gettimeofday(&t1, 0);
+	
+	//~ if ( t0.tv_usec != 0 ){
+		//~ printf("frametime: %f\n", (t1.tv_sec - t0.tv_sec) * 1000.0f + (t1.tv_usec - t0.tv_usec) / 1000.0f);
+	//~ }
+	
+	//~ t0 = t1;
+	
+	if(!window) {
+		return -1;
+	}
+	ww_window_s *window_p = (ww_window_s*) window;
+	
+	ww_render_bars();
+	
+	if (window_p->ww_size_changed) {
+		
+		// don't draw, let the buffer get wiped
+		
+		window_p->ww_size_changed = 0;
+		
+	} else {
+		
+		// draw
+		
+		SDL_SetRenderTarget(window_p->ww_sdl_renderer, NULL);
+		
+		SDL_RenderCopy( window_p->ww_sdl_renderer, window_p->ww_sdl_texture, NULL, NULL );
+		SDL_RenderPresent( window_p->ww_sdl_renderer );
+		
+		SDL_SetRenderTarget(window_p->ww_sdl_renderer, window_p->ww_sdl_texture);
+	}
+	
+	unsigned int new_ticks = SDL_GetTicks();
+	
+	// ms since last update
+	unsigned int passed_ms = (new_ticks - window_p->ticks);
+	
+	// frames since last update
+	window_p->frames = (float)passed_ms / 16.67;
+	
+	// store unused ticks
+	window_p->framediff += (float)passed_ms - ( window_p->frames * 16.67 );
+	
+	// how many 16.67's have passed
+	while (window_p->framediff > 16.67){
+		window_p->framediff -= 16.67;
+		window_p->frames++;
+	}
+		
+	window_p->ticks = new_ticks;
+	
+	ww_clear_buffer();
+	
+	return 0;
+}
+
+ww_sprite_t * ww_new_sprite(ww_reference_t payload){
+	
+	size_t sz = (
+		sizeof(ww_sprite_t)
+		+ sizeof(ww_animation_t) * payload.alloc[0]
+		+ sizeof(ww_frame_t)     * payload.alloc[1]
+		+ sizeof(int)            * payload.alloc[1] // delay per frame
+		+ sizeof(ww_polygon_t)   * payload.alloc[2]
+		+ sizeof(short)          * payload.alloc[3] * 4
+	);
+	
+	//~ printf("sizes:\n\tspri: %lu\n\tanim: %lu\n\tfram: %lu\n\tpoly: %lu\n\tint: %lu\n\n",
+		//~ sizeof(ww_sprite_t),
+		//~ sizeof(ww_animation_t),
+		//~ sizeof(ww_frame_t),
+		//~ sizeof(ww_polygon_t),
+		//~ sizeof(short)
+	//~ );
+	
+	ww_sprite_t * s = calloc(1, sz);
+	
+	s->count = payload.alloc[0];
+	s->scale = 1.0;
+	
+	uint8_t * c = (uint8_t *)s + sizeof(ww_sprite_t);
+	
+	//~ printf("s: %p\n", (void *)s);
+	//~ printf("s: %p sz: %x s+sz: %p &s[1]: %p c: %p\n", (void *)s, (unsigned int)sz, (uint8_t *)s + sz, (void *)&s[1], (void *)c);
+	
+	//~ printf("curr: %p targ: %p\n", (void *)c, (void *)&s->animations);
+	
+	s->animations = (void *)c;
+	c += sizeof(ww_animation_t) * payload.alloc[0];
+	
+	int fstride = 0;
+	int pstride = 0;
+	int vstride = 0;
+	int astride = 0;
+	
+	for(int a = 0; a < payload.alloc[0]; a++){
+		// just need the anim index
+		
+		//~ printf("pre-delay -- curr: %p targ: %p\n", (void *)c, (void *)&s->animations[a].frames);
+		s->animations[a].count = payload.frames[fstride];
+		
+		// copy in delay -- ensure at least 1
+		s->animations[a].delay = (void *)c;
+		for(int i = 0; i < payload.frames[fstride]; i++){
+			s->animations[a].delay[i] = ( payload.delays[a][i] > 0 ? payload.delays[a][i] : 1 );
+		}
+		
+		c += sizeof(int) * payload.frames[fstride];
+		
+		//~ printf("pre-frame -- curr: %p targ: %p\n", (void *)c, (void *)&s->animations[a].frames);
+		s->animations[a].frames = (void *)c;
+		c += sizeof(ww_frame_t) * payload.frames[fstride];
+		
+		for(int f = 0; f < payload.frames[fstride]; f++){
+			
+			s->animations[a].frames[f].count = payload.polygons[pstride];
+			
+			//~ printf("pre-polys -- curr: %p targ: %p\n", (void *)c, (void *)&s->animations[a].frames[f].polys);
+			s->animations[a].frames[f].polys = (void *)c;
+			c += sizeof(ww_polygon_t) * payload.polygons[pstride];
+			
+			for(int p = 0; p < payload.polygons[pstride]; p++){
+				
+				s->animations[a].frames[f].polys[p].count = payload.vertices[vstride];
+				s->animations[a].frames[f].polys[p].ratio = 1.0;
+				s->animations[a].frames[f].polys[p].s_parent = s;
+				//~ s->animations[a].frames[f].polys[p].s_scale = 1.0; // ensures rescale on first draw
+				s->animations[a].frames[f].polys[p].scale = 1.0;
+				memcpy(s->animations[a].frames[f].polys[p].color, payload.colors[vstride], sizeof(ww_rgba_t));
+				
+				//~ printf("pre-x     -- curr: %p anim: %d  fram: %d poly: %d xory: x\n", c, a, f, p);
+				s->animations[a].frames[f].polys[p].x = (void *)c;
+				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
+				c += sizeof(short) * payload.vertices[vstride];
+				
+				//~ printf("pre-scalX -- curr: %p anim: %d  fram: %d poly: %d xory: x\n", c, a, f, p);
+				s->animations[a].frames[f].polys[p].scaled_x = (void *)c;
+				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
+				c += sizeof(short) * payload.vertices[vstride];
+				
+				astride++;
+				//~ printf("pre-y     -- curr: %p anim: %d  fram: %d poly: %d xory: y\n", c, a, f, p);
+				s->animations[a].frames[f].polys[p].y = (void *)c;
+				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
+				c += sizeof(short) * payload.vertices[vstride];
+				
+				//~ printf("pre-scalY -- curr: %p anim: %d  fram: %d poly: %d xory: y\n", c, a, f, p);
+				s->animations[a].frames[f].polys[p].scaled_y = (void *)c;
+				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
+				c += sizeof(short) * payload.vertices[vstride];
+				
+				ww_scale_polygon(&s->animations[a].frames[f].polys[p]);
+				
+				vstride++;
+				astride++;
+				//~ printf("vs: %d as: %d\n", vstride, astride);
+			}
+			pstride++;
+		}
+		fstride++;
+	}
+	
+	//~ for(int i = 0; i < s->count; i++){
+		//~ for(int j = 0; j < s->animations[i].count; j++){
+			//~ for(int k = 0; k < s->animations[i].frames[j].count; k++){
+				//~ for(int l = 0; l < s->animations[i].frames[j].polys[k].count; l++){
+					//~ if (s->animations[i].frames[j].polys[k].y[l] > s->maxy){
+						//~ s->maxy = s->animations[i].frames[j].polys[k].y[l];
+					//~ }
+				//~ }
+			//~ }
+		//~ }
+	//~ }
+	
+	//~ printf("curr: %p targ: %p\n", c, NULL);
+	
+	return s;
+	
+}
+
+ww_sprite_t * ww_clone_sprite(ww_sprite_t * insprite){
+	
+	int ac = insprite->count;
+	int fc = 0;
+	int pc = 0;
+	int vc = 0;
+	//~ printf("0\n");
+	
+	for(int i = 0; i < ac; i++){
+		fc += insprite->animations[i].count;
+		
+		for(int j = 0; j < insprite->animations[i].count; j++){
+			pc += insprite->animations[i].frames[j].count;
+			
+			for(int k = 0; k < insprite->animations[i].frames[j].count; k++){
+				vc += insprite->animations[i].frames[j].polys[k].count;
+			}
+		}
+	}
+	//~ printf("1\n");
+	
+	int alloc[] = { ac, fc, pc, vc };
+	
+	int frames[fc];
+	int * delays[fc];
+	int polygons[pc];
+	unsigned char * colors[pc]; // = malloc(sizeof(char *) * pc);
+	int vertices[vc];
+	short * arrays[vc * 2];
+	//~ printf("2\n");
+	
+	int p_stride = 0;
+	int c_stride = 0;
+	int a_stride = 0;
+	
+	
+	for(int i = 0; i < ac; i++){
+		frames[i] = insprite->animations[i].count;
+		delays[i] = insprite->animations[i].delay;
+		
+		for(int j = 0; j < insprite->animations[i].count; j++){
+			polygons[p_stride] = insprite->animations[i].frames[j].count;
+			p_stride++;
+			
+			for(int k = 0; k < insprite->animations[i].frames[j].count; k++){
+				colors[c_stride] = insprite->animations[i].frames[j].polys[k].color;
+				vertices[c_stride] = insprite->animations[i].frames[j].polys[k].count;
+				c_stride++;
+				
+				arrays[a_stride] = insprite->animations[i].frames[j].polys[k].x;
+				a_stride++;
+				arrays[a_stride] = insprite->animations[i].frames[j].polys[k].y;
+				a_stride++;
+			}
+		}
+	}
+	
+				//~ printf("colors[%d][0]: %d\n", 0, colors[0][0]);
+				//~ printf("colors[%d][1]: %d\n", 0, colors[0][1]);
+				//~ printf("colors[%d][2]: %d\n", 0, colors[0][2]);
+				//~ printf("colors[%d][0]: %d\n", 1, colors[1][0]);
+				//~ printf("colors[%d][1]: %d\n", 1, colors[1][1]);
+				//~ printf("colors[%d][2]: %d\n", 1, colors[1][2]);
+	
+	//~ printf("3\n");
+	
+	ww_reference_t clone_payload = {
+		.alloc = alloc,
+		.frames = frames,
+		.delays = delays,
+		.polygons = polygons,
+		.colors = colors,
+		.vertices = vertices,
+		.arrays = arrays,
+	};
+	
+	//~ printf("aanim[0] -- BA: %d\tba:%d\n", BA.alloc[0], alloc[0]);
+	//~ printf("afram[1] -- BA: %d\tba:%d\n", BA.alloc[1], alloc[1]);
+	//~ printf("apoly[2] -- BA: %d\tba:%d\n", BA.alloc[2], alloc[2]);
+	//~ printf("avert[3] -- BA: %d\tba:%d\n", BA.alloc[3], alloc[3]);
+	
+	//~ for(int i = 0; i < alloc[0]; i++)
+		//~ printf("frames[%d] -- BA: %d\tba: %d\n", i, BA.frames[i], frames[i]);
+	//~ for(int i = 0; i < alloc[0]; i++)
+		//~ printf("delays[%d] -- BA: %d\tba: %d\n", i, BA.delays[i][0], delays[i][0]);
+	//~ for(int i = 0; i < alloc[1]; i++)
+		//~ printf("polygs[%d] -- BA: %d\tba: %d\n", i, BA.polygons[i], polygons[0]);
+	//~ for(int i = 0; i < alloc[2]; i++){
+		//~ printf("colors[%d][0] -- BA: %d\tba: %d\n", i, BA.colors[i][0], colors[i][0]);
+		//~ printf("colors[%d][1] -- BA: %d\tba: %d\n", i, BA.colors[i][1], colors[i][1]);
+		//~ printf("colors[%d][2] -- BA: %d\tba: %d\n", i, BA.colors[i][2], colors[i][2]);
+	//~ }
+	
+	ww_sprite_t * s = ww_new_sprite(clone_payload);
+	
+	s->pad_x = insprite->pad_x;
+	s->pad_y = insprite->pad_y;
+	s->paused = insprite->paused;
+	s->scale = insprite->scale;
+	
+	return s;
+	
+}
+
+//~ int *gfxPrimitivesPolyInts = NULL;
+
+int ww_draw_raw_polygon(const Sint16 * vx, const Sint16 * vy, int n, short miny, short maxy, unsigned char * color)
 {
 	ww_window_s *window_p = (ww_window_s*) window;
 	
 	int result;
 	int i;
 	int y, xa, xb;
-	int miny, maxy;
 	int x1, y1;
 	int x2, y2;
 	int ind1, ind2;
 	int ints;
+	//~ gfxPrimitivesPolyInts = (int *) realloc(gfxPrimitivesPolyInts, sizeof(int) * n);
 	int *gfxPrimitivesPolyInts = (int *) malloc(sizeof(int) * n);
+	
+	//~ printf("color: %d %d %d\n", color[0], color[1], color[2]);
 	
 	if (vx == NULL || vy == NULL || n < 3) {
 		return -1;
 	}
 	
-	miny = vy[0];
-	maxy = vy[0];
-	for (i = 1; (i < n); i++) {
-		if (vy[i] < miny) {
-			miny = vy[i];
-		} else if (vy[i] > maxy) {
-			maxy = vy[i];
-		}
-	}
 	
 	result = 0;
 	for (y = miny; y <= maxy; y++) {
@@ -731,7 +1089,6 @@ int ww_draw_raw_polygon(const Sint16 * vx, const Sint16 * vy, int n, unsigned ch
 			
 			SDL_SetRenderDrawColor(window_p->ww_sdl_renderer, color[0], color[1], color[2], 255);
 			SDL_RenderDrawLine(window_p->ww_sdl_renderer, xa, y, xb, y);
-			
 		}
 	}
 	
@@ -740,18 +1097,21 @@ int ww_draw_raw_polygon(const Sint16 * vx, const Sint16 * vy, int n, unsigned ch
 	return (result);
 }
 
+
+
 void ww_scale_polygon(ww_polygon_t * poly){
+	//~ printf("scale_p\n");
 	ww_window_s *window_p = (ww_window_s*) window;
 	
 	ww_sprite_t * parent = (ww_sprite_t *)(poly->s_parent);
 	
-	if( poly->ratio != window_p->ww_ratio || 
+	if( poly->ratio   != window_p->ww_ratio || 
 		poly->w_pad_x != window_p->ww_pad_x ||
 		poly->w_pad_y != window_p->ww_pad_y ||
 		poly->s_pad_x != parent->pad_x ||
 		poly->s_pad_y != parent->pad_y ||
 		poly->s_scale != parent->scale ||
-		poly->scale != window_p->ww_scale ){
+		poly->scale   != window_p->ww_scale ){
 		
 		poly->ratio = window_p->ww_ratio;
 		poly->w_pad_x = window_p->ww_pad_x;
@@ -761,29 +1121,57 @@ void ww_scale_polygon(ww_polygon_t * poly){
 		poly->s_scale = parent->scale;
 		poly->scale = window_p->ww_scale;
 		
+		poly->miny = 0;
+		poly->maxy = 0;
+		
+		int minx = 0;
+		int maxx = 0;
+		
 		for(int i = 0; i < poly->count; i++){
 			poly->scaled_x[i] = poly->scale * ((poly->x[i] * poly->s_scale + poly->s_pad_x) * poly->ratio + poly->w_pad_x);
 			poly->scaled_y[i] = poly->scale * ((poly->y[i] * poly->s_scale + poly->s_pad_y) * poly->ratio + poly->w_pad_y);
+			
+			if (poly->scaled_x[i] < minx) {
+				minx = poly->scaled_x[i];
+			} else if (poly->scaled_x[i] > maxx) {
+				maxx = poly->scaled_x[i];
+			}
+			
+			if (poly->scaled_y[i] < poly->miny) {
+				poly->miny = poly->scaled_y[i];
+			} else if (poly->scaled_y[i] > poly->maxy) {
+				poly->maxy = poly->scaled_y[i];
+			}
 		}
+		
+		if( (maxx - minx) > parent->width)
+			parent->width = (maxx - minx);
+		if( (poly->maxy - poly->miny) > parent->height)
+			parent->height = (poly->maxy - poly->miny);
 	
 	}
 	
 }
 
 int ww_draw_polygon(ww_polygon_t * poly){
+	//~ printf("draw_p\n");
 	
+	//~ printf("dp_pre_poly: %d\n", poly->scaled_x[0]);
 	ww_scale_polygon(poly);
+	//~ printf("dp_pos_poly: %d\n", poly->scaled_x[0]);
 	
-	return ww_draw_raw_polygon(poly->scaled_x, poly->scaled_y, poly->count, poly->color);
+	return ww_draw_raw_polygon(poly->scaled_x, poly->scaled_y, poly->count, poly->miny, poly->maxy, poly->color);
 }
 
 int ww_draw_frame(ww_frame_t * frame){
+	//~ printf("draw_f\n");
 	
+	//~ printf("frame: %d\n", frame->polys[0].x[0]);
 	int rc = 0;
 	
 	// TODO implement z-depth sorted draws
 	for(int i = 0; i < frame->count; i++){
-		rc += ww_draw_polygon(frame->polys[i]);
+		rc += ww_draw_polygon(&frame->polys[i]);
 	}
 	
 	return rc;
@@ -791,9 +1179,12 @@ int ww_draw_frame(ww_frame_t * frame){
 }
 
 int ww_draw_animation(ww_animation_t * anim, int paused){
+	//~ printf("draw_a\n");
 	
+	//~ printf("anim: %d\n", anim->frames[0].polys[0].x[0]);
 	if (paused == 0) {
 		anim->d_progress -= ww_frames_passed();
+		//~ anim->d_progress--;
 		
 		while(anim->d_progress <= 0){
 			
@@ -807,8 +1198,8 @@ int ww_draw_animation(ww_animation_t * anim, int paused){
 		}
 		
 	}
-	
-	int rc = ww_draw_frame(anim->frames[anim->active_frame]);
+		//~ int rc = 0;
+	int rc = ww_draw_frame(&anim->frames[anim->active_frame]);
 	
 	return rc;
 	
@@ -816,421 +1207,9 @@ int ww_draw_animation(ww_animation_t * anim, int paused){
 
 int ww_draw_sprite(ww_sprite_t * sprite){
 	
-	int rc = ww_draw_animation(sprite->animations[sprite->active_animation], sprite->paused);
+	//~ printf("sprite: %d\n", sprite->animations[0].frames[0].polys[0].x[0]);
+	int rc = ww_draw_animation(&sprite->animations[sprite->active_animation], sprite->paused);
 	
 	return rc;
 	
-}
-
-ww_polygon_t * ww_new_polygon(unsigned char color[3], short * x, short * y, int count){
-	
-	ww_polygon_t * poly = calloc(1, sizeof(ww_polygon_t));
-	poly->x = calloc(count, sizeof(short));
-	poly->y = calloc(count, sizeof(short));
-	memcpy(poly->x, x, count*sizeof(short));
-	memcpy(poly->y, y, count*sizeof(short));
-	
-	poly->scaled_x = calloc(count, sizeof(short));
-	poly->scaled_y = calloc(count, sizeof(short));
-	memcpy(poly->scaled_x, x, count*sizeof(short));
-	memcpy(poly->scaled_y, y, count*sizeof(short));
-	
-	memcpy(poly->color, color, 3);
-	poly->count = count;
-	
-	return poly;
-}
-
-ww_frame_t * ww_new_frame(ww_polygon_t * polys, ...){
-	
-	ww_frame_t * frame = NULL;
-	
-	if(polys == NULL){
-		printf("ww_new_frame called with only NULL argument");
-		return NULL;
-	}
-	
-	frame = calloc(1, sizeof(ww_frame_t));
-	
-	// count items
-	va_list args;
-	ww_polygon_t * tmp = polys;
-	
-	va_start(args, polys);
-	while( tmp != NULL ){
-		frame->count += 1;
-		tmp = va_arg(args, ww_polygon_t *);
-	}
-	va_end(args);
-	
-	// alloc
-	frame->polys = calloc(frame->count, sizeof(ww_polygon_t *));
-	
-	// assign
-	int i = 1;
-	tmp = polys;
-	frame->polys[0] = polys;
-	va_start(args, polys);
-	while( 1 ){
-		tmp = va_arg(args, ww_polygon_t *);
-		
-		if(tmp == NULL)
-			break;
-		
-		frame->polys[i] = tmp;
-		i++;
-	}
-	va_end(args);
-	
-	return frame;
-	
-}
-
-ww_animation_t * ww_new_animation(int * delay, ww_frame_t * frames, ...){
-	
-	ww_animation_t * anim = NULL;
-	
-	if(frames == NULL){
-		printf("ww_new_animation called with only NULL argument");
-		return NULL;
-	}
-	
-	anim = calloc(1, sizeof(ww_animation_t));
-	
-	// count items
-	va_list args;
-	ww_frame_t * tmp = frames;
-	
-	va_start(args, frames);
-	while( tmp != NULL ){
-		anim->count += 1;
-		tmp = va_arg(args, ww_frame_t *);
-	}
-	va_end(args);
-	
-	// alloc
-	anim->frames = calloc(anim->count, sizeof(ww_frame_t *));
-	
-	// assign
-	anim->delay = calloc(anim->count, sizeof(int));
-	memcpy(anim->delay, delay, anim->count*sizeof(int));
-	anim->d_progress = anim->delay[0];
-	
-	int i = 1;
-	tmp = frames;
-	anim->frames[0] = frames;
-	va_start(args, frames);
-	
-	while( 1 ){
-		tmp = va_arg(args, ww_frame_t *);
-		
-		if(tmp == NULL)
-			break;
-		
-		anim->frames[i] = tmp;
-		i++;
-	}
-	va_end(args);
-	
-	return anim;
-}
-
-ww_sprite_t * ww_new_sprite(int depth, ww_animation_t * animations, ...){
-	
-	ww_sprite_t * sprite = NULL;
-	
-	if(animations == NULL){
-		printf("ww_new_animation called with only NULL argument");
-		return NULL;
-	}
-	
-	sprite = calloc(1, sizeof(ww_sprite_t));
-	
-	// count items
-	va_list args;
-	ww_animation_t * tmp = animations;
-	
-	va_start(args, animations);
-	while( tmp != NULL ){
-		sprite->count += 1;
-		tmp = va_arg(args, ww_animation_t *);
-	}
-	va_end(args);
-	
-	// alloc
-	sprite->animations = calloc(sprite->count, sizeof(ww_animation_t *));
-	
-	// assign
-	sprite->z_depth = depth;
-	sprite->scale = 1.0;
-	
-	int i = 1;
-	tmp = animations;
-	sprite->animations[0] = animations;
-	va_start(args, animations);
-	
-	while( 1 ){
-		tmp = va_arg(args, ww_animation_t *);
-		
-		if(tmp == NULL)
-			break;
-		
-		sprite->animations[i] = tmp;
-		i++;
-	}
-	va_end(args);
-	
-	for(int s = 0; s < sprite->count; s++){
-		
-		for(int a = 0; a < sprite->animations[s]->count; a++){
-		
-			for(int f = 0; f < sprite->animations[s]->frames[a]->count; f++){
-			
-				sprite->animations[s]->frames[a]->polys[f]->s_parent = sprite;
-				
-				ww_polygon_t * t_poly = sprite->animations[s]->frames[a]->polys[f];
-				
-				for(int sh = 0; sh < t_poly->count; sh++){
-					if(t_poly->x[sh] > sprite->width)
-						sprite->width = t_poly->x[sh];
-					if(t_poly->y[sh] > sprite->height)
-						sprite->height = t_poly->y[sh];
-				}
-				
-			}	
-		}	
-	}
-	
-	return sprite;
-}
-
-ww_sprite_t * ww_clone_sprite(ww_sprite_t * in_sprite){
-	
-	ww_sprite_t * out_sprite = NULL;
-	
-	if(in_sprite == NULL){
-		printf("ww_clone_sprite called with only NULL argument");
-		return NULL;
-	}
-	
-	out_sprite = calloc(1, sizeof(ww_sprite_t));
-	
-	// assignments
-	*out_sprite = *in_sprite;
-	// alloc
-	out_sprite->animations = NULL;
-	out_sprite->animations = calloc(in_sprite->count, sizeof(ww_animation_t *));
-	
-	for(int i = 0; i < in_sprite->count; i++){
-		
-		out_sprite->animations[i] = calloc(1, sizeof(ww_animation_t));
-		*(out_sprite->animations[i]) = *(in_sprite->animations[i]);
-		
-		out_sprite->animations[i]->delay  = NULL;
-		out_sprite->animations[i]->delay  = calloc(in_sprite->animations[i]->count, sizeof(ww_frame_t *));
-		for(int j = 0; j < out_sprite->animations[i]->count; j++)
-			out_sprite->animations[i]->delay[j] = in_sprite->animations[i]->delay[j];
-		
-		out_sprite->animations[i]->frames = NULL;
-		out_sprite->animations[i]->frames = calloc(in_sprite->animations[i]->count, sizeof(ww_frame_t *));
-		
-		for(int j = 0; j < in_sprite->animations[i]->count; j++){
-			
-			out_sprite->animations[i]->frames[j] = calloc(1, sizeof(ww_frame_t));
-			*out_sprite->animations[i]->frames[j] = *in_sprite->animations[i]->frames[j];
-			out_sprite->animations[i]->frames[j]->polys = NULL;
-			out_sprite->animations[i]->frames[j]->polys = calloc(in_sprite->animations[i]->frames[j]->count, sizeof(ww_polygon_t *));
-						
-			for(int k = 0; k < in_sprite->animations[i]->frames[j]->count; k++){
-				
-				out_sprite->animations[i]->frames[j]->polys[k] = calloc(1, sizeof(ww_polygon_t));
-				*out_sprite->animations[i]->frames[j]->polys[k] = *in_sprite->animations[i]->frames[j]->polys[k];
-				out_sprite->animations[i]->frames[j]->polys[k]->x        = NULL;
-				out_sprite->animations[i]->frames[j]->polys[k]->y        = NULL;
-				out_sprite->animations[i]->frames[j]->polys[k]->scaled_x = NULL;
-				out_sprite->animations[i]->frames[j]->polys[k]->scaled_y = NULL;
-				out_sprite->animations[i]->frames[j]->polys[k]->s_parent = out_sprite;
-				out_sprite->animations[i]->frames[j]->polys[k]->x        = calloc(in_sprite->animations[i]->frames[j]->polys[k]->count, sizeof(short));
-				out_sprite->animations[i]->frames[j]->polys[k]->y        = calloc(in_sprite->animations[i]->frames[j]->polys[k]->count, sizeof(short));
-				out_sprite->animations[i]->frames[j]->polys[k]->scaled_x = calloc(in_sprite->animations[i]->frames[j]->polys[k]->count, sizeof(short));
-				out_sprite->animations[i]->frames[j]->polys[k]->scaled_y = calloc(in_sprite->animations[i]->frames[j]->polys[k]->count, sizeof(short));
-				
-				for(int l = 0; l < in_sprite->animations[i]->frames[j]->polys[k]->count; l++){
-					
-					out_sprite->animations[i]->frames[j]->polys[k]->x[l]        = in_sprite->animations[i]->frames[j]->polys[k]->x[l];     
-					out_sprite->animations[i]->frames[j]->polys[k]->y[l]        = in_sprite->animations[i]->frames[j]->polys[k]->y[l];      
-					out_sprite->animations[i]->frames[j]->polys[k]->scaled_x[l] = in_sprite->animations[i]->frames[j]->polys[k]->scaled_x[l];
-					out_sprite->animations[i]->frames[j]->polys[k]->scaled_y[l] = in_sprite->animations[i]->frames[j]->polys[k]->scaled_y[l];
-					
-				}
-				
-			}
-			
-		}
-		
-	}
-	
-	return out_sprite;
-}
-
-void ww_free_polygon(ww_polygon_t * poly){
-	free(poly->x);
-	free(poly->y);
-	free(poly->scaled_x);
-	free(poly->scaled_y);
-	free(poly);
-}
-
-void ww_free_frame(ww_frame_t * frame){
-	
-	for(int i = 0; i < frame->count; i++){
-		ww_free_polygon( frame->polys[i] );
-	}
-	
-	free(frame->polys);
-	free(frame);
-	
-}
-
-void ww_free_anim(ww_animation_t * anim){
-	
-	for(int i = 0; i < anim->count; i++){
-		ww_free_frame( anim->frames[i] );
-	}
-	
-	free(anim->delay);
-	free(anim->frames);
-	free(anim);
-	
-}
-
-void ww_free_sprite(ww_sprite_t * sprite){
-	
-	for(int i = 0; i < sprite->count; i++){
-		ww_free_anim( sprite->animations[i] );
-	}
-	
-	free(sprite->animations);
-	free(sprite);
-	
-}
-
-void ww_render_bars(){
-	
-	ww_window_s *window_p = (ww_window_s*) window;
-	
-	unsigned char bar_grey[] = { 0x1C, 0x1F, 0x20 };
-	
-	if (window_p->ww_pad_x != 0){
-		// left
-		short bar_ax[4] = { 
-			0, 
-			window_p->ww_pad_x * (window_p->ww_scale), 
-			window_p->ww_pad_x * (window_p->ww_scale), 
-			0 
-		};
-		short bar_ay[4] = { 
-			0, 
-			0, 
-			window_p->ww_height * (window_p->ww_scale), 
-			window_p->ww_height * (window_p->ww_scale)
-		};
-		ww_draw_raw_polygon(bar_ax, bar_ay, 4, bar_grey);
-		// right
-		short bar_bx[4] = { 
-			(window_p->ww_width - window_p->ww_pad_x) * (window_p->ww_scale), 
-			(window_p->ww_width) * (window_p->ww_scale),
-			(window_p->ww_width) * (window_p->ww_scale), 
-			(window_p->ww_width - window_p->ww_pad_x) * (window_p->ww_scale)
-		};
-		short bar_by[4] = { 
-			0, 
-			0, 
-			window_p->ww_height * (window_p->ww_scale), 
-			window_p->ww_height * (window_p->ww_scale)
-		};
-		ww_draw_raw_polygon(bar_bx, bar_by, 4, bar_grey);
-		
-	} else {
-		// top
-		short bar_ax[4] = { 
-			0, 
-			window_p->ww_width * (window_p->ww_scale),
-			window_p->ww_width * (window_p->ww_scale),
-			0
-		};
-		short bar_ay[4] = { 
-			0, 
-			0, 
-			window_p->ww_pad_y * (window_p->ww_scale), 
-			window_p->ww_pad_y * (window_p->ww_scale)
-		};
-		ww_draw_raw_polygon(bar_ax, bar_ay, 4, bar_grey);
-		// bottom
-		short bar_bx[4] = { 
-			0, 
-			window_p->ww_width * (window_p->ww_scale), 
-			window_p->ww_width * (window_p->ww_scale),
-			0
-		};
-		short bar_by[4] = {
-			(window_p->ww_height - window_p->ww_pad_y) * (window_p->ww_scale), 
-			(window_p->ww_height - window_p->ww_pad_y) * (window_p->ww_scale), 
-			window_p->ww_height * (window_p->ww_scale),
-			window_p->ww_height * (window_p->ww_scale)
-		};
-		ww_draw_raw_polygon(bar_bx, bar_by, 4, bar_grey);
-		
-	}
-	
-}
-
-void ww_clear_buffer(){
-	
-	ww_window_s *window_p = (ww_window_s*) window;
-	
-	SDL_SetRenderDrawColor(window_p->ww_sdl_renderer, 0, 0, 0, 255);
-	
-	// clear texture
-	SDL_RenderClear( window_p->ww_sdl_renderer );
-	
-	// clear renderer
-	SDL_SetRenderTarget(window_p->ww_sdl_renderer, NULL);
-	SDL_RenderClear(window_p->ww_sdl_renderer);
-	
-	// draw to texture
-	SDL_SetRenderTarget(window_p->ww_sdl_renderer, window_p->ww_sdl_texture);
-
-}
-
-int ww_window_update_buffer() {
-	
-	if(!window) {
-		return -1;
-	}
-	ww_window_s *window_p = (ww_window_s*) window;
-	
-	ww_render_bars();
-	
-	if (window_p->ww_size_changed) {
-		
-		// don't draw, let the buffer get wiped
-		
-		window_p->ww_size_changed = 0;
-		
-	} else {
-		
-		// draw
-		
-		SDL_SetRenderTarget(window_p->ww_sdl_renderer, NULL);
-		
-		SDL_RenderCopy( window_p->ww_sdl_renderer, window_p->ww_sdl_texture, NULL, NULL );
-		SDL_RenderPresent( window_p->ww_sdl_renderer );
-		
-		SDL_SetRenderTarget(window_p->ww_sdl_renderer, window_p->ww_sdl_texture);
-	}
-	
-	ww_clear_buffer();
-	
-	return 0;
 }

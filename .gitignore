@@ -3,6 +3,7 @@ concoord/concoord
 *.gch
 *.o
 img/**/*.h
+img/**/*.c
 tools/yaml2struct/yaml2struct
 test.mp
 facegame.opk
