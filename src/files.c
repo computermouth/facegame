@@ -19,7 +19,6 @@ char *share_dir = "/share";
 
 char game_dir[FILENAME_BUFFER_SIZE];
 char game_file[FILENAME_BUFFER_SIZE];
-char tmp_path[FILENAME_BUFFER_SIZE];
 
 int check_dir(char *tp){
 
@@ -87,61 +86,68 @@ int verify_or_create_save(game_state_t * gs){
 	for(int i = 0; game_file[i]; i++){
 		game_file[i] = tolower(game_file[i]);
 	}
+	
+	char * tmp_path = calloc(strlen(home_dir) + strlen(local_dir) + strlen(share_dir) + strlen(game_dir) + strlen(game_dir) + 1, sizeof(char));
 
 	// check homedir exists
-	memset(tmp_path, 0, FILENAME_BUFFER_SIZE * sizeof(char));
 	sprintf(tmp_path, "%s", home_dir);
 	rc += check_dir(tmp_path);
 	if (rc != 0) {
 		printf("E: Failed to find/create %s\n", tmp_path);
-		return rc;
+		goto funcend;
 	}
 	
 	// check local_dir exists
-	memset(tmp_path, 0, FILENAME_BUFFER_SIZE * sizeof(char));
 	sprintf(tmp_path, "%s%s", home_dir, local_dir);
 	rc += check_dir(tmp_path);
 	if (rc != 0) {
 		printf("E: Failed to find/create %s\n", tmp_path);
-		return rc;
+		goto funcend;
 	}
 	
 	// check share_dir exists
-	memset(tmp_path, 0, FILENAME_BUFFER_SIZE * sizeof(char));
 	sprintf(tmp_path, "%s%s%s", home_dir, local_dir, share_dir);
 	rc += check_dir(tmp_path);
 	if (rc != 0) {
 		printf("E: Failed to find/create %s\n", tmp_path);
-		return rc;
+		goto funcend;
 	}
 	
 	// check game_dir exists
-	memset(tmp_path, 0, FILENAME_BUFFER_SIZE * sizeof(char));
 	sprintf(tmp_path, "%s%s%s%s", home_dir, local_dir, share_dir, game_dir);
 	rc += check_dir(tmp_path);
 	if (rc != 0) {
 		printf("E: Failed to find/create %s\n", tmp_path);
-		return rc;
+		goto funcend;
 	}
 	
 	// check game_file exists
-	memset(tmp_path, 0, FILENAME_BUFFER_SIZE * sizeof(char));
 	sprintf(tmp_path, "%s%s%s%s%s", home_dir, local_dir, share_dir, game_dir, game_file);
 	rc += check_file(tmp_path, gs);
 	if (rc != 0) {
 		printf("E: Failed to find/create %s\n", tmp_path);
-		return rc;
+		goto funcend;
 	}
+	
+	funcend:
+	
+	free(tmp_path);
 
 	return rc;
 }
 
 int msave(game_state_t * gs){
+	
+	int rc = 0;
+	FILE *out = NULL;
+	
 	// encode to memory buffer
 	char* data;
 	size_t size;
 	mpack_writer_t writer;
 	mpack_writer_init_growable(&writer, &data, &size);
+	
+	char * tmp_path = calloc(strlen(home_dir) + strlen(local_dir) + strlen(share_dir) + strlen(game_dir) + strlen(game_dir) + 1, sizeof(char));
 
 	// write the example on the msgpack homepage
 	mpack_start_map(&writer, 2);
@@ -181,12 +187,11 @@ int msave(game_state_t * gs){
 	// finish writing
 	if (mpack_writer_destroy(&writer) != mpack_ok) {
 		fprintf(stderr, "An error occurred encoding the data!\n");
-		return -1;
+		rc = -1;
+		goto funcend;
 	}
 	
 	// test if file exists
-	FILE *out = NULL;
-	
 	memset(tmp_path, 0, 500 * sizeof(char));
 	sprintf(tmp_path, "%s%s%s%s%s", home_dir, local_dir, share_dir, game_dir, game_file);
 
@@ -197,31 +202,44 @@ int msave(game_state_t * gs){
 		int rm = remove(tmp_path);
 		if(rm != 0){
 			fprintf(stderr, "E: file exists, but unable to delete and rewrite it\n");
-			return -1;
+			rc = -1;
+			goto funcend;
 		}
 	}
 	
 	// open and write
 	out = fopen(tmp_path, "wb");
-	if (out == NULL) return 1;
+	if (out == NULL){
+		rc = 1;
+		goto funcend;
+	}
 	
 	for(size_t i = 0; i < size; i++){
 		fputc(data[i], out);
 	}
 	
 	// use the data
-	free(data);
-	if (out != NULL) fclose(out);
 	
 	// validate write
-	return mread(gs);
+	rc += mread(gs);
+	
+	funcend:
+	
+	free(data);
+	if (out != NULL) fclose(out);
+	free(tmp_path);
+	
+	return rc;
 }
 
 int mread(game_state_t * gs){
+	
+	int rc = 0;
+	
 	// parse a file into a node tree
 	mpack_tree_t tree;
 	
-	memset(tmp_path, 0, 500 * sizeof(char));
+	char * tmp_path = calloc(strlen(home_dir) + strlen(local_dir) + strlen(share_dir) + strlen(game_dir) + strlen(game_dir) + 1, sizeof(char));
 	sprintf(tmp_path, "%s%s%s%s%s", home_dir, local_dir, share_dir, game_dir, game_file);
 	
 	mpack_tree_init_filename(&tree, tmp_path, 0);
@@ -236,24 +254,32 @@ int mread(game_state_t * gs){
 		int rm = remove(tmp_path);
 		if(rm != 0){
 			fprintf(stderr, "An error occurred reading the file, and it couldn't be replaced\n");
-			return -1;
+			rc = -1;
+			goto funcend;
 		}
 		
-		int rc = msave(gs);
-		if(rc != 0){
+		if(msave(gs) != 0){
 			fprintf(stderr, "An error occurred reading the file, and it couldn't be replaced\n");
-			return -1;
+			rc = -1;
+			goto funcend;
 		}
 	}
 	
-	return 0;
+	funcend:
+	
+	free(tmp_path);
+	
+	return rc;
 }
 
 int mload(game_state_t * gs){
+	
+	int rc = 0;
+	
 	// parse a file into a node tree
 	mpack_tree_t tree;
 	
-	memset(tmp_path, 0, 500 * sizeof(char));
+	char * tmp_path = calloc(strlen(home_dir) + strlen(local_dir) + strlen(share_dir) + strlen(game_dir) + strlen(game_dir) + 1, sizeof(char));
 	sprintf(tmp_path, "%s%s%s%s%s", home_dir, local_dir, share_dir, game_dir, game_file);
 	
 	mpack_tree_init_filename(&tree, tmp_path, 0);
@@ -271,15 +297,20 @@ int mload(game_state_t * gs){
 		int rm = remove(tmp_path);
 		if(rm != 0){
 			fprintf(stderr, "An error occurred reading the file, and it couldn't be replaced\n");
-			return -1;
+			rc = -1;
+			goto funcend;
 		}
 		
-		int rc = msave(gs);
-		if(rc != 0){
+		if(msave(gs) != 0){
 			fprintf(stderr, "An error occurred reading the file, and it couldn't be replaced\n");
-			return -1;
+			rc = -1;
+			goto funcend;
 		}
 	}
 	
-	return 0;
+	funcend:
+	
+	free(tmp_path);
+	
+	return rc;
 }

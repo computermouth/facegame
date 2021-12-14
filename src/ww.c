@@ -99,9 +99,9 @@ int ww_window_create(int argc, char * argv[], char * title, int width, int heigh
 	window_p->ww_default_width = width;
 	window_p->ww_default_height = height;
 	window_p->ww_ratio = 1.0;
-	window_p->ww_scale = SC_ONE;
+	window_p->ww_scale = SC_EIGHTH;
 	window_p->pf = SDL_PIXELFORMAT_RGB888;
-	window_p->acc = SDL_RENDERER_ACCELERATED;
+	window_p->acc = SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE;
 	window_p->vsync = SDL_RENDERER_PRESENTVSYNC;
 	window_p->ticks = 0;
 	window_p->framediff = 0.0;

@@ -378,8 +378,20 @@ void process_roam(){
 	
 }
 
+int spiral_runs = 0;
 void process_battle(){
-	ww_draw_sprite(spiral);
+	
+	// only show the spiral until it ends
+	if (spiral_runs < 1){
+		ww_draw_sprite(spiral);
+		if(spiral->animations[0].active_frame == SPIRAL_ANIMATION_0_FRAME_COUNT - 1)
+			spiral_runs = 1;
+		return;
+	}
+	
+	
+	
+	// reset spiral_runs after a finished battle
 }
 
 void process_play(){	
