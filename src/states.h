@@ -33,6 +33,7 @@ typedef struct {
 	uint32_t max_hp;
 	uint32_t hp;
 	uint32_t speed;
+	uint32_t tmp_speed;
 	uint32_t baseatk;
 	uint32_t basedef;
 	uint32_t *atk;

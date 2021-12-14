@@ -410,15 +410,16 @@ void process_battle_init(){
 	ww_window_s *window_p = (ww_window_s*) window;
 	
 	battler_t *player_battler = &game_state.play_state.battle.player_battler;
-	player_battler->sprite  = ww_new_sprite(DUDE),
-	player_battler->level   = game_state.play_state.player.level,
-	player_battler->max_hp  = game_state.play_state.player.max_hp,
-	player_battler->hp      = game_state.play_state.player.hp,
-	player_battler->speed   = game_state.play_state.player.speed,
-	player_battler->baseatk = game_state.play_state.player.baseatk,
-	player_battler->basedef = game_state.play_state.player.basedef,
-	player_battler->atk     = game_state.play_state.player.atk,
-	player_battler->def     = game_state.play_state.player.def,
+	player_battler->sprite    = ww_new_sprite(DUDE),
+	player_battler->level     = game_state.play_state.player.level,
+	player_battler->max_hp    = game_state.play_state.player.max_hp,
+	player_battler->hp        = game_state.play_state.player.hp,
+	player_battler->speed     = game_state.play_state.player.speed,
+	player_battler->tmp_speed = game_state.play_state.player.speed,
+	player_battler->baseatk   = game_state.play_state.player.baseatk,
+	player_battler->basedef   = game_state.play_state.player.basedef,
+	player_battler->atk       = game_state.play_state.player.atk,
+	player_battler->def       = game_state.play_state.player.def,
 	player_battler->sprite->active_animation = DUDE_WALK_RIGHT_INDEX;
 	player_battler->sprite->pad_x = 0;
 	
@@ -426,15 +427,16 @@ void process_battle_init(){
 	player_battler->sprite->pad_y = (window_p->ww_default_height / 2) - (player_battler->sprite->height / 2);
 	
 	battler_t *enemy_battler = &game_state.play_state.battle.enemy_battler; // TODO, actually generate enemy
-	enemy_battler->sprite  = ww_new_sprite(DUDE),
-	enemy_battler->level   = game_state.play_state.player.level,
-	enemy_battler->max_hp  = game_state.play_state.player.max_hp / 2,
-	enemy_battler->hp      = game_state.play_state.player.hp / 2,
-	enemy_battler->speed   = game_state.play_state.player.speed,
-	enemy_battler->baseatk = game_state.play_state.player.baseatk,
-	enemy_battler->basedef = game_state.play_state.player.basedef,
-	enemy_battler->atk     = game_state.play_state.player.atk,
-	enemy_battler->def     = game_state.play_state.player.def,
+	enemy_battler->sprite    = ww_new_sprite(DUDE),
+	enemy_battler->level     = game_state.play_state.player.level,
+	enemy_battler->max_hp    = game_state.play_state.player.max_hp / 2,
+	enemy_battler->hp        = game_state.play_state.player.hp / 2,
+	enemy_battler->speed     = game_state.play_state.player.speed + 45,
+	enemy_battler->tmp_speed = game_state.play_state.player.speed,
+	enemy_battler->baseatk   = game_state.play_state.player.baseatk,
+	enemy_battler->basedef   = game_state.play_state.player.basedef,
+	enemy_battler->atk       = game_state.play_state.player.atk,
+	enemy_battler->def       = game_state.play_state.player.def,
 	enemy_battler->sprite->active_animation = DUDE_WALK_LEFT_INDEX;
 	
 	ww_scale_sprite(enemy_battler->sprite);
@@ -457,25 +459,27 @@ void process_battle_end(){
 	
 	// TODO -- if player.hp == 0 -- PLAY_STATE_REST
 	
-	game_state.play_state.battle.battle_state_activity  = 0;
-	game_state.play_state.battle.player_battler.sprite  = NULL;
-	game_state.play_state.battle.player_battler.level   = 0;
-	game_state.play_state.battle.player_battler.max_hp  = 0;
-	game_state.play_state.battle.player_battler.hp      = 0;
-	game_state.play_state.battle.player_battler.speed   = 0;
-	game_state.play_state.battle.player_battler.baseatk = 0;
-	game_state.play_state.battle.player_battler.basedef = 0;
-	game_state.play_state.battle.player_battler.atk     = NULL;
-	game_state.play_state.battle.player_battler.def     = NULL;
-	game_state.play_state.battle.enemy_battler.sprite  = NULL;
-	game_state.play_state.battle.enemy_battler.level   = 0;
-	game_state.play_state.battle.enemy_battler.max_hp  = 0;
-	game_state.play_state.battle.enemy_battler.hp      = 0;
-	game_state.play_state.battle.enemy_battler.speed   = 0;
-	game_state.play_state.battle.enemy_battler.baseatk = 0;
-	game_state.play_state.battle.enemy_battler.basedef = 0;
-	game_state.play_state.battle.enemy_battler.atk     = NULL;
-	game_state.play_state.battle.enemy_battler.def     = NULL;
+	game_state.play_state.battle.battle_state_activity    = 0;
+	game_state.play_state.battle.player_battler.sprite    = NULL;
+	game_state.play_state.battle.player_battler.level     = 0;
+	game_state.play_state.battle.player_battler.max_hp    = 0;
+	game_state.play_state.battle.player_battler.hp        = 0;
+	game_state.play_state.battle.player_battler.speed     = 0;
+	game_state.play_state.battle.player_battler.tmp_speed = 0;
+	game_state.play_state.battle.player_battler.baseatk   = 0;
+	game_state.play_state.battle.player_battler.basedef   = 0;
+	game_state.play_state.battle.player_battler.atk       = NULL;
+	game_state.play_state.battle.player_battler.def       = NULL;
+	game_state.play_state.battle.enemy_battler.sprite    = NULL;
+	game_state.play_state.battle.enemy_battler.level     = 0;
+	game_state.play_state.battle.enemy_battler.max_hp    = 0;
+	game_state.play_state.battle.enemy_battler.hp        = 0;
+	game_state.play_state.battle.enemy_battler.speed     = 0;
+	game_state.play_state.battle.enemy_battler.tmp_speed = 0;
+	game_state.play_state.battle.enemy_battler.baseatk   = 0;
+	game_state.play_state.battle.enemy_battler.basedef   = 0;
+	game_state.play_state.battle.enemy_battler.atk       = NULL;
+	game_state.play_state.battle.enemy_battler.def       = NULL;
 	
 	game_state.play_state.map[game_state.play_state.player.x_pos][game_state.play_state.player.y_pos] = 0;
 	generate_event();
@@ -485,10 +489,55 @@ void process_battle_end(){
 
 void process_battle_battle(){
 	
-	battle_state_t battle_state = game_state.play_state.battle;
+	battle_state_t *battle_state = &game_state.play_state.battle;
 	
-	ww_draw_sprite(battle_state.player_battler.sprite);
-	ww_draw_sprite(battle_state.enemy_battler.sprite);
+	// end battle
+	if (battle_state->player_battler.hp == 0) {
+		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
+		printf("player dies\n");
+		return;
+	} else if (battle_state->enemy_battler.hp == 0) {
+		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_XP;
+		printf("enemy dies\n");
+		return;
+	}
+	
+	static int player_atk_stick = 0;
+	static int enemy_atk_stick = 0;
+	
+	// reset positions from attacks
+	ww_window_s *window_p = (ww_window_s*) window;
+	if (player_atk_stick != 0)
+		player_atk_stick--;
+	else
+		battle_state->player_battler.sprite->pad_x = 0;
+		
+	if (enemy_atk_stick != 0)
+		enemy_atk_stick--;
+	else
+		battle_state->enemy_battler.sprite->pad_x = window_p->ww_default_width - battle_state->enemy_battler.sprite->width;
+	
+	// perform attack
+	battle_state->player_battler.tmp_speed--;
+	if (battle_state->player_battler.tmp_speed == 0) {
+		battle_state->player_battler.sprite->pad_x += 50;
+		int dmg_index = rand() % 4;
+		battle_state->enemy_battler.hp -= battle_state->player_battler.atk[dmg_index];
+		battle_state->player_battler.tmp_speed = battle_state->player_battler.speed;
+		player_atk_stick = 30;
+	}
+	
+	battle_state->enemy_battler.tmp_speed--;
+	if (battle_state->enemy_battler.tmp_speed == 0) {
+		battle_state->enemy_battler.sprite->pad_x -= 50;
+		int dmg_index = rand() % 4;
+		battle_state->player_battler.hp -= battle_state->enemy_battler.atk[dmg_index];
+		battle_state->enemy_battler.tmp_speed = battle_state->enemy_battler.speed;
+		enemy_atk_stick = 30;
+	}
+	
+	ww_draw_sprite(battle_state->player_battler.sprite);
+	ww_draw_sprite(battle_state->enemy_battler.sprite);
 	
 }
 
@@ -504,7 +553,7 @@ void process_battle(){
 			process_battle_battle();	
 			break;
 		case BATTLE_STATE_XP:
-			ww_window_send_quit_event();
+			game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
 			break;
 		case BATTLE_STATE_END:
 			process_battle_end();
@@ -559,16 +608,16 @@ void game_prop_init(){
 	game_state.play_state.player.level     = 1;
 	game_state.play_state.player.max_hp    = 5;
 	game_state.play_state.player.hp        = 5;
-	game_state.play_state.player.speed     = 1;
+	game_state.play_state.player.speed     = 120;
 	game_state.play_state.player.baseatk   = 1;
 	game_state.play_state.player.basedef   = 1;
 	game_state.play_state.player.atk[0]    = 1;
 	game_state.play_state.player.atk[1]    = 1;
 	game_state.play_state.player.atk[2]    = 1;
-	game_state.play_state.player.atk[3]    = 1;
-	game_state.play_state.player.def[0]    = 1;
-	game_state.play_state.player.def[1]    = 1;
-	game_state.play_state.player.def[2]    = 1;
+	game_state.play_state.player.atk[3]    = 0;
+	game_state.play_state.player.def[0]    = 0;
+	game_state.play_state.player.def[1]    = 0;
+	game_state.play_state.player.def[2]    = 0;
 	game_state.play_state.player.def[3]    = 1;
 	game_state.play_state.player.exp[0]    = 0;
 	game_state.play_state.player.exp[1]    = 0;
