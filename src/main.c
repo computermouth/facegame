@@ -378,10 +378,26 @@ void process_roam(){
 	
 }
 
-int spiral_runs = 0;
-void process_battle(){
+void generate_event(){
+	int event_x = rand() % MAP_WIDTH;
+	int event_y = rand() % MAP_HEIGHT;
+	
+	while ( // don't put an event on the player, or on existing event
+		(event_x == game_state.play_state.player.x_pos && 
+		event_y == game_state.play_state.player.y_pos ) ||
+		game_state.play_state.map[event_x][event_y] == 1
+	){
+		event_x = rand() % MAP_WIDTH;
+		event_y = rand() % MAP_HEIGHT;
+	}
+	
+	game_state.play_state.map[event_x][event_y] = 1;
+}
+
+void process_battle_init(){
 	
 	// only show the spiral until it ends
+	static int spiral_runs = 0;
 	if (spiral_runs < 1){
 		ww_draw_sprite(spiral);
 		if(spiral->animations[0].active_frame == SPIRAL_ANIMATION_0_FRAME_COUNT - 1)
@@ -390,6 +406,110 @@ void process_battle(){
 	}
 	
 	
+	
+	ww_window_s *window_p = (ww_window_s*) window;
+	
+	battler_t *player_battler = &game_state.play_state.battle.player_battler;
+	player_battler->sprite  = ww_new_sprite(DUDE),
+	player_battler->level   = game_state.play_state.player.level,
+	player_battler->max_hp  = game_state.play_state.player.max_hp,
+	player_battler->hp      = game_state.play_state.player.hp,
+	player_battler->speed   = game_state.play_state.player.speed,
+	player_battler->baseatk = game_state.play_state.player.baseatk,
+	player_battler->basedef = game_state.play_state.player.basedef,
+	player_battler->atk     = game_state.play_state.player.atk,
+	player_battler->def     = game_state.play_state.player.def,
+	player_battler->sprite->active_animation = DUDE_WALK_RIGHT_INDEX;
+	player_battler->sprite->pad_x = 0;
+	
+	ww_scale_sprite(player_battler->sprite);
+	player_battler->sprite->pad_y = (window_p->ww_default_height / 2) - (player_battler->sprite->height / 2);
+	
+	battler_t *enemy_battler = &game_state.play_state.battle.enemy_battler; // TODO, actually generate enemy
+	enemy_battler->sprite  = ww_new_sprite(DUDE),
+	enemy_battler->level   = game_state.play_state.player.level,
+	enemy_battler->max_hp  = game_state.play_state.player.max_hp / 2,
+	enemy_battler->hp      = game_state.play_state.player.hp / 2,
+	enemy_battler->speed   = game_state.play_state.player.speed,
+	enemy_battler->baseatk = game_state.play_state.player.baseatk,
+	enemy_battler->basedef = game_state.play_state.player.basedef,
+	enemy_battler->atk     = game_state.play_state.player.atk,
+	enemy_battler->def     = game_state.play_state.player.def,
+	enemy_battler->sprite->active_animation = DUDE_WALK_LEFT_INDEX;
+	
+	ww_scale_sprite(enemy_battler->sprite);
+	enemy_battler->sprite->pad_x = window_p->ww_default_width - enemy_battler->sprite->width;
+	enemy_battler->sprite->pad_y = (window_p->ww_default_height / 2) - (enemy_battler->sprite->height / 2);
+	
+	game_state.play_state.battle.battle_state_activity = BATTLE_STATE_BATTLE;
+	spiral_runs = 0;
+	
+}
+
+void process_battle_end(){
+	
+	battle_state_t battle_state = game_state.play_state.battle;
+	
+	free(battle_state.player_battler.sprite);
+	free(battle_state.enemy_battler.sprite);
+	
+	game_state.play_state.player.hp = battle_state.player_battler.hp;
+	
+	// TODO -- if player.hp == 0 -- PLAY_STATE_REST
+	
+	game_state.play_state.battle.battle_state_activity  = 0;
+	game_state.play_state.battle.player_battler.sprite  = NULL;
+	game_state.play_state.battle.player_battler.level   = 0;
+	game_state.play_state.battle.player_battler.max_hp  = 0;
+	game_state.play_state.battle.player_battler.hp      = 0;
+	game_state.play_state.battle.player_battler.speed   = 0;
+	game_state.play_state.battle.player_battler.baseatk = 0;
+	game_state.play_state.battle.player_battler.basedef = 0;
+	game_state.play_state.battle.player_battler.atk     = NULL;
+	game_state.play_state.battle.player_battler.def     = NULL;
+	game_state.play_state.battle.enemy_battler.sprite  = NULL;
+	game_state.play_state.battle.enemy_battler.level   = 0;
+	game_state.play_state.battle.enemy_battler.max_hp  = 0;
+	game_state.play_state.battle.enemy_battler.hp      = 0;
+	game_state.play_state.battle.enemy_battler.speed   = 0;
+	game_state.play_state.battle.enemy_battler.baseatk = 0;
+	game_state.play_state.battle.enemy_battler.basedef = 0;
+	game_state.play_state.battle.enemy_battler.atk     = NULL;
+	game_state.play_state.battle.enemy_battler.def     = NULL;
+	
+	game_state.play_state.map[game_state.play_state.player.x_pos][game_state.play_state.player.y_pos] = 0;
+	generate_event();
+	
+	game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+}
+
+void process_battle_battle(){
+	
+	battle_state_t battle_state = game_state.play_state.battle;
+	
+	ww_draw_sprite(battle_state.player_battler.sprite);
+	ww_draw_sprite(battle_state.enemy_battler.sprite);
+	
+}
+
+void process_battle(){
+	
+	battle_state_t battle_state = game_state.play_state.battle;
+	
+	switch (battle_state.battle_state_activity){
+		case BATTLE_STATE_INIT:
+			process_battle_init();
+			break;
+		case BATTLE_STATE_BATTLE:
+			process_battle_battle();	
+			break;
+		case BATTLE_STATE_XP:
+			ww_window_send_quit_event();
+			break;
+		case BATTLE_STATE_END:
+			process_battle_end();
+			break;
+	}
 	
 	// reset spiral_runs after a finished battle
 }
@@ -400,21 +520,15 @@ void process_play(){
 		case PLAY_STATE_BATTLE:
 			process_battle();
 			break;
-		case PLAY_STATE_DEFUP:
-			break;
-		case PLAY_STATE_DISTRACTION:
+		case PLAY_STATE_REST:
 			break;
 		case PLAY_STATE_EVENT:
-			break;
-		case PLAY_STATE_LEVELUP:
 			break;
 		case PLAY_STATE_MENU:
 			process_play_menu();
 			break;
 		case PLAY_STATE_ROAM:
 			process_roam();
-			break;
-		case PLAY_STATE_WEAPONUP:
 			break;
 	}
 
@@ -439,6 +553,8 @@ void process_state(){
 }
 
 void game_prop_init(){
+	
+	ww_window_s *window_p = (ww_window_s*) window;
 	
 	game_state.play_state.player.level     = 1;
 	game_state.play_state.player.max_hp    = 5;
@@ -467,29 +583,36 @@ void game_prop_init(){
 	game_state.play_state.player.y_pos     = MAP_HEIGHT / 2;
 	game_state.play_state.player.sub_x_pos = 240;
 	game_state.play_state.player.sub_y_pos = 240;
+	
 	game_state.options_menu_state.volume   = 5;
-	game_state.options_menu_state.scale    = SC_ONE;
+	game_state.options_menu_state.scale    = window_p->ww_scale;
+	
+	game_state.play_state.battle.battle_state_activity  = 0;
+	game_state.play_state.battle.player_battler.sprite  = NULL;
+	game_state.play_state.battle.player_battler.level   = 0;
+	game_state.play_state.battle.player_battler.max_hp  = 0;
+	game_state.play_state.battle.player_battler.hp      = 0;
+	game_state.play_state.battle.player_battler.speed   = 0;
+	game_state.play_state.battle.player_battler.baseatk = 0;
+	game_state.play_state.battle.player_battler.basedef = 0;
+	game_state.play_state.battle.player_battler.atk     = NULL;
+	game_state.play_state.battle.player_battler.def     = NULL;
+	game_state.play_state.battle.enemy_battler.sprite  = NULL;
+	game_state.play_state.battle.enemy_battler.level   = 0;
+	game_state.play_state.battle.enemy_battler.max_hp  = 0;
+	game_state.play_state.battle.enemy_battler.hp      = 0;
+	game_state.play_state.battle.enemy_battler.speed   = 0;
+	game_state.play_state.battle.enemy_battler.baseatk = 0;
+	game_state.play_state.battle.enemy_battler.basedef = 0;
+	game_state.play_state.battle.enemy_battler.atk     = NULL;
+	game_state.play_state.battle.enemy_battler.def     = NULL;
 	
 	// magic number for event density 1/36 units
 	for(int i = 0; i < 18; i++){
-		int event_x = rand() % MAP_WIDTH;
-		int event_y = rand() % MAP_HEIGHT;
-		
-		if( 
-			( event_x == game_state.play_state.player.x_pos && 
-			event_y == game_state.play_state.player.y_pos ) ||
-			game_state.play_state.map[event_x][event_y] == 1
-		){
-			// don't put an event on the player
-			// don't put an event where there is already an event
-			i--;
-			continue;
-		}
-		
-		game_state.play_state.map[event_x][event_y] = 1;
+		generate_event();
 	}
 	
-	// from here
+	// TODO -- from here
 	ground->paused = 1;
 	dude->pad_x = 360;
 	dude->pad_y = 80;
