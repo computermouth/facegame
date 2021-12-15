@@ -1,0 +1,19 @@
+
+animations:
+  - animation: Animation_0
+    frames:
+      - frame: Frame_0
+        delay: 2
+        layers:
+          - layer: Layer_0
+            color: "#04ff00"
+            x:
+              - 0
+              - 0
+              - 64
+              - 64
+            y:
+              - 0
+              - 64
+              - 64
+              - 0

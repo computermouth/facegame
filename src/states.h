@@ -20,7 +20,7 @@ typedef struct {
 	uint32_t basedef;
 	uint32_t atk[4];
 	uint32_t def[4];
-	uint32_t exp[9];
+	uint32_t exp[3][3];
 	int32_t x_pos;
 	int32_t y_pos;
 	int32_t sub_x_pos;

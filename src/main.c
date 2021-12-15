@@ -18,6 +18,7 @@
 #include "map_event.h"
 #include "spiral.h"
 #include "wiper.h"
+#include "xp_bit.h"
 
 #include "untitled.h"
 #include "buttons.h"
@@ -30,6 +31,7 @@ typedef enum { IDLE, WALK } movement;
 game_state_t game_state = { 0 };
 
 ww_sprite_t * ground_sprites[10][3];
+ww_sprite_t * xp_sprites[3][3];
 
 ww_sprite_t * dude = NULL;
 ww_sprite_t * sky = NULL;
@@ -69,10 +71,18 @@ void frees(){
 	free(dude);
 	free(sky);
 	free(spiral);
+	free(ground);
+	free(grass_decoration);
 	
 	for(int i = 0; i < 10; i++){
 		for(int j = 0; j < 3; j++){
 			free(ground_sprites[i][j]);
+		}
+	}
+	
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 3; j++){
+			free(xp_sprites[i][j]);
 		}
 	}
 }
@@ -452,8 +462,8 @@ void process_battle_end(){
 	
 	battle_state_t battle_state = game_state.play_state.battle;
 	
-	free(battle_state.player_battler.sprite);
-	free(battle_state.enemy_battler.sprite);
+	if(battle_state.player_battler.sprite != NULL) free(battle_state.player_battler.sprite);
+	if(battle_state.enemy_battler.sprite != NULL)  free(battle_state.enemy_battler.sprite);
 	
 	game_state.play_state.player.hp = battle_state.player_battler.hp;
 	
@@ -484,7 +494,117 @@ void process_battle_end(){
 	game_state.play_state.map[game_state.play_state.player.x_pos][game_state.play_state.player.y_pos] = 0;
 	generate_event();
 	
+	game_state.play_state.battle.battle_state_activity = BATTLE_STATE_INIT;
 	game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+}
+
+void process_xp_gain(){
+	
+	static int xp_x = 1;
+	static int xp_y = 1;
+	int old_xx = xp_x;
+	int old_xy = xp_y;
+	
+	       int phases[6]     = {  8, 12, 17, 27, 40, 120 };
+	static int tmp_phases[6] = {  8, 12, 17, 27, 40, 120 };
+	       int counts[6]     = { 10,  9,  7,  4,  2,   1 };
+	static int tmp_counts[6] = { 10,  9,  7,  4,  2,   1 };
+	static int mode = 0;
+	
+	tmp_phases[mode]--;
+	if(tmp_phases[mode] == 0){
+		tmp_phases[mode] = phases[mode];
+		tmp_counts[mode]--;
+
+		if(tmp_counts[mode] == 0)
+			mode++;
+		
+		while ( // move new xp bit every $phases frames
+			mode != 6 && (
+				game_state.play_state.player.exp[xp_x][xp_y] ||
+				((old_xx == xp_x) && (old_xy == xp_y))
+			)
+		){
+			xp_x = rand() % 3;
+			xp_y = rand() % 3;
+		}
+	}
+	
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 3; j++){
+			if (game_state.play_state.player.exp[i][j])
+				ww_draw_sprite(xp_sprites[i][j]);
+		}
+	}
+	
+	ww_draw_sprite(xp_sprites[xp_x][xp_y]);
+	
+	if(mode == 6){
+		game_state.play_state.player.exp[xp_x][xp_y] = 1;
+		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
+		mode = 0;
+		tmp_counts[0] = counts[0];
+		tmp_counts[1] = counts[1];
+		tmp_counts[2] = counts[2];
+		tmp_counts[3] = counts[3];
+		tmp_counts[4] = counts[4];
+		tmp_counts[5] = counts[5];
+		tmp_phases[0] = phases[0];
+		tmp_phases[1] = phases[1];
+		tmp_phases[2] = phases[2];
+	}
+	
+	if (
+		(// top row
+			game_state.play_state.player.exp[0][0] &&
+			game_state.play_state.player.exp[0][1] &&
+			game_state.play_state.player.exp[0][2]
+		) ||
+		(// middle row
+			game_state.play_state.player.exp[1][0] &&
+			game_state.play_state.player.exp[1][1] &&
+			game_state.play_state.player.exp[1][2]
+		) ||
+		(// bottom row
+			game_state.play_state.player.exp[2][0] &&
+			game_state.play_state.player.exp[2][1] &&
+			game_state.play_state.player.exp[2][2]
+		) ||
+		(// left column
+			game_state.play_state.player.exp[0][0] &&
+			game_state.play_state.player.exp[1][0] &&
+			game_state.play_state.player.exp[2][0]
+		) ||
+		(// middle column
+			game_state.play_state.player.exp[0][1] &&
+			game_state.play_state.player.exp[1][1] &&
+			game_state.play_state.player.exp[2][1]
+		) ||
+		(// right column
+			game_state.play_state.player.exp[0][2] &&
+			game_state.play_state.player.exp[1][2] &&
+			game_state.play_state.player.exp[2][2]
+		) ||
+		(// tl -> br
+			game_state.play_state.player.exp[0][0] &&
+			game_state.play_state.player.exp[1][1] &&
+			game_state.play_state.player.exp[2][2]
+		) ||
+		(// tr -> bl
+			game_state.play_state.player.exp[0][2] &&
+			game_state.play_state.player.exp[1][1] &&
+			game_state.play_state.player.exp[2][0]
+		)
+	) {
+		for(int i = 0; i < 3; i++)
+			for(int j = 0; j < 3; j++)
+				game_state.play_state.player.exp[i][j] = 0;
+		
+		game_state.play_state.player.level  +=  1;
+		game_state.play_state.player.hp     += 10;
+		game_state.play_state.player.max_hp += 10;
+	}
+	
 }
 
 void process_battle_battle(){
@@ -553,7 +673,7 @@ void process_battle(){
 			process_battle_battle();	
 			break;
 		case BATTLE_STATE_XP:
-			game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
+			process_xp_gain();
 			break;
 		case BATTLE_STATE_END:
 			process_battle_end();
@@ -619,15 +739,15 @@ void game_prop_init(){
 	game_state.play_state.player.def[1]    = 0;
 	game_state.play_state.player.def[2]    = 0;
 	game_state.play_state.player.def[3]    = 1;
-	game_state.play_state.player.exp[0]    = 0;
-	game_state.play_state.player.exp[1]    = 0;
-	game_state.play_state.player.exp[2]    = 0;
-	game_state.play_state.player.exp[3]    = 0;
-	game_state.play_state.player.exp[4]    = 0;
-	game_state.play_state.player.exp[5]    = 0;
-	game_state.play_state.player.exp[6]    = 0;
-	game_state.play_state.player.exp[7]    = 0;
-	game_state.play_state.player.exp[8]    = 0;
+	game_state.play_state.player.exp[0][0] = 0;
+	game_state.play_state.player.exp[0][1] = 0;
+	game_state.play_state.player.exp[0][2] = 0;
+	game_state.play_state.player.exp[1][0] = 0;
+	game_state.play_state.player.exp[1][1] = 0;
+	game_state.play_state.player.exp[1][2] = 0;
+	game_state.play_state.player.exp[2][0] = 0;
+	game_state.play_state.player.exp[2][1] = 0;
+	game_state.play_state.player.exp[2][2] = 0;
 	game_state.play_state.player.x_pos     = MAP_WIDTH  / 2;
 	game_state.play_state.player.y_pos     = MAP_HEIGHT / 2;
 	game_state.play_state.player.sub_x_pos = 240;
@@ -661,7 +781,7 @@ void game_prop_init(){
 		generate_event();
 	}
 	
-	// TODO -- from here
+	// defaults on load
 	ground->paused = 1;
 	dude->pad_x = 360;
 	dude->pad_y = 80;
@@ -670,6 +790,7 @@ void game_prop_init(){
 	if (mov == WALK)
 		anim += 4;
 	
+	// populate grass doodads
 	for(int i = 0; i < 10; i++){
 		for(int j = 0; j < 3; j++){
 			ground_sprites[i][j] = ww_clone_sprite(grass_decoration);
@@ -683,7 +804,17 @@ void game_prop_init(){
 			}
 		}
 	}
-	// to here, should go somewhere else
+	
+	int offset[3] = { -1, 0 , 1 };
+	// xp bits
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 3; j++){
+			xp_sprites[i][j] = ww_new_sprite(XP_BIT);
+			ww_scale_sprite(xp_sprites[i][j]);
+			xp_sprites[i][j]->pad_x = (1024 / 2) - xp_sprites[i][j]->width  / 2 + (offset[i] * 128);
+			xp_sprites[i][j]->pad_y = (576 / 2)  - xp_sprites[i][j]->height / 2 + (offset[j] * 128);
+		}
+	}
 	
 }
 
