@@ -16,22 +16,46 @@ int main(const int argc, const char **argv)
 	
 	//~ printf("%x\n", ok);
 	
+	//~ typedef struct {
+		//~ int count;
+		//~ short ** arrays;
+	//~ } ww_font_char_t;
+	
 	init_font_table();
 	
-	for(int i = 'A'; i < 'Z' +  1; i++){
-		char some[10];
+	printf("{\n");
+	
+	for(int i = 0; i < 256; i++){
+		
+		if (font_lookup[i] == -1 ){
+			printf("\t{ 0 },\t// %02x\n", i);
+			continue;
+		}
+		
+		char some[2];
+		printf("\t{\t// %c\n", i);
 		sprintf(some, "%c", i);
 		ww_sprite_t * asprite = sprite_from_string(some);
+		printf("\n\t},\n");
 	}
 	
-	for(int i = '0'; i < '9' +  1; i++){
-		char some[10];
-		sprintf(some, "%c", i);
-		ww_sprite_t * asprite = sprite_from_string(some);
-	}
+	//~ for(int i = '0'; i < '9' +  1; i++){
+		//~ char some[2];
+		//~ printf("\t{\t\\\\ %c\n", i);
+		//~ sprintf(some, "%c", i);
+		//~ ww_sprite_t * asprite = sprite_from_string(some);
+		//~ printf("\n\t},\n");
+	//~ }
 	
-	ww_sprite_t * a = sprite_from_string(".");
-	ww_sprite_t * b = sprite_from_string("!");
+		//~ printf("\t{\t\\\\ %c\n", '.');
+	//~ ww_sprite_t * a = sprite_from_string(".");
+		//~ printf("\n\t},\n");
+		//~ printf("\t{\t\\\\ %c\n", '!');
+	//~ ww_sprite_t * b = sprite_from_string("!");
+		//~ printf("\n\t},\n");
+	
+	printf("};");
+	
 	//~ ww_sprite_t * b = sprite_from_string("A");
 	//~ free(b);
 	

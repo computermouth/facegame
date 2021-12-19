@@ -238,7 +238,7 @@ const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	(0x08 << 12)   // 1000
 };
 
-unsigned char font_lookup[256];
+short font_lookup[256] = { -1 };
 
 const short horizontals[4][2][4] = {
 	// 1
@@ -266,6 +266,9 @@ const short horizontals[4][2][4] = {
 // set whole table to -1
 // set the following programattically
 void init_font_table(){
+	
+	memset(font_lookup, -1, sizeof(short) * 256);
+	
 	font_lookup['A'] =  0;
 	font_lookup['B'] =  1;
 	font_lookup['C'] =  2;
@@ -475,27 +478,24 @@ ww_sprite_t * sprite_from_string(char * input){
 			free(fc.arrays[j * 2 - 1]);
 		}
 		
-		
-		printf("static fontchar_t fc_%c = {\n", input[i]);
-		printf("\t.count = %d,\n", fc.lines);
-		printf("\t.array = (short*[]){\n");
+		printf("\t\t.count = %d,\n", fc.lines);
+		printf("\t\t.arrays = (short*[]){\n");
 		for(int j = 1; j < fc.lines + 1; j++){
-			printf("\t\t(short[]){ %d, %d, %d, %d },\n",
+			printf("\t\t\t(short[]){ %d, %d, %d, %d },\n",
 				ref.arrays[(total_lines + j) * 2 - 2][0],
 				ref.arrays[(total_lines + j) * 2 - 2][1],
 				ref.arrays[(total_lines + j) * 2 - 2][2],
 				ref.arrays[(total_lines + j) * 2 - 2][3]
 			);
-			printf("\t\t(short[]){ %d, %d, %d, %d }",
+			printf("\t\t\t(short[]){ %d, %d, %d, %d }",
 				ref.arrays[(total_lines + j) * 2 - 1][0],
 				ref.arrays[(total_lines + j) * 2 - 1][1],
 				ref.arrays[(total_lines + j) * 2 - 1][2],
 				ref.arrays[(total_lines + j) * 2 - 1][3]
 			);
 			if (j != fc.lines) printf(",\n\n");
-			//~ printf("\n\t}\n");
 		}
-		printf("\n\t}\n};\n\n");
+			printf("\n\t\t}");
 		
 		/*
 		printf("#define      FONT_%c_POLYGON_COUNT %d\n", input[i], fc.lines);

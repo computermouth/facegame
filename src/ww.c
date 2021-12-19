@@ -863,6 +863,7 @@ ww_sprite_t * ww_new_sprite(ww_reference_t payload){
 			c += sizeof(ww_polygon_t) * payload.polygons[pstride];
 			
 			for(int p = 0; p < payload.polygons[pstride]; p++){
+				printf("ok1\n");
 				
 				s->animations[a].frames[f].polys[p].count = payload.vertices[vstride];
 				s->animations[a].frames[f].polys[p].ratio = 1.0;
@@ -870,29 +871,44 @@ ww_sprite_t * ww_new_sprite(ww_reference_t payload){
 				//~ s->animations[a].frames[f].polys[p].s_scale = 1.0; // ensures rescale on first draw
 				s->animations[a].frames[f].polys[p].scale = 1.0;
 				memcpy(s->animations[a].frames[f].polys[p].color, payload.colors[vstride], sizeof(ww_rgba_t));
+				printf("ok2\n");
 				
 				//~ printf("pre-x     -- curr: %p anim: %d  fram: %d poly: %d xory: x\n", c, a, f, p);
 				s->animations[a].frames[f].polys[p].x = (void *)c;
+				printf("ok2.1\n");
+				printf("payload.vertices[vstride]: %d\n", payload.vertices[vstride]);
+				printf("ok2.1\n");
+				printf("payload.arrays[astride]: %p\n", payload.arrays[astride]);
+				printf("payload.arrays[astride][0]: %d\n", payload.arrays[astride][0]);
+				printf("payload.arrays[astride][1]: %d\n", payload.arrays[astride][1]);
+				printf("payload.arrays[astride][2]: %d\n", payload.arrays[astride][2]);
+				printf("payload.arrays[astride][3]: %d\n", payload.arrays[astride][3]);
 				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
+				printf("ok2.2\n");
 				c += sizeof(short) * payload.vertices[vstride];
+				printf("ok3\n");
 				
 				//~ printf("pre-scalX -- curr: %p anim: %d  fram: %d poly: %d xory: x\n", c, a, f, p);
 				s->animations[a].frames[f].polys[p].scaled_x = (void *)c;
 				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
 				c += sizeof(short) * payload.vertices[vstride];
+				printf("ok4\n");
 				
 				astride++;
 				//~ printf("pre-y     -- curr: %p anim: %d  fram: %d poly: %d xory: y\n", c, a, f, p);
 				s->animations[a].frames[f].polys[p].y = (void *)c;
 				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
 				c += sizeof(short) * payload.vertices[vstride];
+				printf("ok5\n");
 				
 				//~ printf("pre-scalY -- curr: %p anim: %d  fram: %d poly: %d xory: y\n", c, a, f, p);
 				s->animations[a].frames[f].polys[p].scaled_y = (void *)c;
 				memcpy(c, payload.arrays[astride], sizeof(short) * payload.vertices[vstride]);
 				c += sizeof(short) * payload.vertices[vstride];
+				printf("ok6\n");
 				
 				ww_scale_polygon(&s->animations[a].frames[f].polys[p]);
+				printf("ok7\n");
 				
 				vstride++;
 				astride++;
