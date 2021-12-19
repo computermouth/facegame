@@ -1,0 +1,79 @@
+
+animations:
+  - animation: Animation_0
+    frames:
+      - frame: Frame_0
+        delay: 2
+        layers:
+          - layer: l1_single
+            color: "#000000"
+            x:
+              - 0
+              - 4
+              - 4
+              - 0
+            y:
+              - 0 
+              - 0 
+              - 1 
+              - 1
+          - layer: l2_left
+            color: "#000000"
+            x:
+              - 0 
+              - 1 
+              - 1 
+              - 0
+            y:
+              - 1 
+              - 1 
+              - 2 
+              - 2
+          - layer: l2_right
+            color: "#000000"
+            x:
+              - 3 
+              - 4 
+              - 4 
+              - 3
+            y:
+              - 1 
+              - 1 
+              - 2 
+              - 2
+          - layer: l3_single
+            color: "#000000"
+            x:
+              - 0
+              - 4
+              - 4
+              - 0
+            y:
+              - 2
+              - 2
+              - 3
+              - 3
+          - layer: l4_left
+            color: "#000000"
+            x:
+              - 0
+              - 1
+              - 1
+              - 0
+            y:
+              - 3
+              - 3
+              - 4
+              - 4
+          - layer: l4_right
+            color: "#000000"
+            x:
+              - 3
+              - 4
+              - 4
+              - 3
+            y:
+              - 3
+              - 3
+              - 4
+              - 4

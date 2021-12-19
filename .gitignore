@@ -7,3 +7,4 @@ img/**/*.c
 tools/yaml2struct/yaml2struct
 test.mp
 facegame.opk
+fontgen/a.out
