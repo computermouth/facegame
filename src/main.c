@@ -49,9 +49,7 @@ ww_sprite_t * pause_menu = NULL;
 ww_sprite_t * map_event = NULL;
 ww_sprite_t * spiral = NULL;
 
-ww_sprite_t * textA = NULL;
-ww_sprite_t * textS1 = NULL;
-ww_sprite_t * textS2 = NULL;
+ww_sprite_t * gamename = NULL;
 
 void inits(){
 	
@@ -69,19 +67,12 @@ void inits(){
 	map_event = ww_new_sprite(MAP_EVENT);
 	spiral = ww_new_sprite(SPIRAL);
 	
-	textA = ww_new_sprite_from_string("A", (ww_rgba_t){255, 127, 0});
-	textA->scale = 10.0;
-	ww_scale_sprite(textA);
-	
-	textS1 = ww_new_sprite_from_string("S", (ww_rgba_t){0, 255, 127});
-	textS1->scale = 10.0;
-	textS1->pad_x = 60;
-	ww_scale_sprite(textS1);
-	
-	textS2 = ww_new_sprite_from_string("S", (ww_rgba_t){127, 0, 255});
-	textS2->scale = 10.0;
-	textS2->pad_x = 120;
-	ww_scale_sprite(textS2);
+	gamename = ww_new_sprite_from_string("THIS IS A GAME", (ww_rgba_t){127, 127, 255});
+	gamename->scale = 8.0;
+	ww_scale_sprite(gamename);
+	printf("gamename->width: %d\n", gamename->width);
+	gamename->pad_x = (1024 / 2) - (gamename->width  * gamename->scale)  / 2;
+	gamename->pad_y = (576 / 4)  - (gamename->height * gamename->scale)  / 2;
 }
 
 void frees(){
@@ -150,9 +141,8 @@ void process_top_menu(){
 	ww_draw_sprite(title);
 	ww_draw_sprite(buttons);
 	ww_draw_sprite(selector);
-	ww_draw_sprite(textA);
-	ww_draw_sprite(textS1);
-	ww_draw_sprite(textS2);
+	
+	ww_draw_sprite(gamename);
 	
 }
 
@@ -863,7 +853,7 @@ int main( int argc, char * argv[] ) {
 		//~ }
 	//~ }
 	
-	inits();
+	inits();	
 	game_prop_init();
 	
 	// primary loop
