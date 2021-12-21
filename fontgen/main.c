@@ -39,21 +39,6 @@ int main(const int argc, const char **argv)
 		printf("\n\t},\n");
 	}
 	
-	//~ for(int i = '0'; i < '9' +  1; i++){
-		//~ char some[2];
-		//~ printf("\t{\t\\\\ %c\n", i);
-		//~ sprintf(some, "%c", i);
-		//~ ww_sprite_t * asprite = sprite_from_string(some);
-		//~ printf("\n\t},\n");
-	//~ }
-	
-		//~ printf("\t{\t\\\\ %c\n", '.');
-	//~ ww_sprite_t * a = sprite_from_string(".");
-		//~ printf("\n\t},\n");
-		//~ printf("\t{\t\\\\ %c\n", '!');
-	//~ ww_sprite_t * b = sprite_from_string("!");
-		//~ printf("\n\t},\n");
-	
 	printf("};");
 	
 	//~ ww_sprite_t * b = sprite_from_string("A");

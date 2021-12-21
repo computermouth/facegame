@@ -7,6 +7,16 @@
 
 #include "a.h"
 
+// u64{	 ( 0x0C      ) // 00001100
+//		 ( 0x1E << 8 ) // 00011110
+//		 ( 0x33 << 16) // 00110011 
+//		 ( 0x63 << 24) // 01100011
+//		 ( 0xFE << 32) // 11111110
+//		 ( 0xFE << 40) // 11111110
+//		 ( 0xC6 << 48) // 11000110
+//		 ( 0xC6 << 56) // 11000110
+//    },
+
 const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	
 	// A
@@ -14,7 +24,7 @@ const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	(0x09 << 4 ) | // 1001
 	(0x0F << 8 ) | // 1111
 	(0x09 << 12),  // 1001
-	
+		
 	// B
 	(0x0F      ) | // 1111
 	(0x0E << 4 ) | // 1110
@@ -31,7 +41,7 @@ const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	(0x0E      ) | // 1110
 	(0x09 << 4 ) | // 1001
 	(0x09 << 8 ) | // 1001
-	(0x09 << 12),  // 1110
+	(0x0E << 12),  // 1110
 	
 	// E
 	(0x0F      ) | // 1111
@@ -43,7 +53,7 @@ const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	(0x0F      ) | // 1111
 	(0x0E << 4 ) | // 1110
 	(0x08 << 8 ) | // 1000
-	(0x0F << 12),  // 1111
+	(0x08 << 12),  // 1111
 	
 	// G
 	(0x0F      ) | // 1111
@@ -221,9 +231,9 @@ const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	
 	// 9
 	(0x07      ) | // 0111
-	(0x0D << 4 ) | // 1101
-	(0x0B << 8 ) | // 1011
-	(0x0E << 12),  // 1110
+	(0x05 << 4 ) | // 0101
+	(0x03 << 8 ) | // 0011
+	(0x0C << 12),  // 1100
 	
 	// .
 	(0x00      ) | // 0000
@@ -327,22 +337,23 @@ font_char_t get_font_char(unsigned char input, int index){
 	
 	for(int i = 0; i < 4; i++){
 		unsigned char nib = (output_char >> i * 4) % 0x10;
-		//~ printf("nib: %02x\n", nib);
-		
 		//~ unsigned char bits[4];
 		int size = 0;
 		for(int j = 0; j < 5; j++) {
+			
+			//~ printf("nib: %02x j: %02x shift: %02x\n", nib, nib & (0x08 >> j), (nib & (0x08 >> j)) );
+			//~ printf("    set: %d\n", (nib & (0x08 >> j)) > 0 );
 			
 			// start line
 			if ( nib & ( 0x08 >> j) && j < 5) {
 				
 				if (size == 0){
 					rc.lines++;
-					//~ printf("bit is yes, rc.lines++\n");
+					//~ printf("nib[%d]: %02x bit is %d, rc.lines++\n", j);
 				}
 				size++;
 			}
-			
+		
 			//~ int end = 0;
 			//~ if (j == 3 || !(nib & ( 0x08 >> j)))
 				//~ end = 1;
@@ -387,7 +398,7 @@ font_char_t get_font_char(unsigned char input, int index){
 				}
 				//~ printf("\n");
 				
-				j++;
+				//~ j++;
 				
 				//~ printf("\nfinal size: %d\n", size);
 				size = 0;
