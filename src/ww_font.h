@@ -223,7 +223,7 @@ static const ww_font_char_t font_chars[256] = {
 		}
 	},
 	{	// 8
-		.count = 5,
+		.count = 6,
 		.arrays = (short*[]){
 			(short[]){ 1, 4, 4, 1 },
 			(short[]){ 0, 0, 1, 1 },
@@ -231,10 +231,13 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 0, 2, 2, 0 },
 			(short[]){ 1, 1, 2, 2 },
 
+			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 1, 1, 2, 2 },
+
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 2, 2, 3, 3 },
 
 			(short[]){ 0, 3, 3, 0 },
@@ -247,16 +250,16 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 1, 4, 4, 1 },
 			(short[]){ 0, 0, 1, 1 },
 
-			(short[]){ 0, 2, 2, 0 },
+			(short[]){ 1, 2, 2, 1 },
 			(short[]){ 1, 1, 2, 2 },
 
-			(short[]){ 0, 1, 1, 0 },
-			(short[]){ 2, 2, 3, 3 },
-
 			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 1, 1, 2, 2 },
+
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 0, 3, 3, 0 },
+			(short[]){ 0, 2, 2, 0 },
 			(short[]){ 3, 3, 4, 4 }
 		}
 	},
@@ -271,7 +274,6 @@ static const ww_font_char_t font_chars[256] = {
 		.count = 6,
 		.arrays = (short*[]){
 			(short[]){ 0, 4, 4, 0 },
-			//~ (short[]){ 12, 13, 14, 15 },
 			(short[]){ 0, 0, 1, 1 },
 
 			(short[]){ 0, 1, 1, 0 },
@@ -326,7 +328,7 @@ static const ww_font_char_t font_chars[256] = {
 		}
 	},
 	{	// D
-		.count = 7,
+		.count = 6,
 		.arrays = (short*[]){
 			(short[]){ 0, 3, 3, 0 },
 			(short[]){ 0, 0, 1, 1 },
@@ -343,10 +345,7 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 3, 4, 4, 3 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 0, 1, 1, 0 },
-			(short[]){ 3, 3, 4, 4 },
-
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 0, 3, 3, 0 },
 			(short[]){ 3, 3, 4, 4 }
 		}
 	},
@@ -378,7 +377,7 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 0, 4, 4, 0 },
+			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 3, 3, 4, 4 }
 		}
 	},
@@ -511,13 +510,13 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 1, 1, 2, 2 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 1, 1, 2, 2 },
 
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 2, 2, 3, 3 },
 
 			(short[]){ 0, 1, 1, 0 },
@@ -528,15 +527,18 @@ static const ww_font_char_t font_chars[256] = {
 		}
 	},
 	{	// N
-		.count = 7,
+		.count = 8,
 		.arrays = (short*[]){
 			(short[]){ 0, 2, 2, 0 },
+			(short[]){ 0, 0, 1, 1 },
+
+			(short[]){ 3, 4, 4, 3 },
 			(short[]){ 0, 0, 1, 1 },
 
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 1, 1, 2, 2 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 1, 1, 2, 2 },
 
 			(short[]){ 0, 1, 1, 0 },
@@ -608,7 +610,7 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 2, 2, 3, 3 },
 
 			(short[]){ 0, 4, 4, 0 },
@@ -616,7 +618,7 @@ static const ww_font_char_t font_chars[256] = {
 		}
 	},
 	{	// R
-		.count = 5,
+		.count = 6,
 		.arrays = (short*[]){
 			(short[]){ 0, 4, 4, 0 },
 			(short[]){ 0, 0, 1, 1 },
@@ -631,6 +633,9 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 2, 2, 3, 3 },
 
 			(short[]){ 0, 1, 1, 0 },
+			(short[]){ 3, 3, 4, 4 },
+
+			(short[]){ 2, 3, 3, 2 },
 			(short[]){ 3, 3, 4, 4 }
 		}
 	},
@@ -728,13 +733,13 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 1, 1, 2, 2 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 1, 1, 2, 2 },
 
 			(short[]){ 0, 1, 1, 0 },
 			(short[]){ 2, 2, 3, 3 },
 
-			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 2, 4, 4, 2 },
 			(short[]){ 2, 2, 3, 3 },
 
 			(short[]){ 0, 4, 4, 0 },

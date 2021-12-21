@@ -39,7 +39,7 @@ ww_sprite_t * ww_new_sprite_from_string(char * input, ww_rgba_t color){
 		
 		ww_font_char_t fc = font_chars[ic];
 		if (fc.count == 0){
-			printf("char [%c -- %02x] not found\n", ic, ic);
+			printf("char [%c -- %02x]\n", ic, ic);
 			continue;
 		}
 		
@@ -75,7 +75,7 @@ ww_sprite_t * ww_new_sprite_from_string(char * input, ww_rgba_t color){
 			//~ printf("des[j]: %p\n", ref.arrays[j]);
 			memcpy(ref.arrays[j], fc.arrays[b], sizeof(short) * CHAR_PIXEL_WIDTH);
 			for(int k = 0; k < CHAR_PIXEL_WIDTH && j % 2 == 0; k++){
-				ref.arrays[j][k] += (CHAR_PIXEL_WIDTH + 1) * i;
+				ref.arrays[j][k] += (CHAR_PIXEL_WIDTH + 2) * i;
 			}
 			b++;
 			//~ printf("ref.arrays[j][0]: %d\n", ref.arrays[j][0]);

@@ -50,6 +50,8 @@ ww_sprite_t * map_event = NULL;
 ww_sprite_t * spiral = NULL;
 
 ww_sprite_t * gamename = NULL;
+ww_sprite_t * alpha1 = NULL;
+ww_sprite_t * alpha2 = NULL;
 
 void inits(){
 	
@@ -67,12 +69,21 @@ void inits(){
 	map_event = ww_new_sprite(MAP_EVENT);
 	spiral = ww_new_sprite(SPIRAL);
 	
-	gamename = ww_new_sprite_from_string("THIS IS A GAME", (ww_rgba_t){127, 127, 255});
-	gamename->scale = 8.0;
+	gamename = ww_new_sprite_from_string("GAME", (ww_rgba_t){127, 127, 255});
+	gamename->scale = 16.0;
 	ww_scale_sprite(gamename);
 	printf("gamename->width: %d\n", gamename->width);
 	gamename->pad_x = (1024 / 2) - (gamename->width  * gamename->scale)  / 2;
 	gamename->pad_y = (576 / 4)  - (gamename->height * gamename->scale)  / 2;
+	
+	alpha1 = ww_new_sprite_from_string("ABCDEFGHIJKLMNOPQRS", (ww_rgba_t){255, 127, 0});
+	alpha1->scale = 9.0;
+	ww_scale_sprite(alpha1);	
+	
+	alpha2 = ww_new_sprite_from_string("TUVWXYZ0123456789.!", (ww_rgba_t){255, 127, 0});
+	alpha2->scale = 9.0;
+	ww_scale_sprite(alpha2);
+	alpha2->pad_y = (alpha1->height * alpha1->scale) * 1.5;
 }
 
 void frees(){
@@ -143,6 +154,8 @@ void process_top_menu(){
 	ww_draw_sprite(selector);
 	
 	ww_draw_sprite(gamename);
+	ww_draw_sprite(alpha1);
+	ww_draw_sprite(alpha2);
 	
 }
 
@@ -844,14 +857,14 @@ int main( int argc, char * argv[] ) {
 		return 1;
 	}
 	
-	//~ if ( verify_or_create_save(&game_state) != 0 ){
-		//~ printf("E: failed to locate or create save file\n");
-		//~ return 1;
-	//~ } else {
-		//~ if ( mload(&game_state) != 0 ){
-			//~ return 1;
-		//~ }
-	//~ }
+	if ( verify_or_create_save(&game_state) != 0 ){
+		printf("E: failed to locate or create save file\n");
+		return 1;
+	} else {
+		if ( mload(&game_state) != 0 ){
+			return 1;
+		}
+	}
 	
 	inits();	
 	game_prop_init();
