@@ -2,8 +2,6 @@
 #include "ww.h"
 #include "ww_font.h"
 
-#include "a.h"
-
 #define CHAR_PIXEL_WIDTH 4
 
 ww_sprite_t * ww_new_sprite_from_string(char * input, ww_rgba_t color){
@@ -34,12 +32,10 @@ ww_sprite_t * ww_new_sprite_from_string(char * input, ww_rgba_t color){
 	for(int i = 0; i < len; i++){
 		
 		unsigned char ic = input[i];
-		if (ic == ' ')
-			continue;
 		
 		ww_font_char_t fc = font_chars[ic];
 		if (fc.count == 0){
-			printf("char [%c -- %02x]\n", ic, ic);
+			//~ printf("char ['%c' -- %02x]\n", ic, ic);
 			continue;
 		}
 		

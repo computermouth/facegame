@@ -29,12 +29,16 @@
 #include "selector.h"
 #include "title.h"
 
+#define WINDOW_WIDTH  1024
+#define WINDOW_HEIGHT 576
+
 typedef enum { DOWN, LEFT, RIGHT, UP } direction;
 typedef enum { IDLE, WALK } movement;
 
 game_state_t game_state = { 0 };
 
 ww_sprite_t * ground_sprites[10][3];
+ww_sprite_t * xp_slots[3][3];
 ww_sprite_t * xp_sprites[3][3];
 
 ww_sprite_t * dude = NULL;
@@ -53,7 +57,17 @@ ww_sprite_t * gamename = NULL;
 ww_sprite_t * alpha1 = NULL;
 ww_sprite_t * alpha2 = NULL;
 
+ww_sprite_t * text_level_up = NULL;
+ww_sprite_t * text_xp_gain = NULL;
+
+ww_sprite_t * ok = NULL;
+
 void inits(){
+	
+	ok = ww_new_sprite(XP_BIT);
+	ww_scale_sprite(ok);
+	ok->pad_x = WINDOW_WIDTH - ok->width;
+	ww_scale_sprite(ok);
 	
 	dude = ww_new_sprite(DUDE);
 	sky = ww_new_sprite(SKY);
@@ -72,31 +86,51 @@ void inits(){
 	gamename = ww_new_sprite_from_string("GAME", (ww_rgba_t){127, 127, 255});
 	gamename->scale = 16.0;
 	ww_scale_sprite(gamename);
-	printf("gamename->width: %d\n", gamename->width);
-	gamename->pad_x = (1024 / 2) - (gamename->width  * gamename->scale)  / 2;
-	gamename->pad_y = (576 / 4)  - (gamename->height * gamename->scale)  / 2;
+	gamename->pad_x = (WINDOW_WIDTH  / 2) - (gamename->width  / 2);
+	gamename->pad_y = (WINDOW_HEIGHT / 4) - (gamename->height / 2);
 	
 	alpha1 = ww_new_sprite_from_string("ABCDEFGHIJKLMNOPQRS", (ww_rgba_t){255, 127, 0});
 	alpha1->scale = 9.0;
-	ww_scale_sprite(alpha1);	
+	ww_scale_sprite(alpha1);
 	
 	alpha2 = ww_new_sprite_from_string("TUVWXYZ0123456789.!", (ww_rgba_t){255, 127, 0});
 	alpha2->scale = 9.0;
 	ww_scale_sprite(alpha2);
-	alpha2->pad_y = (alpha1->height * alpha1->scale) * 1.5;
+	alpha2->pad_y = (alpha1->height) * 1.25;
+	
+	text_level_up = ww_new_sprite_from_string("LEVEL UP!!!", (ww_rgba_t){0, 255, 127});
+	text_level_up->scale = 10.0;
+	ww_scale_sprite(text_level_up);
+	text_level_up->pad_x = (WINDOW_WIDTH / 2 )     - (text_level_up->width  / 2);
+	text_level_up->pad_y = (WINDOW_HEIGHT / 4) * 3 - (text_level_up->height / 2);
+	
+	text_xp_gain = ww_new_sprite_from_string("XP", (ww_rgba_t){255, 255, 0});
+	text_xp_gain->scale = 8.0;
+	ww_scale_sprite(text_xp_gain);
+	text_xp_gain->pad_x = (WINDOW_WIDTH / 2) - (text_xp_gain->width / 2);
+	text_xp_gain->pad_y = text_xp_gain->height;
 }
 
 void frees(){
+	
+	free(dude);
+	free(sky);
+	free(ground);
+	free(grass_decoration);
+	
 	free(untitled);
 	free(buttons);
 	free(selector);
 	free(title);
 	
-	free(dude);
-	free(sky);
+	free(pause_menu);
+	free(map_event);
 	free(spiral);
-	free(ground);
-	free(grass_decoration);
+	
+	free(gamename);
+	free(alpha1);
+	free(alpha2);
+	free(text_level_up);
 	
 	for(int i = 0; i < 10; i++){
 		for(int j = 0; j < 3; j++){
@@ -107,6 +141,12 @@ void frees(){
 	for(int i = 0; i < 3; i++){
 		for(int j = 0; j < 3; j++){
 			free(xp_sprites[i][j]);
+		}
+	}
+	
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 3; j++){
+			free(xp_slots[i][j]);
 		}
 	}
 }
@@ -152,11 +192,9 @@ void process_top_menu(){
 	ww_draw_sprite(title);
 	ww_draw_sprite(buttons);
 	ww_draw_sprite(selector);
-	
 	ww_draw_sprite(gamename);
 	ww_draw_sprite(alpha1);
 	ww_draw_sprite(alpha2);
-	
 }
 
 int process_play_menu_esc_previous_frame_value = 1;
@@ -443,9 +481,7 @@ void process_battle_init(){
 		return;
 	}
 	
-	
-	
-	ww_window_s *window_p = (ww_window_s*) window;
+	//~ ww_window_s *window_p = (ww_window_s*) window;
 	
 	battler_t *player_battler = &game_state.play_state.battle.player_battler;
 	player_battler->sprite    = ww_new_sprite(DUDE),
@@ -462,7 +498,7 @@ void process_battle_init(){
 	player_battler->sprite->pad_x = 0;
 	
 	ww_scale_sprite(player_battler->sprite);
-	player_battler->sprite->pad_y = (window_p->ww_default_height / 2) - (player_battler->sprite->height / 2);
+	player_battler->sprite->pad_y = (WINDOW_HEIGHT / 2) - (player_battler->sprite->height / 2);
 	
 	battler_t *enemy_battler = &game_state.play_state.battle.enemy_battler; // TODO, actually generate enemy
 	enemy_battler->sprite    = ww_new_sprite(DUDE),
@@ -478,8 +514,8 @@ void process_battle_init(){
 	enemy_battler->sprite->active_animation = DUDE_WALK_LEFT_INDEX;
 	
 	ww_scale_sprite(enemy_battler->sprite);
-	enemy_battler->sprite->pad_x = window_p->ww_default_width - enemy_battler->sprite->width;
-	enemy_battler->sprite->pad_y = (window_p->ww_default_height / 2) - (enemy_battler->sprite->height / 2);
+	enemy_battler->sprite->pad_y = (WINDOW_HEIGHT / 2) - (enemy_battler->sprite->height / 2);
+	enemy_battler->sprite->pad_x = WINDOW_WIDTH - enemy_battler->sprite->width;
 	
 	game_state.play_state.battle.battle_state_activity = BATTLE_STATE_BATTLE;
 	spiral_runs = 0;
@@ -560,6 +596,7 @@ void process_xp_gain(){
 	
 	for(int i = 0; i < 3; i++){
 		for(int j = 0; j < 3; j++){
+			ww_draw_sprite(xp_slots[i][j]);
 			if (game_state.play_state.player.exp[i][j])
 				ww_draw_sprite(xp_sprites[i][j]);
 		}
@@ -633,28 +670,33 @@ void process_xp_gain(){
 		game_state.play_state.player.max_hp += 10;
 	}
 	
+	ww_draw_sprite(text_xp_gain);
+	
 }
 
 void process_battle_battle(){
+		
+	static int player_atk_stick = 0;
+	static int enemy_atk_stick = 0;
 	
 	battle_state_t *battle_state = &game_state.play_state.battle;
 	
 	// end battle
 	if (battle_state->player_battler.hp == 0) {
 		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
-		printf("player dies\n");
+		player_atk_stick = 0;
+		enemy_atk_stick = 0;
 		return;
 	} else if (battle_state->enemy_battler.hp == 0) {
 		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_XP;
-		printf("enemy dies\n");
+		player_atk_stick = 0;
+		enemy_atk_stick = 0;
 		return;
 	}
 	
-	static int player_atk_stick = 0;
-	static int enemy_atk_stick = 0;
-	
 	// reset positions from attacks
-	ww_window_s *window_p = (ww_window_s*) window;
+	battler_t *enemy_battler = &game_state.play_state.battle.enemy_battler;
+	
 	if (player_atk_stick != 0)
 		player_atk_stick--;
 	else
@@ -662,9 +704,10 @@ void process_battle_battle(){
 		
 	if (enemy_atk_stick != 0)
 		enemy_atk_stick--;
-	else
-		battle_state->enemy_battler.sprite->pad_x = window_p->ww_default_width - battle_state->enemy_battler.sprite->width;
-	
+	else {
+		enemy_battler->sprite->pad_x = WINDOW_WIDTH - enemy_battler->sprite->width;
+	}
+			
 	// perform attack
 	battle_state->player_battler.tmp_speed--;
 	if (battle_state->player_battler.tmp_speed == 0) {
@@ -838,9 +881,19 @@ void game_prop_init(){
 	for(int i = 0; i < 3; i++){
 		for(int j = 0; j < 3; j++){
 			xp_sprites[i][j] = ww_new_sprite(XP_BIT);
-			ww_scale_sprite(xp_sprites[i][j]);
-			xp_sprites[i][j]->pad_x = (1024 / 2) - xp_sprites[i][j]->width  / 2 + (offset[i] * 128);
-			xp_sprites[i][j]->pad_y = (576 / 2)  - xp_sprites[i][j]->height / 2 + (offset[j] * 128);
+			xp_sprites[i][j]->pad_x = (WINDOW_WIDTH  / 2) - (xp_sprites[i][j]->width  / 2) + (offset[i] * 128);
+			xp_sprites[i][j]->pad_y = (WINDOW_HEIGHT / 2) - (xp_sprites[i][j]->height / 2) + (offset[j] * 128);
+		}
+	}
+	
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 3; j++){
+			xp_slots[i][j] = ww_new_sprite(XP_BIT);
+			xp_slots[i][j]->pad_x = (WINDOW_WIDTH  / 2) - (xp_slots[i][j]->width  / 2) + (offset[i] * 128)- (xp_slots[i][j]->width  / 7);
+			xp_slots[i][j]->pad_y = (WINDOW_HEIGHT / 2) - (xp_slots[i][j]->height / 2) + (offset[j] * 128)- (xp_slots[i][j]->height / 7);
+			xp_slots[i][j]->animations[0].frames[0].polys[0].color[0] = 127;
+			xp_slots[i][j]->animations[0].frames[0].polys[0].color[1] = 127;
+			xp_slots[i][j]->animations[0].frames[0].polys[0].color[2] = 127;
 		}
 	}
 	
@@ -852,7 +905,7 @@ int main( int argc, char * argv[] ) {
 	srand(time(0));
 	
 	// initialization
-	if(ww_window_create(argc, argv, "Pixarray", 1024, 576)) {
+	if(ww_window_create(argc, argv, "Pixarray", WINDOW_WIDTH, WINDOW_HEIGHT)) {
 		printf("Closing..\n");
 		return 1;
 	}
