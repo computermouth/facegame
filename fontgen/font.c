@@ -245,7 +245,25 @@ const unsigned short font[(NUM_LETTERS + NUM_NUMBERS + NUM_SYMBOLS) * 2] = {
 	(0x08      ) | // 1000
 	(0x08 << 4 ) | // 1000
 	(0x00 << 8 ) | // 0000
-	(0x08 << 12)   // 1000
+	(0x08 << 12),  // 1000
+	
+	// /
+	(0x01      ) | // 0001
+	(0x02 << 4 ) | // 0010
+	(0x04 << 8 ) | // 0100
+	(0x08 << 12),  // 1000
+	
+	// :
+	(0x00      ) | // 0000
+	(0x04 << 4 ) | // 0100
+	(0x00 << 8 ) | // 0000
+	(0x04 << 12),  // 0100
+	
+	// -
+	(0x00      ) | // 0000
+	(0x00 << 4 ) | // 0000
+	(0x06 << 8 ) | // 0110
+	(0x00 << 12)   // 0000
 };
 
 short font_lookup[256] = { -1 };
@@ -317,6 +335,9 @@ void init_font_table(){
 	font_lookup['9'] = 35;
 	font_lookup['.'] = 36;
 	font_lookup['!'] = 37;
+	font_lookup['/'] = 38;
+	font_lookup[':'] = 39;
+	font_lookup['-'] = 40;
 }
 
 font_char_t get_font_char(unsigned char input, int index){

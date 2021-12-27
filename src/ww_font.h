@@ -70,7 +70,13 @@ static const ww_font_char_t font_chars[256] = {
 	{ 0 },	// 2a
 	{ 0 },	// 2b
 	{ 0 },	// 2c
-	{ 0 },	// 2d
+	{	// -
+		.count = 1,
+		.arrays = (short*[]){
+			(short[]){ 1, 3, 3, 1 },
+			(short[]){ 2, 2, 3, 3 }
+		}
+	},
 	{	// .
 		.count = 1,
 		.arrays = (short*[]){
@@ -78,7 +84,22 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 3, 3, 4, 4 }
 		}
 	},
-	{ 0 },	// 2f
+	{	// /
+		.count = 4,
+		.arrays = (short*[]){
+			(short[]){ 3, 4, 4, 3 },
+			(short[]){ 0, 0, 1, 1 },
+
+			(short[]){ 2, 3, 3, 2 },
+			(short[]){ 1, 1, 2, 2 },
+
+			(short[]){ 1, 2, 2, 1 },
+			(short[]){ 2, 2, 3, 3 },
+
+			(short[]){ 0, 1, 1, 0 },
+			(short[]){ 3, 3, 4, 4 }
+		}
+	},
 	{	// 0
 		.count = 6,
 		.arrays = (short*[]){
@@ -263,7 +284,16 @@ static const ww_font_char_t font_chars[256] = {
 			(short[]){ 3, 3, 4, 4 }
 		}
 	},
-	{ 0 },	// 3a
+	{	// :
+		.count = 2,
+		.arrays = (short*[]){
+			(short[]){ 1, 2, 2, 1 },
+			(short[]){ 1, 1, 2, 2 },
+
+			(short[]){ 1, 2, 2, 1 },
+			(short[]){ 3, 3, 4, 4 }
+		}
+	},
 	{ 0 },	// 3b
 	{ 0 },	// 3c
 	{ 0 },	// 3d

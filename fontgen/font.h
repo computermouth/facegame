@@ -6,7 +6,7 @@
 
 #define NUM_LETTERS 26
 #define NUM_NUMBERS 10
-#define NUM_SYMBOLS 2
+#define NUM_SYMBOLS 5
 
 #define CHAR_PIXEL_WIDTH 4
 

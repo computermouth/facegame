@@ -28,7 +28,8 @@ typedef struct {
 } player_t;
 
 typedef struct {
-	ww_sprite_t *sprite;
+	ww_sprite_t *bt_sprite;
+	ww_sprite_t *hp_sprite;
 	uint32_t level;
 	uint32_t max_hp;
 	uint32_t hp;
