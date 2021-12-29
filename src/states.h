@@ -45,18 +45,21 @@ typedef struct {
 #define MAP_HEIGHT 26
 
 typedef struct {
-	enum { BATTLE_STATE_INIT, BATTLE_STATE_BATTLE, BATTLE_STATE_END, BATTLE_STATE_XP } battle_state_activity;
+	enum { BATTLE_STATE_INIT, BATTLE_STATE_BATTLE, BATTLE_STATE_END } battle_state_activity;
 	battler_t player_battler;
 	battler_t enemy_battler;
 } battle_state_t;
 
-// event_state_t -- EVENT_STATE_WEAPONUP, EVENT_STATE_DEFUP, EVENT_STATE_XPUP, EVENT_STATE_DISTRACTION
+typedef struct {
+	enum { EVENT_STATE_NONE, EVENT_STATE_BATTLE, EVENT_STATE_WEAPONUP, EVENT_STATE_XPUP, EVENT_STATE_REST } event_state_activity;
+	battle_state_t battle;
+} event_state_t;
 
 typedef struct {
 	uint32_t map[MAP_WIDTH][MAP_HEIGHT];
 	player_t player;
-	enum { PLAY_STATE_ROAM, PLAY_STATE_MENU, PLAY_STATE_EVENT, PLAY_STATE_BATTLE, PLAY_STATE_REST } play_state_activity;
-	battle_state_t battle;
+	enum { PLAY_STATE_ROAM, PLAY_STATE_MENU, PLAY_STATE_EVENT } play_state_activity;
+	event_state_t event;
 } play_state_t;
 
 typedef struct {
