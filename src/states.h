@@ -14,7 +14,7 @@ typedef struct {
 typedef struct {
 	uint32_t level;
 	uint32_t max_hp;
-	uint32_t hp;
+	int32_t  hp;
 	uint32_t speed;
 	uint32_t baseatk;
 	uint32_t basedef;
@@ -32,7 +32,7 @@ typedef struct {
 	ww_sprite_t *hp_sprite;
 	uint32_t level;
 	uint32_t max_hp;
-	uint32_t hp;
+	int32_t  hp;
 	uint32_t speed;
 	uint32_t tmp_speed;
 	uint32_t baseatk;

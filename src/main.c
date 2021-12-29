@@ -59,6 +59,8 @@ ww_sprite_t * alpha2 = NULL;
 
 ww_sprite_t * text_level_up = NULL;
 ww_sprite_t * text_xp_gain = NULL;
+ww_sprite_t * text_victory = NULL;
+ww_sprite_t * text_defeat = NULL;
 
 ww_sprite_t * ok = NULL;
 
@@ -109,6 +111,18 @@ void inits(){
 	ww_scale_sprite(text_xp_gain);
 	text_xp_gain->pad_x = (WINDOW_WIDTH / 2) - (text_xp_gain->width / 2);
 	text_xp_gain->pad_y = text_xp_gain->height;
+	
+	text_victory = ww_new_sprite_from_string("VICTORY!!!", (ww_rgba_t){0, 255, 127});
+	text_victory->scale = 10.0;
+	ww_scale_sprite(text_victory);
+	text_victory->pad_x = (WINDOW_WIDTH  / 2 ) - (text_victory->width  / 2);
+	text_victory->pad_y = (WINDOW_HEIGHT / 8 ) - (text_victory->height / 2);
+	
+	text_defeat = ww_new_sprite_from_string("DEFEAT", (ww_rgba_t){127, 0, 255});
+	text_defeat->scale = 10.0;
+	ww_scale_sprite(text_defeat);
+	text_defeat->pad_x = (WINDOW_WIDTH / 2  ) - (text_defeat->width  / 2);
+	text_defeat->pad_y = (WINDOW_HEIGHT / 8 ) - (text_defeat->height / 2);
 }
 
 void frees(){
@@ -131,6 +145,9 @@ void frees(){
 	free(alpha1);
 	free(alpha2);
 	free(text_level_up);
+	free(text_xp_gain);
+	free(text_victory);
+	free(text_defeat);
 	
 	for(int i = 0; i < 10; i++){
 		for(int j = 0; j < 3; j++){
@@ -582,14 +599,15 @@ void process_battle_init(){
 	player_battler->hp_sprite->pad_y = (WINDOW_HEIGHT * 7/8) - (player_battler->hp_sprite->height / 2);
 	
 	
-	sprintf(tmp, "HP: %02d / %02d", (game_state.play_state.player.hp / 2), (game_state.play_state.player.max_hp / 2));
-	
 	battler_t *enemy_battler = &game_state.play_state.battle.enemy_battler; // TODO, actually generate enemy
 	enemy_battler->bt_sprite = ww_new_sprite(DUDE),
-	enemy_battler->hp_sprite = ww_new_sprite_from_string(tmp, (ww_rgba_t){255, 255, 255}),
 	enemy_battler->level     = game_state.play_state.player.level,
 	enemy_battler->max_hp    = game_state.play_state.player.max_hp / 2,
 	enemy_battler->hp        = enemy_battler->max_hp,
+	
+	sprintf(tmp, "HP: %02d / %02d", (game_state.play_state.player.hp / 2), (game_state.play_state.player.max_hp / 2));
+	enemy_battler->hp_sprite = ww_new_sprite_from_string(tmp, (ww_rgba_t){255, 255, 255}),
+	
 	enemy_battler->speed     = game_state.play_state.player.speed + 45,
 	enemy_battler->tmp_speed = game_state.play_state.player.speed,
 	enemy_battler->baseatk   = game_state.play_state.player.baseatk,
@@ -629,8 +647,6 @@ void process_battle_end(){
 	game_state.play_state.player.hp = battle_state.player_battler.hp;
 	game_state.play_state.player.max_hp = battle_state.player_battler.max_hp;
 	
-	// TODO -- if player.hp == 0 -- PLAY_STATE_REST
-	
 	game_state.play_state.battle.battle_state_activity    = 0;
 	game_state.play_state.battle.player_battler.bt_sprite = NULL;
 	game_state.play_state.battle.player_battler.level     = 0;
@@ -657,7 +673,12 @@ void process_battle_end(){
 	generate_event();
 	
 	game_state.play_state.battle.battle_state_activity = BATTLE_STATE_INIT;
-	game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+	
+	if (game_state.play_state.player.hp > 0)
+		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+	else
+		game_state.play_state.play_state_activity = PLAY_STATE_REST;
+		
 }
 
 void process_xp_gain(){
@@ -792,19 +813,34 @@ void process_battle_battle(){
 		
 	static int player_atk_stick = 0;
 	static int enemy_atk_stick = 0;
+	static int fight_over_wait = 180;
 	
 	battle_state_t *battle_state = &game_state.play_state.battle;
 	
 	// end battle
-	if (battle_state->player_battler.hp == 0) {
-		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
+	if (battle_state->player_battler.hp <= 0) {
+		if (fight_over_wait != 0){
+			ww_draw_sprite(text_defeat);
+			fight_over_wait--;
+			battle_state->player_battler.hp = 0;
+			goto draw_sprites;
+		}
+	} else if (battle_state->enemy_battler.hp <= 0) {
+		if (fight_over_wait != 0){
+			ww_draw_sprite(text_victory);
+			fight_over_wait--;
+			goto draw_sprites;
+		}
+	}
+	
+	if (fight_over_wait == 0) {
+		if (battle_state->player_battler.hp <= 0)
+			game_state.play_state.battle.battle_state_activity = BATTLE_STATE_END;
+		else
+			game_state.play_state.battle.battle_state_activity = BATTLE_STATE_XP;
 		player_atk_stick = 0;
 		enemy_atk_stick = 0;
-		return;
-	} else if (battle_state->enemy_battler.hp == 0) {
-		game_state.play_state.battle.battle_state_activity = BATTLE_STATE_XP;
-		player_atk_stick = 0;
-		enemy_atk_stick = 0;
+		fight_over_wait = 180;
 		return;
 	}
 	
@@ -859,11 +895,118 @@ void process_battle_battle(){
 		battle_state->player_battler.hp_sprite->pad_y = (WINDOW_HEIGHT * 7/8) - (battle_state->player_battler.hp_sprite->height / 2);
 	}
 	
+	draw_sprites:
+	
 	ww_draw_sprite(battle_state->player_battler.bt_sprite);
 	ww_draw_sprite(battle_state->player_battler.hp_sprite);
 	
 	ww_draw_sprite(battle_state->enemy_battler.bt_sprite);
 	ww_draw_sprite(battle_state->enemy_battler.hp_sprite);
+	
+}
+
+ww_sprite_t * text_resting = NULL;
+ww_sprite_t * sleeper = NULL;
+ww_sprite_t * sleeper_hp = NULL;
+ww_sprite_t * sleeperz1 = NULL;
+ww_sprite_t * sleeperz2 = NULL;
+
+void process_rest(){
+	
+	uint32_t *max_hp = &game_state.play_state.player.max_hp;
+	int32_t  *cur_hp = &game_state.play_state.player.hp;
+	
+	static int hp_gain_wait = 120;
+	
+	// setup
+	if (text_resting == NULL) {
+		text_resting = ww_new_sprite_from_string("RESTING", (ww_rgba_t){127, 0, 255});
+		text_resting->scale = 10.0;
+		ww_scale_sprite(text_resting);
+		text_resting->pad_x = (WINDOW_WIDTH / 2  ) - (text_resting->width  / 2);
+		text_resting->pad_y = (WINDOW_HEIGHT / 8 ) - (text_resting->height / 2);
+		
+		sleeper = ww_new_sprite(DUDE);
+		sleeper->pad_x = (WINDOW_WIDTH / 2  ) - (sleeper->width  / 2);
+		sleeper->pad_y = (WINDOW_HEIGHT / 2 ) - (sleeper->height / 2);
+		
+		sleeperz1 = ww_new_sprite_from_string("Z", (ww_rgba_t){0, 0xBB, 255});
+		sleeperz1->scale = 6.0;
+		ww_scale_sprite(sleeperz1);
+		sleeperz1->pad_x = sleeper->width + sleeper->pad_x + sleeperz1->width  * 2;
+		sleeperz1->pad_y = sleeper->pad_y + sleeperz1->height * 2;
+		
+		sleeperz2 = ww_new_sprite_from_string("Z", (ww_rgba_t){0, 0xBB, 255});
+		sleeperz2->scale = 10.0;
+		ww_scale_sprite(sleeperz2);
+		sleeperz2->pad_x = sleeperz1->pad_x + sleeperz2->width;
+		sleeperz2->pad_y = sleeperz1->pad_y - sleeperz2->height;
+		
+		char tmp[40];
+		sprintf(tmp, "HP: %02u / %02u", *cur_hp, *max_hp);
+		sleeper_hp = ww_new_sprite_from_string(tmp, (ww_rgba_t){255, 255, 255});
+		sleeper_hp->scale = 10.0;
+		ww_scale_sprite(sleeper_hp);
+		sleeper_hp->pad_x = (WINDOW_WIDTH / 2    ) - (sleeper_hp->width  / 2);
+		sleeper_hp->pad_y = (WINDOW_HEIGHT * 7/8 ) - (sleeper_hp->height / 2);
+		
+	}
+	
+	hp_gain_wait--;
+	if(hp_gain_wait == 0){
+		*cur_hp = *cur_hp + 1;
+		hp_gain_wait = 120;
+		free(sleeper_hp);
+		
+		char tmp[40];
+		sprintf(tmp, "HP: %02d / %02d", *cur_hp, *max_hp);
+		sleeper_hp = ww_new_sprite_from_string(tmp, (ww_rgba_t){255, 255, 255});
+		sleeper_hp->scale = 10.0;
+		ww_scale_sprite(sleeper_hp);
+		sleeper_hp->pad_x = (WINDOW_WIDTH / 2    ) - (sleeper_hp->width  / 2);
+		sleeper_hp->pad_y = (WINDOW_HEIGHT * 7/8 ) - (sleeper_hp->height / 2);
+	}
+	
+	ww_draw_sprite(text_resting);
+	ww_draw_sprite(sleeper);
+	ww_draw_sprite(sleeperz1);
+	if(*cur_hp % 2 == 1)
+		ww_draw_sprite(sleeperz2);
+	ww_draw_sprite(sleeper_hp);
+	
+	if ( // hp is max, or hp is half max and any key is pressed
+		(*cur_hp == *max_hp) ||
+		(
+			(*cur_hp >= *max_hp / 2) &&
+				(
+					istate.c_str ||
+					istate.c_sel ||
+					istate.c_up  ||
+					istate.c_dn  ||
+					istate.c_lt  ||
+					istate.c_rt  ||
+					istate.c_a   ||
+					istate.c_b   ||
+					istate.c_x   ||
+					istate.c_y
+				)
+		)
+	){
+		hp_gain_wait = 120;
+		
+		free(text_resting);
+		free(sleeper     );
+		free(sleeper_hp  );
+		free(sleeperz1   );
+		free(sleeperz2   );
+		text_resting = NULL;
+		sleeper = NULL;
+		sleeper_hp = NULL;
+		sleeperz1 = NULL;
+		sleeperz2 = NULL;
+		
+		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+	}
 	
 }
 
@@ -896,6 +1039,7 @@ void process_play(){
 			process_battle();
 			break;
 		case PLAY_STATE_REST:
+			process_rest();
 			break;
 		case PLAY_STATE_EVENT:
 			break;
@@ -931,9 +1075,11 @@ void game_prop_init(){
 	
 	ww_window_s *window_p = (ww_window_s*) window;
 	
+	// TODO -- reset temp stats (player hp, starting xp)
 	game_state.play_state.player.level     = 1;
 	game_state.play_state.player.max_hp    = 5;
-	game_state.play_state.player.hp        = 5;
+	//~ game_state.play_state.player.hp        = 5;
+	game_state.play_state.player.hp        = 1;
 	game_state.play_state.player.speed     = 120;
 	game_state.play_state.player.baseatk   = 1;
 	game_state.play_state.player.basedef   = 1;
@@ -945,14 +1091,18 @@ void game_prop_init(){
 	game_state.play_state.player.def[1]    = 0;
 	game_state.play_state.player.def[2]    = 0;
 	game_state.play_state.player.def[3]    = 1;
+	//~ game_state.play_state.player.exp[0][0] = 0;
 	game_state.play_state.player.exp[0][0] = 1;
 	game_state.play_state.player.exp[0][1] = 0;
+	//~ game_state.play_state.player.exp[0][2] = 0;
 	game_state.play_state.player.exp[0][2] = 1;
 	game_state.play_state.player.exp[1][0] = 0;
 	game_state.play_state.player.exp[1][1] = 0;
 	game_state.play_state.player.exp[1][2] = 0;
+	//~ game_state.play_state.player.exp[2][0] = 0;
 	game_state.play_state.player.exp[2][0] = 1;
 	game_state.play_state.player.exp[2][1] = 0;
+	//~ game_state.play_state.player.exp[2][2] = 0;
 	game_state.play_state.player.exp[2][2] = 1;
 	game_state.play_state.player.x_pos     = MAP_WIDTH  / 2;
 	game_state.play_state.player.y_pos     = MAP_HEIGHT / 2;
