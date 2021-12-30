@@ -680,6 +680,87 @@ void process_battle_end(){
 		
 }
 
+void process_weapon_find(){
+	
+	static uint32_t new_weapon[4] = {0, 0, 0, 0};
+	static uint32_t new_weapon_total = -1;
+	static ww_sprite_t * text_new_weapon    = NULL;
+	static ww_sprite_t * text_cur_weapon    = NULL;
+	static ww_sprite_t * text_choose_weapon = NULL;
+	
+	if (new_weapon_total == -1){
+		int32_t weapon_randomizer = 0;
+		for(int i = 0; i < game_state.play_state.player.level / 5; i++)
+			weapon_randomizer += (rand() % 6) - (rand() % 4);
+		
+		printf("randomizer -- %d\n", weapon_randomizer);
+		
+		new_weapon_total = (game_state.play_state.player.level + weapon_randomizer) % 37;
+
+		while(new_weapon_total > 36)
+			new_weapon_total -= (game_state.play_state.player.level / 6) + 1;
+		
+		for(int i = 0; i < new_weapon_total; i++){
+			int index = rand() % 4;
+			if(new_weapon[index] != 9)
+				new_weapon[index]++;
+			else
+				i--;
+		}
+		
+		char tmp[20];
+		sprintf(tmp, "NEW: %d-%d-%d-%d", new_weapon[0], new_weapon[1], new_weapon[2], new_weapon[3]);
+		text_new_weapon = ww_new_sprite_from_string(tmp, (ww_rgba_t){255, 255, 255});
+		text_new_weapon->scale = 6.0;
+		ww_scale_sprite(text_new_weapon);
+		text_new_weapon->pad_x = (WINDOW_WIDTH  /   2) - text_new_weapon->width  / 2;
+		text_new_weapon->pad_y = (WINDOW_HEIGHT * 3/5) - text_new_weapon->height / 2;
+		
+		uint32_t * cur_weapon = game_state.play_state.player.atk;
+		sprintf(tmp, "CUR: %d-%d-%d-%d", cur_weapon[0], cur_weapon[1], cur_weapon[2], cur_weapon[3]);
+		text_cur_weapon = ww_new_sprite_from_string(tmp, (ww_rgba_t){255, 255, 255});
+		text_cur_weapon->scale = 6.0;
+		ww_scale_sprite(text_cur_weapon);
+		text_cur_weapon->pad_x = (WINDOW_WIDTH  /   2) - text_cur_weapon->width  / 2;
+		text_cur_weapon->pad_y = (WINDOW_HEIGHT * 4/5) - text_cur_weapon->height / 2;
+		
+		text_choose_weapon = ww_new_sprite_from_string("CHOOSE A WEAPON:", (ww_rgba_t){127, 255, 0});
+		text_choose_weapon->scale = 10.0;
+		ww_scale_sprite(text_choose_weapon);
+		text_choose_weapon->pad_x = (WINDOW_WIDTH  /   2) - text_choose_weapon->width  / 2;
+		text_choose_weapon->pad_y = text_choose_weapon->height;
+	}
+	
+	ww_draw_sprite(text_new_weapon);
+	ww_draw_sprite(text_cur_weapon);
+	ww_draw_sprite(text_choose_weapon);
+	
+	if (istate.cfrm){
+		game_state.play_state.player.atk[0] = new_weapon[0];
+		game_state.play_state.player.atk[1] = new_weapon[1];
+		game_state.play_state.player.atk[2] = new_weapon[2];
+		game_state.play_state.player.atk[3] = new_weapon[3];
+		
+		free(text_new_weapon);
+		free(text_cur_weapon);
+		free(text_choose_weapon);
+		
+		text_new_weapon    = NULL;
+		text_cur_weapon    = NULL;
+		text_choose_weapon = NULL;
+		
+		new_weapon_total = -1;
+		new_weapon[0] = 0;
+		new_weapon[1] = 0;
+		new_weapon[2] = 0;
+		new_weapon[3] = 0;
+		
+		game_state.play_state.event.event_state_activity = EVENT_STATE_NONE;
+		game_state.play_state.play_state_activity = PLAY_STATE_ROAM;
+	}
+	
+}
+
 void process_xp_gain(){
 	
 	static int xp_x = 1;
@@ -749,8 +830,10 @@ void process_xp_gain(){
 				for(int j = 0; j < 3; j++)
 					game_state.play_state.player.exp[i][j] = 0;
 			game_state.play_state.player.level  +=  1;
-			game_state.play_state.player.hp     += 10;
-			game_state.play_state.player.max_hp += 10;
+			
+			int old_max_hp = game_state.play_state.player.max_hp;
+			game_state.play_state.player.max_hp  = game_state.play_state.player.level * 1.5;
+			game_state.play_state.player.hp     += (game_state.play_state.player.max_hp - old_max_hp);
 			does_level_up = 0;
 		}
 	}
@@ -829,6 +912,7 @@ void process_battle_battle(){
 		if (fight_over_wait != 0){
 			ww_draw_sprite(text_victory);
 			fight_over_wait--;
+			battle_state->enemy_battler.hp = 0;
 			goto draw_sprites;
 		}
 	}
@@ -872,6 +956,9 @@ void process_battle_battle(){
 		ww_scale_sprite(battle_state->enemy_battler.hp_sprite);
 		battle_state->enemy_battler.hp_sprite->pad_x = WINDOW_WIDTH - battle_state->enemy_battler.hp_sprite->width - battle_state->enemy_battler.hp_sprite->scale * 5;
 		battle_state->enemy_battler.hp_sprite->pad_y = (WINDOW_HEIGHT * 7/8) - (battle_state->enemy_battler.hp_sprite->height / 2);
+		
+		if (battle_state->enemy_battler.hp <= 0)
+			goto draw_sprites;
 	}
 	
 	battle_state->enemy_battler.tmp_speed--;
@@ -1031,9 +1118,9 @@ void determine_event(){
 	
 	int odds_max    =  0;
 	int odds_battle = 20;
-	int odds_xp     =  5;
-	int odds_rest   =  5;
-	int odds_weapon =  3;
+	int odds_xp     =  3;
+	int odds_rest   =  7;
+	int odds_weapon = 10;
 	
 	// battle encounter
 	odds_max += odds_battle;
@@ -1042,21 +1129,21 @@ void determine_event(){
 	odds_max += odds_xp;
 	
 	// rest encounter
-	if (game_state.play_state.player.hp <= game_state.play_state.player.max_hp / 2)
+	if (game_state.play_state.player.hp <= game_state.play_state.player.max_hp / 3)
 		odds_max += odds_rest;
 	else
 		odds_rest = 0;
 	
 	// weapon encounter
-	//~ int weapon_power =
-		//~ game_state.play_state.player.atk[0] +
-		//~ game_state.play_state.player.atk[1] +
-		//~ game_state.play_state.player.atk[2] +
-		//~ game_state.play_state.player.atk[3];
-	//~ if (weapon_power < game_state.play_state.player.level)
-		//~ odds += odds_weapon;
-	//~ else
-		//~ odds_weapon = 0;
+	int weapon_power =
+		game_state.play_state.player.atk[0] +
+		game_state.play_state.player.atk[1] +
+		game_state.play_state.player.atk[2] +
+		game_state.play_state.player.atk[3];
+	if (weapon_power < game_state.play_state.player.level - 1)
+		odds_max += odds_weapon;
+	else
+		odds_weapon = 0;
 	
 	// TODO -- EVENT_STORY
 	
@@ -1109,6 +1196,7 @@ void process_event(){
 			process_rest();
 			break;
 		case EVENT_STATE_WEAPONUP:
+			process_weapon_find();
 			break;
 	}
 	
@@ -1153,11 +1241,12 @@ void game_prop_init(){
 	ww_window_s *window_p = (ww_window_s*) window;
 	
 	// TODO -- reset temp stats (player hp, starting xp)
-	game_state.play_state.player.level     = 1;
-	game_state.play_state.player.max_hp    = 5;
-	//~ game_state.play_state.player.hp        = 5;
+	game_state.play_state.player.level     = 3;
+	game_state.play_state.player.max_hp    = 4;
+	//~ game_state.play_state.player.hp        = 4;
 	game_state.play_state.player.hp        = 1;
-	game_state.play_state.player.speed     = 120;
+	//~ game_state.play_state.player.speed     = 120;
+	game_state.play_state.player.speed     = 30;
 	game_state.play_state.player.baseatk   = 1;
 	game_state.play_state.player.basedef   = 1;
 	game_state.play_state.player.atk[0]    = 1;
@@ -1212,7 +1301,8 @@ void game_prop_init(){
 	game_state.play_state.event.battle.enemy_battler.def        = NULL;
 	
 	// magic number for event density 1/36 units
-	for(int i = 0; i < 18; i++){
+	//~ for(int i = 0; i < 18; i++){
+	for(int i = 0; i < 500; i++){
 		generate_event();
 	}
 	
