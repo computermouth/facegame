@@ -7,11 +7,21 @@ F_LDFLAGS += $(SDL_LDFLAGS)
 F_CFLAGS += -O2 -Wall -pedantic -std=gnu11
 F_CFLAGS += $(SDL_CFLAGS)
 
-all: images
-	$(CC) src/*.c img/*.c $(CFLAGS) $(F_CFLAGS) $(INCLUDES) -o main $(LDFLAGS) $(F_LDFLAGS)
+GAM_SRC = $(wildcard src/*.c)
+GAM_OBJ = $(GAM_SRC:.c=.o)
 
-images: tools
-	./concoord/concoord img/*.yaml
+IMG_YML = $(wildcard img/*.yaml)
+IMG_SRC = $(IMG_YML:.yaml=.c)
+IMG_OBJ = $(IMG_SRC:.c=.o)
+
+all: tools $(IMG_SRC) $(GAM_OBJ) $(IMG_OBJ)
+	$(CC) -o main $(GAM_OBJ) $(IMG_OBJ) $(LDFLAGS) $(F_LDFLAGS)
+
+%.c: %.yaml
+	./concoord/concoord $<
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(F_CFLAGS) $(INCLUDES) -c $< -o $@
 
 tools:
 	make -C concoord
