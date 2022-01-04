@@ -14,7 +14,7 @@ IMG_YML = $(wildcard img/*.yaml)
 IMG_SRC = $(IMG_YML:.yaml=.c)
 IMG_OBJ = $(IMG_SRC:.c=.o)
 
-all: tools $(IMG_SRC) $(GAM_OBJ) $(IMG_OBJ)
+all: concoord/concoord $(IMG_SRC) $(GAM_OBJ) $(IMG_OBJ)
 	$(CC) -o main $(GAM_OBJ) $(IMG_OBJ) $(LDFLAGS) $(F_LDFLAGS)
 
 %.c: %.yaml
@@ -23,7 +23,7 @@ all: tools $(IMG_SRC) $(GAM_OBJ) $(IMG_OBJ)
 %.o: %.c
 	$(CC) $(CFLAGS) $(F_CFLAGS) $(INCLUDES) -c $< -o $@
 
-tools:
+concoord/concoord:
 	make -C concoord
 
 memtest:
