@@ -31,3 +31,7 @@ memtest:
 
 opk:
 	mksquashfs main assets/* facegame.opk -all-root -noappend -no-exports -no-xattrs -no-progress
+
+fresh: tools
+	./concoord/concoord img/*.yaml
+	$(CC) src/*.c img/*.c $(CFLAGS) $(F_CFLAGS) $(INCLUDES) -o main $(LDFLAGS) $(F_LDFLAGS)
